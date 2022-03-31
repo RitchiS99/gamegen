@@ -1,0 +1,225 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-30 15:25+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: home/models.py:8 home/models.py:15 home/models.py:22 home/models.py:29
+#: home/models.py:38 home/models.py:46 home/models.py:61
+msgid "modelName"
+msgstr "Name"
+
+#: home/models.py:12 home/models.py:39 home/models.py:49
+msgid "locationModel"
+msgstr "Ort"
+
+#: home/models.py:13
+msgid "locationModelPlural"
+msgstr "Orte"
+
+#: home/models.py:19 home/models.py:47
+msgid "genreModel"
+msgstr "Genre"
+
+#: home/models.py:20
+msgid "genreModelPlural"
+msgstr "Genres"
+
+#: home/models.py:26 home/models.py:48
+msgid "versusModel"
+msgstr "Versus"
+
+#: home/models.py:27
+msgid "versusModelPlural"
+msgstr "Versus"
+
+#: home/models.py:30
+msgid "modelMinTime"
+msgstr "Minmale Zeit"
+
+#: home/models.py:31
+msgid "modelMaxTime"
+msgstr "Maximale Zeit"
+
+#: home/models.py:35 home/models.py:50
+msgid "timeModel"
+msgstr "Zeit"
+
+#: home/models.py:36
+msgid "timeModelPlural"
+msgstr "Zeiten"
+
+#: home/models.py:43 home/models.py:72
+msgid "personModel"
+msgstr "Person"
+
+#: home/models.py:44
+msgid "personModelPlural"
+msgstr "Personen"
+
+#: home/models.py:51 home/models.py:63
+msgid "modelMinPlayer"
+msgstr "Minimale Spieler"
+
+#: home/models.py:52 home/models.py:64
+msgid "modelMaxPlayer"
+msgstr "Maximale Spieler"
+
+#: home/models.py:53
+msgid "modelDislikes"
+msgstr "Dislikes"
+
+#: home/models.py:54
+msgid "modelRules"
+msgstr "Regeln"
+
+#: home/models.py:58
+msgid "gameModel"
+msgstr "Spiel"
+
+#: home/models.py:59
+msgid "gameModelPlural"
+msgstr "Spiele"
+
+#: home/models.py:62
+msgid "modelBaseGame"
+msgstr "Grundspiel"
+
+#: home/models.py:65
+msgid "modelNumber"
+msgstr "Nummer"
+
+#: home/models.py:69
+msgid "extensionModel"
+msgstr "Erweiterung"
+
+#: home/models.py:70
+msgid "extensionModelPlural"
+msgstr "Erweiterungen"
+
+#: home/models.py:73
+msgid "modelViewer"
+msgstr "Viewer"
+
+#: home/models.py:74
+msgid "modelEditer"
+msgstr "Editer"
+
+#: home/models.py:75
+msgid "modelCreater"
+msgstr "Creater"
+
+#: home/models.py:79
+msgid "permissionModel"
+msgstr "Recht"
+
+#: home/models.py:80
+msgid "permissionModelPlural"
+msgstr "Rechte"
+
+#: home/templates/home/change_password.html:38
+#: home/templates/home/index.html:41
+msgid "Generate"
+msgstr "Generieren"
+
+#: home/templates/home/change_password.html:43
+#: home/templates/home/index.html:46
+msgid "Admin"
+msgstr "Admin"
+
+#: home/templates/home/change_password.html:47
+#: home/templates/home/index.html:50
+msgid "Editor"
+msgstr "Editor"
+
+#: home/templates/home/change_password.html:50
+#: home/templates/home/index.html:53
+msgid "Logout"
+msgstr "Logout"
+
+#: home/templates/home/change_password.html:53
+#: home/templates/home/change_password.html:70
+#: home/templates/home/index.html:56
+msgid "PasswordChange"
+msgstr "Passwort ändern"
+
+#: home/templates/home/change_password.html:68
+#: home/templates/home/index.html:72
+msgid "Demo"
+msgstr "Demo"
+
+#: home/templates/home/change_password.html:69
+#: home/templates/home/index.html:75
+msgid "Login"
+msgstr "Login"
+
+#: home/templates/home/index.html:111
+msgid "ChooseLocation"
+msgstr "Wähle den Ort"
+
+#: home/templates/home/index.html:124
+msgid "ChooseGenre"
+msgstr "Wähle das Genre"
+
+#: home/templates/home/index.html:137
+msgid "PlayerCount"
+msgstr "Spieleranzahl"
+
+#: home/templates/home/index.html:145
+msgid "MatchCharacter"
+msgstr "Versus?"
+
+#: home/templates/home/index.html:158 home/templates/home/index.html:205
+#: home/templates/home/index.html:211
+msgid "GameLength"
+msgstr "Dauer"
+
+#: home/templates/home/index.html:172
+msgid "FellowPlayers"
+msgstr "Mitspieler"
+
+#: home/templates/home/index.html:189
+msgid "Search"
+msgstr "Suche"
+
+#: home/templates/home/index.html:195
+msgid "GameSearch"
+msgstr "Spielsuche"
+
+#: home/templates/home/index.html:199
+msgid "GameName"
+msgstr "Spielname"
+
+#: home/templates/home/index.html:202
+msgid "GenreOfGame"
+msgstr "Genre"
+
+#: home/templates/home/index.html:208
+msgid "GameCharacter"
+msgstr "Versus?"
+
+#: home/templates/home/index.html:214
+msgid "GameDislikes"
+msgstr "Dislikes"
+
+#: home/views.py:74
+msgid "extensionString"
+msgstr ". Erweiterung"
+
+#: home/views.py:75
+msgid "playerString"
+msgstr " Spieler)"

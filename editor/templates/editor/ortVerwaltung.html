@@ -1,0 +1,153 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}{{WebsiteName}}{% endblock %}</title>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {% block styles %}{% endblock styles %}
+  {% block script %}{% endblock script %}
+</head>
+
+<header>
+  {% if user.is_authenticated %}
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="/">{{WebsiteName}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">{% trans 'Generate' %} <span class="sr-only">(current)</span></a>
+        </li>
+        
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/admin">{% trans 'Admin' %}</a>
+        </li>
+        {% endif %}
+        <li class="nav-item active">
+          <a class="nav-item nav-link" href="/editor">{% trans 'Editor' %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/logout">{% trans 'Logout' %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/password">{% trans 'PasswordChange' %}</a>
+        </li>
+      </ul>
+    </div>
+    </nav>
+  
+  
+  {% else %}
+  <nav class="navbar navbar-expand navbar-light bg-light" style="width:max-content">
+    <a class="navbar-brand" href="/">{{WebsiteName}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/">{% trans 'Demo' %} <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/login">{% trans 'Login' %}</a>
+      </div>
+    </div>
+    </nav>
+  {% endif %}
+</header>
+
+<script>
+  function searchTable(tableName) {
+    // Declare variables 
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById(tableName);
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
+    }
+  }
+  </script>
+
+<body {% block body_attributes %}{% endblock body_attributes %} style="overflow-x: hidden;">
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="hidden" name="methode" value="newOrt">
+  <input type="submit" value="{% trans 'AddLocation' %}">
+</form>
+
+<input type="text" id="myInput" onkeyup="searchTable('orttable')" placeholder={% trans 'LocationSearch' %}>
+
+  <table border=1 style="width:100vw" id="orttable">
+    <tr>
+      <th>
+        {% trans 'LocationName' %}
+      </th>
+      <th>
+        {% trans 'Persons' %}
+      </th>
+      <th>
+        {% trans 'Edit' %}
+      </th>
+    </tr>
+    {% for ort in endOrte%}
+    <tr>
+      <td>{{ort.name}}</td>
+      <td>{{ort.personen}}</td>
+      <td>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="methode" value="editOrt">
+          <input type="hidden" name="ortname" value={{ort.name}}>
+          <input type="hidden" name="ortpersonen" value={{ort.personen}}>
+          <input type="submit" value={% trans 'Edit' %}>
+        </form>
+        <form action="" method="post">
+          {% csrf_token %}
+          <input type="hidden" name="methode" value="deleteOrt">
+          <input type="hidden" name="ortname" value={{ort.name}}>
+          <input type="submit" value={% trans 'Delete' %}>
+        </form>
+
+      </td>
+    </tr>
+    {% endfor %}
+
+  </table>
+
+
+  
+
+
+</body>
+
+</html>

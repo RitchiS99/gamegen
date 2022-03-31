@@ -1,0 +1,318 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-03-30 15:25+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: editor/templates/editor/addErweiterung.html:43
+#: editor/templates/editor/addGame.html:38
+#: editor/templates/editor/addOrt.html:38
+#: editor/templates/editor/addUser.html:37
+#: editor/templates/editor/editGame.html:38
+#: editor/templates/editor/editOrt.html:37
+#: editor/templates/editor/erweiterungVerwaltung.html:39
+#: editor/templates/editor/index.html:37
+#: editor/templates/editor/ortVerwaltung.html:39
+#: editor/templates/editor/personenVerwaltung.html:37
+msgid "Generate"
+msgstr "Generieren"
+
+#: editor/templates/editor/addErweiterung.html:48
+#: editor/templates/editor/addGame.html:43
+#: editor/templates/editor/addOrt.html:43
+#: editor/templates/editor/addUser.html:42
+#: editor/templates/editor/editGame.html:43
+#: editor/templates/editor/editOrt.html:42
+#: editor/templates/editor/erweiterungVerwaltung.html:44
+#: editor/templates/editor/index.html:42
+#: editor/templates/editor/ortVerwaltung.html:44
+#: editor/templates/editor/personenVerwaltung.html:42
+msgid "Admin"
+msgstr "Admin"
+
+#: editor/templates/editor/addErweiterung.html:52
+#: editor/templates/editor/addOrt.html:47
+#: editor/templates/editor/addUser.html:46
+#: editor/templates/editor/editGame.html:47
+#: editor/templates/editor/editOrt.html:46
+#: editor/templates/editor/erweiterungVerwaltung.html:48
+#: editor/templates/editor/index.html:46
+#: editor/templates/editor/ortVerwaltung.html:48
+#: editor/templates/editor/personenVerwaltung.html:46
+msgid "Editor"
+msgstr "Editor"
+
+#: editor/templates/editor/addErweiterung.html:55
+#: editor/templates/editor/addGame.html:50
+#: editor/templates/editor/addOrt.html:50
+#: editor/templates/editor/addUser.html:49
+#: editor/templates/editor/editGame.html:50
+#: editor/templates/editor/editOrt.html:49
+#: editor/templates/editor/erweiterungVerwaltung.html:51
+#: editor/templates/editor/index.html:49
+#: editor/templates/editor/ortVerwaltung.html:51
+#: editor/templates/editor/personenVerwaltung.html:49
+msgid "Logout"
+msgstr "Logout"
+
+#: editor/templates/editor/addErweiterung.html:58
+#: editor/templates/editor/addGame.html:53
+#: editor/templates/editor/addOrt.html:53
+#: editor/templates/editor/addUser.html:52
+#: editor/templates/editor/editGame.html:53
+#: editor/templates/editor/editOrt.html:52
+#: editor/templates/editor/erweiterungVerwaltung.html:54
+#: editor/templates/editor/index.html:52
+#: editor/templates/editor/ortVerwaltung.html:54
+#: editor/templates/editor/personenVerwaltung.html:52
+msgid "PasswordChange"
+msgstr "Passwort ändern"
+
+#: editor/templates/editor/addErweiterung.html:73
+#: editor/templates/editor/addGame.html:68
+#: editor/templates/editor/addOrt.html:68
+#: editor/templates/editor/addUser.html:67
+#: editor/templates/editor/editGame.html:68
+#: editor/templates/editor/editOrt.html:67
+#: editor/templates/editor/erweiterungVerwaltung.html:69
+#: editor/templates/editor/index.html:67
+#: editor/templates/editor/ortVerwaltung.html:69
+#: editor/templates/editor/personenVerwaltung.html:67
+msgid "Demo"
+msgstr "Demo"
+
+#: editor/templates/editor/addErweiterung.html:74
+#: editor/templates/editor/addGame.html:69
+#: editor/templates/editor/addOrt.html:69
+#: editor/templates/editor/addUser.html:68
+#: editor/templates/editor/editGame.html:69
+#: editor/templates/editor/editOrt.html:68
+#: editor/templates/editor/erweiterungVerwaltung.html:70
+#: editor/templates/editor/index.html:68
+#: editor/templates/editor/ortVerwaltung.html:70
+#: editor/templates/editor/personenVerwaltung.html:68
+msgid "Login"
+msgstr "Login"
+
+#: editor/templates/editor/addErweiterung.html:98
+#: editor/templates/editor/addGame.html:96
+#: editor/templates/editor/addOrt.html:93
+#: editor/templates/editor/editGame.html:88
+msgid "Name"
+msgstr "Name"
+
+#: editor/templates/editor/addErweiterung.html:108
+msgid "Number"
+msgstr "Nummer"
+
+#: editor/templates/editor/addErweiterung.html:118
+#: editor/templates/editor/erweiterungVerwaltung.html:128
+msgid "Basegame"
+msgstr "Basisspiel"
+
+#: editor/templates/editor/addErweiterung.html:121
+#: editor/templates/editor/addErweiterung.html:122
+#: editor/templates/editor/addErweiterung.html:129
+#: editor/templates/editor/addErweiterung.html:130
+msgid "ChooseBaseGame"
+msgstr "Basisspiel"
+
+#: editor/templates/editor/addErweiterung.html:140
+#: editor/templates/editor/addGame.html:122
+#: editor/templates/editor/editGame.html:115
+msgid "minPlayer"
+msgstr "minimale Spieler"
+
+#: editor/templates/editor/addErweiterung.html:150
+#: editor/templates/editor/addGame.html:128
+#: editor/templates/editor/editGame.html:121
+msgid "maxPlayer"
+msgstr "maximale Spieler"
+
+#: editor/templates/editor/addErweiterung.html:160
+#: editor/templates/editor/addErweiterung.html:161
+#: editor/templates/editor/addGame.html:179
+#: editor/templates/editor/addGame.html:180
+#: editor/templates/editor/addOrt.html:113
+#: editor/templates/editor/addOrt.html:114
+#: editor/templates/editor/addUser.html:158
+#: editor/templates/editor/addUser.html:159
+#: editor/templates/editor/editGame.html:177
+#: editor/templates/editor/editGame.html:178
+#: editor/templates/editor/editOrt.html:102
+#: editor/templates/editor/editOrt.html:103
+msgid "Save"
+msgstr "Speichern"
+
+#: editor/templates/editor/addGame.html:102
+#: editor/templates/editor/addUser.html:133
+#: editor/templates/editor/editGame.html:94
+#: editor/templates/editor/index.html:209
+#: editor/templates/editor/personenVerwaltung.html:116
+msgid "Location"
+msgstr "Ort"
+
+#: editor/templates/editor/addGame.html:112
+#: editor/templates/editor/editGame.html:100
+msgid "Genre"
+msgstr "Genre"
+
+#: editor/templates/editor/addGame.html:134
+#: editor/templates/editor/editGame.html:127
+msgid "Versus"
+msgstr "Versus?"
+
+#: editor/templates/editor/addGame.html:144
+#: editor/templates/editor/editGame.html:142
+msgid "Length"
+msgstr "Länge"
+
+#: editor/templates/editor/addGame.html:154
+#: editor/templates/editor/editGame.html:157
+msgid "Dislikes"
+msgstr "Dislikes"
+
+#: editor/templates/editor/addGame.html:173
+#: editor/templates/editor/editGame.html:171
+msgid "Rules"
+msgstr "Regeln"
+
+#: editor/templates/editor/addOrt.html:103
+#: editor/templates/editor/ortVerwaltung.html:116
+msgid "Persons"
+msgstr "Personen"
+
+#: editor/templates/editor/addUser.html:93
+msgid "Username"
+msgstr "Nutzername"
+
+#: editor/templates/editor/addUser.html:103
+msgid "Mail"
+msgstr "Mail"
+
+#: editor/templates/editor/addUser.html:109
+#: editor/templates/editor/personenVerwaltung.html:113
+msgid "Role"
+msgstr "Rolle"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:114
+msgid "AddExtension"
+msgstr "Erweiterung hinzufügen"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:117
+msgid "ExtensionSearch"
+msgstr "Erweiterungssuche"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:122
+msgid "ExtensionName"
+msgstr "Erweiterungsname"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:125
+msgid "ExtensionNumber"
+msgstr "Erweiterungsnummer"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:131
+msgid "PlayerCount"
+msgstr "Spielerzahl"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:134
+#: editor/templates/editor/index.html:210
+#: editor/templates/editor/index.html:223
+#: editor/templates/editor/ortVerwaltung.html:119
+#: editor/templates/editor/ortVerwaltung.html:132
+msgid "Edit"
+msgstr "Bearbeiten"
+
+#: editor/templates/editor/erweiterungVerwaltung.html:148
+#: editor/templates/editor/index.html:230
+#: editor/templates/editor/ortVerwaltung.html:138
+#: editor/templates/editor/personenVerwaltung.html:119
+#: editor/templates/editor/personenVerwaltung.html:134
+msgid "Delete"
+msgstr "Löschen"
+
+#: editor/templates/editor/index.html:168
+msgid "ManageLocations"
+msgstr "Orte verwalten"
+
+#: editor/templates/editor/index.html:175
+msgid "ManageUsers"
+msgstr "Nutzer verwalten"
+
+#: editor/templates/editor/index.html:182
+msgid "ManageExtensions"
+msgstr "Erweiterungen verwalten"
+
+#: editor/templates/editor/index.html:189
+msgid "AddGame"
+msgstr "Spiel hinzufügen"
+
+#: editor/templates/editor/index.html:204
+msgid "GameSearch"
+msgstr "Spielsuche"
+
+#: editor/templates/editor/index.html:208
+msgid "GameName"
+msgstr "Spielname"
+
+#: editor/templates/editor/ortVerwaltung.html:105
+msgid "AddLocation"
+msgstr "Ort hinzufügen"
+
+#: editor/templates/editor/ortVerwaltung.html:108
+msgid "LocationSearch"
+msgstr "Ortsuche"
+
+#: editor/templates/editor/ortVerwaltung.html:113
+msgid "LocationName"
+msgstr "Ortname"
+
+#: editor/templates/editor/personenVerwaltung.html:102
+msgid "AddUser"
+msgstr "Nutzer hinzufügen"
+
+#: editor/templates/editor/personenVerwaltung.html:105
+msgid "PersonSearch"
+msgstr "Personensuche"
+
+#: editor/templates/editor/personenVerwaltung.html:110
+msgid "Person"
+msgstr "Person"
+
+#: editor/views.py:86
+msgid "userDoesntExist"
+msgstr "Dieser Nutzer existiert nicht, bitte geben sie eine Mail an"
+
+#: editor/views.py:123
+msgid "locationDoesExist"
+msgstr ""
+"Dieser Ortsname existiert schon, bitte nehmen sie einen anderen Ortsnamen."
+
+#: editor/views.py:373
+msgid "yourUsernameIs"
+msgstr ""
+"Ihre Zugangsdaten sind:  \n"
+" \n"
+" Nutzername: "
+
+#: editor/views.py:374
+msgid "yourPasswordIs"
+msgstr "Passwort: "
+
+#: editor/views.py:375
+msgid "changePassword"
+msgstr "Ändern sie ihr Passwort unter dem folgenden Link: "

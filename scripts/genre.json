@@ -1,0 +1,23 @@
+{
+    "Genre": [
+    "Wortspiel",
+    "Strategiespiel",
+    "Rollenspiel",
+    "Kartenspiel",
+    "Denkspiel",
+    "Würfelspiel",
+    "Abenteuerspiel",
+    "Reaktionsspiel",
+    "Würfelspiel"
+    ],
+    "Zeiten": [
+    "kurz",
+    "mittel",
+    "lang"
+    ],
+    "vs": [
+        "kooperativ",
+        "kompetitiv",
+        "teams"
+        ]
+}

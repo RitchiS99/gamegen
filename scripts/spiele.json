@@ -1,0 +1,307 @@
+﻿{
+    "Stade": [
+        {
+            "Spiel": "Codenames",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Gloomhaven",
+            "Art": "Strategiespiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "4",
+            "Anzahl max": "4",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Decrypto",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Deception",
+            "Art": "Rollenspiel",
+            "Vs": "teams",
+            "Anzahl min": "5",
+            "Anzahl max": "10",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Just Two",
+            "Art": "Wortspiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Ultimate Werewolf",
+            "Art": "Rollenspiel",
+            "Vs": "teams",
+            "Anzahl min": "5",
+            "Anzahl max": "10",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Werewords",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Dominion",
+            "Art": "Strategiespiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "5",
+            "Zeit": "mittel",
+            "Personen": "Maren"
+        },
+        {
+            "Spiel": "Andor",
+            "Art": "Strategiespiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "3",
+            "Anzahl max": "6",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Dixit",
+            "Art": "Wortspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "7 Wonders",
+            "Art": "Strategiespiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "5",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Loveletter",
+            "Art": "Kartenspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "6",
+            "Zeit": "kurz",
+            "Personen": "Nico"
+        },
+        {
+            "Spiel": "Concept",
+            "Art": "Wortspiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "3",
+            "Anzahl max": "6",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "When i dream",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Dream Team",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "4",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Theraphy",
+            "Art": "Denkspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "4",
+            "Anzahl max": "6",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Spyfall",
+            "Art": "Rollenspiel",
+            "Vs": "teams",
+            "Anzahl min": "5",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Poker",
+            "Art": "Strategiespiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Zendo",
+            "Art": "Denkspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "10",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Die Zwerge",
+            "Art": "Strategiespiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "4",
+            "Anzahl max": "4",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Word Slam",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "4",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Robinson Cruso",
+            "Art": "Strategiespiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "4",
+            "Anzahl max": "4",
+            "Zeit": "lang",
+            "Personen": "Christian"
+        },
+        {
+            "Spiel": "Quacksilber",
+            "Art": "Strategiespiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "4",
+            "Anzahl max": "5",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "The Game/ The Mind",
+            "Art": "Denkspiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "mittel",
+            "Personen": "Nico"
+        },
+        {
+            "Spiel": "Romme",
+            "Art": "Kartenspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "kurz",
+            "Personen": "Nico"
+        },
+        {
+            "Spiel": "Word Combine",
+            "Art": "Wortspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "4",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "General",
+            "Art": "Würfelspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "6",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Sonne",
+            "Art": "Würfelspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "10",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Obscurio",
+            "Art": "Denkspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "7",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Skat",
+            "Art": "Kartenspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "3",
+            "Zeit": "kurz",
+            "Personen": "Nico"
+        },
+        {
+            "Spiel": "Human Punishment",
+            "Art": "Rollenspiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "10",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Berge des Wahnsinns",
+            "Art": "Denkspiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "3",
+            "Anzahl max": "4",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Codenames Duett",
+            "Art": "Wortspiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "2",
+            "Anzahl max": "4",
+            "Zeit": "mittel"
+        },
+        {
+            "Spiel": "Zwei Dumme ein Gedanke",
+            "Art": "Wortspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "4",
+            "Anzahl max": "8",
+            "Zeit": "kurz"
+        },
+        {
+            "Spiel": "Winter der Toten",
+            "Art": "Strategiespiel",
+            "Vs": "teams",
+            "Anzahl min": "4",
+            "Anzahl max": "6",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Harry Potter Spiel",
+            "Art": "Strategiespiel",
+            "Vs": "kooperativ",
+            "Anzahl min": "4",
+            "Anzahl max": "5",
+            "Zeit": "lang"
+        },
+        {
+            "Spiel": "Scrabble",
+            "Art": "Wortspiel",
+            "Vs": "kompetitiv",
+            "Anzahl min": "3",
+            "Anzahl max": "4",
+            "Zeit": "lang",
+            "Personen": "Anja"
+        }
+    ]
+}

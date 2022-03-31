@@ -1,0 +1,280 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}{{WebsiteName}}{% endblock %}</title>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <style>
+      #table_detail .hidden_row {
+        display:none;
+      }
+    </style>
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {% block styles %}{% endblock styles %}
+  {% block script %}{% endblock script %}
+</head>
+<header>
+  {% if user.is_authenticated %}
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="/">{{WebsiteName}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">{% trans 'Generate' %} <span class="sr-only">(current)</span></a>
+        </li>
+        
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/admin">{% trans 'Admin' %}</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/editor">{% trans 'Editor' %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/logout">{% trans 'Logout' %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/password">{% trans 'PasswordChange' %}</a>
+        </li>
+      </ul>
+    </div>
+    </nav>
+  
+  
+  {% else %}
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="/">{{WebsiteName}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-item nav-link active" href="/">{% trans 'Demo' %} <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-item nav-link" href="/login">{% trans 'Login' %}</a>
+        </li>
+      </ul>
+    </div>
+    </nav>
+  {% endif %}
+</header>
+
+<script>
+  function displayDiv(){
+    orte={{orte|safe}}
+    for (ort in orte){
+      document.getElementById(orte[ort]).style.display = "none";
+    } 
+    select = document.getElementById('id_ort');
+    value = select.options[select.selectedIndex].text;
+    document.getElementById(value).style.display = "contents";
+  }
+  function showHideRow(row){
+    $(row).toggle();
+  }
+
+
+</script>
+
+<body {% block body_attributes %}{% endblock body_attributes %} onload="displayDiv()">
+
+
+
+
+
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <!-- <td><label for="id_ort">Wähle den Ort</label></td> -->
+            <td><label for="id_ort">{% trans 'ChooseLocation' %}</label></td>
+            <td><select onchange="displayDiv()" id="id_ort" name="ort">
+              {% for ort in orte%}
+              {% if ort == auswahl.ort%}
+              <option selected>{{ort}}</option>
+              {% else %}
+              <option>{{ort}}</option>
+              {% endif %}
+              {% endfor %}
+              </select></td>
+        </tr>
+        <tr>
+            <!-- <td><label for="id_genre">Wähle das Genre</label></td> -->
+            <td><label for="id_genre">{% trans 'ChooseGenre' %}</label></td>
+            <td><select id="id_genre" name="genre">
+              <option>None</option>
+              {% for genre in genres%}
+              {% if genre == auswahl.genres%}
+              <option selected>{{genre}}</option>
+              {% else %}
+              <option>{{genre}}</option>
+              {% endif %}
+              {% endfor %}
+            </select></td>
+        </tr>
+        <tr>
+          <td><label for="id_spielerzahl">{% trans 'PlayerCount' %}</label></td>
+          <td>{% if auswahl.spielerzahl == 'None' %}
+            <input type="number" name="spielerzahl" id="id_spielerzahl" value=0 >
+            {% else %}
+            <input type="number" name="spielerzahl" id="id_spielerzahl" value={{auswahl.spielerzahl}} >
+            {% endif %}</td>
+      </tr>
+      <tr>
+        <td><label for="id_versus">{% trans 'MatchCharacter' %}</label></td>
+        <td><select id="id_versus" name="versus">
+          <option>None</option>
+          {% for versus in vs%}
+          {% if versus == auswahl.versus%}
+          <option selected>{{versus}}</option>
+          {% else %}
+          <option>{{versus}}</option>
+          {% endif %}
+          {% endfor %}
+        </select></td>
+    </tr>
+    <tr>
+      <td><label for="id_zeit">{% trans 'GameLength' %}</label></td>
+      <td><select id="id_zeit" name="zeit">
+        <option>None</option>
+        {% for zeit in zeiten%}
+        {% if zeit == auswahl.zeiten%}
+        <option selected>{{zeit}}</option>
+        {% else %}
+        <option>{{zeit}}</option>
+        {% endif %}
+        {% endfor %}
+      </select></td>
+  </tr>
+  {% for key, value in personen.items%}
+  <tr id = {{key}} style="display:contents">
+    <td><label for="id_mitspieler">{% trans 'FellowPlayers' %}</label></td>
+    
+    <td><select id="id_mitspieler" name={{key}} multiple="multiple">
+      {% for person in value %}
+      {% if person in auswahl.personen and key == auswahl.ort%}
+        <option value={{person}} selected>{{person}}</option>
+        {%else%}
+        <option value={{person}}>{{person}}</option>
+        {%endif%}
+      {% endfor %}
+    </select>
+  </td>
+  
+  </tr>
+  {% endfor %}
+        <tr>
+            <td></td>
+            <td><input type="submit" value="{% trans 'Search' %}"></td>
+        </tr>
+    </table>
+</form>
+
+  
+<input type="text" id="myInput" onkeyup="searchTable('table_detail')" placeholder={% trans 'GameSearch' %}>
+<table border=1 style="width:100vw" id="table_detail">
+  <tr>
+    <th >
+      {% trans 'GameName' %}
+    </th>
+    <th >
+      {% trans 'GenreOfGame' %}
+    </th>
+    <th >
+      {% trans 'GameLength' %}
+    </th>
+    <th >
+      {% trans 'GameCharacter' %}
+    </th>
+    <th >
+      {% trans 'GameLength' %}
+    </th>
+    <th >
+      {% trans 'GameDislikes' %}
+    </th>
+    <th></th>
+  </tr>
+  {% for nummer in gefundenes %}
+  {% if nummer.erwAktiv %}
+  <tr onclick="showHideRow({{nummer.namenid}})" style="background-color: yellow;">
+  {% else %}
+  <tr onclick="showHideRow({{nummer.namenid}})">
+    {% endif %}
+    <td> {{nummer.name}}</td>
+    <td> {{nummer.genre}}</td>
+    <td> {{nummer.zeit}}</td>
+    <td> {{nummer.versus}}</td>
+    <td> {{nummer.minSpieler}}  - {{nummer.maxSpieler}}</td>
+    <td> {{nummer.personen_string}}</td>
+    <td style="width:1rem"> <img src="https://cdn-icons-png.flaticon.com/512/63/63830.png" style="width:1rem" onclick="showOverlay({{nummer.namenid}}, '{{nummer.rules}}')"></td>
+  </tr>
+  <tr id={{nummer.namenid}} class="hidden_row">
+    <td colspan=6>{{nummer.erweiterungen|linebreaks}}</td>
+  </tr>
+  {% endfor %}
+</table>
+<div class="overlay" id="overlay" onclick="removeOverlay()" style="background: rgba(0, 0, 0, 0.8);height: 100%;width: 100%;position: fixed;top: 0;left: 0;display: none;">
+  <p id="rules" style="background-color:white; color:black; position: absolute;width: fit-content;height:fit-content;top: 0; bottom:0;left: 0; right:0; max-width:80%; margin-top: auto; margin-bottom:auto;margin-left: auto;margin-right:auto; opacity:1"></p>  </div>
+</div>
+</body>
+
+</html>
+
+<script>
+  function showOverlay(nummer, description){
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "block";
+    rules=description.replaceAll("_.,._", "\n")
+    document.getElementById("rules").innerHTML=rules
+    showHideRow(nummer)
+  }
+  function removeOverlay(){
+    var overlay = document.getElementById("overlay");
+    overlay.style.display = "none";
+  }
+</script>
+
+<script>
+  function searchTable(tableName) {
+    // Declare variables 
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById(tableName);
+    tr = table.getElementsByTagName("tr");
+  
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[0];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      } 
+    }
+  }
+  </script>

@@ -1,0 +1,188 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" style="overflow-x: hidden;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>{% block title %}{{WebsiteName}}{% endblock %}</title>
+
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+    integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  {% block styles %}{% endblock styles %}
+  {% block script %}{% endblock script %}
+</head>
+<header>
+  {% if user.is_authenticated %}
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="/">{{WebsiteName}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">{% trans 'Generate' %} <span class="sr-only">(current)</span></a>
+        </li>
+        
+        {% if user.is_staff %}
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/admin">{% trans 'Admin' %}</a>
+        </li>
+        {% endif %}
+        <li class="nav-item active">
+          <a class="nav-item nav-link" href="/editor">{% trans 'Editor' %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/logout">{% trans 'Logout' %}</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-item nav-link" href="/password">{% trans 'PasswordChange' %}</a>
+        </li>
+      </ul>
+    </div>
+    </nav>
+  
+  
+  {% else %}
+  <nav class="navbar navbar-expand navbar-light bg-light" style="width:max-content">
+    <a class="navbar-brand" href="/">{{WebsiteName}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link active" href="/">{% trans 'Demo' %} <span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="/login">{% trans 'Login' %}</a>
+      </div>
+    </div>
+    </nav>
+  {% endif %}
+</header>
+
+
+
+<body {% block body_attributes %}{% endblock body_attributes %} style="overflow-x: hidden;">
+  
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="methode" value="SaveGame">
+    <input type="hidden" name="gameID" value={{game.id}}>
+    <input type="hidden" name="gameOrt" value={{ort}}>
+    <table border=1 style="width:100vw">
+      <tr>
+        <td>{% trans 'Name' %}</td>
+        <td>
+          <input type="text" value='{{game.name}}' name="gameName">
+        </td> 
+      </tr>
+      <tr>
+        <td>{% trans 'Location' %}</td>
+        <td>
+          {{game.ort}}
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'Genre' %}</td>
+        <td>
+          <select id="id_genre" name="gameGenre">
+            <option>None</option>
+            {% for genrei in genres%}
+            {% if genrei == game.genre%}
+            <option selected>{{genrei}}</option>
+            {% else %}
+            <option>{{genrei}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'minPlayer' %}</td>
+        <td>
+          <input type="number" value={{game.minSpieler}} name="gameMinSpieler">
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'maxPlayer' %}</td>
+        <td>
+          <input type="number" value={{game.maxSpieler}} name="gameMaxSpieler">
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'Versus' %}</td>
+        <td>
+          <select id="id_versus" name="gameVersus">
+            <option>None</option>
+            {% for versis in vs%}
+            {% if versis == game.versus%}
+            <option selected>{{versis}}</option>
+            {% else %}
+            <option>{{versis}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'Length' %}</td>
+        <td>
+          <select id="id_dauer" name="gameDauer">
+            <option>None</option>
+            {% for zeit in zeiten%}
+            {% if zeit == game.zeit%}
+            <option selected>{{zeit}}</option>
+            {% else %}
+            <option>{{zeit}}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'Dislikes' %}</td>
+        <td>
+          <select id="id_mitspieler" multiple="multiple" name="gameDislikes">
+            {% for person in personen %}
+            {% if person in game.Personen%}
+              <option value={{person}} selected>{{person}}</option>
+            {%else%}
+              <option value={{person}}>{{person}}</option>
+            {%endif%}
+            {% endfor %}
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'Rules' %}</td>
+        <td>
+          <textarea rows = "5" cols = "60" name = "rules">{{game.rules}}</textarea>
+        </td>
+      </tr>
+      <tr>
+        <td> {% trans 'Save' %} </td>
+        <td> <input type="submit" value="{% trans 'Save' %}"></td>
+      </tr>
+    </table>
+  </form>
+
+  
+
+
+</body>
+
+</html>
