@@ -10,3 +10,6 @@
 5. In your browser navigate to "localhost:8000/admin" and login with your created admin credentials of step 3. Now create at least one genre, one location, one "versus" and one time amount
 6. After these steps you can navigate to the mainpage under localhost:8000 and create their your games, edit your locations, invite people (reverse proxie or portforwarding needed) and add extensions.
 7. When you are done with the configuring have fun and find the perfect game for your next gamenight.
+
+### Demo
+* You can find a demo under: https://gamegen.richardschoebel.de
