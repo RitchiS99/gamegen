@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-03-30 15:25+0200\n"
+"POT-Creation-Date: 2022-04-03 11:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,71 +148,76 @@ msgstr "Editor"
 
 #: home/templates/home/change_password.html:50
 #: home/templates/home/index.html:53
+msgid "ImporterBGG"
+msgstr "BGG Import"
+
+#: home/templates/home/change_password.html:53
+#: home/templates/home/index.html:56
 msgid "Logout"
 msgstr "Logout"
 
-#: home/templates/home/change_password.html:53
-#: home/templates/home/change_password.html:70
-#: home/templates/home/index.html:56
+#: home/templates/home/change_password.html:56
+#: home/templates/home/change_password.html:73
+#: home/templates/home/index.html:59
 msgid "PasswordChange"
 msgstr "Passwort ändern"
 
-#: home/templates/home/change_password.html:68
-#: home/templates/home/index.html:72
+#: home/templates/home/change_password.html:71
+#: home/templates/home/index.html:75
 msgid "Demo"
 msgstr "Demo"
 
-#: home/templates/home/change_password.html:69
-#: home/templates/home/index.html:75
+#: home/templates/home/change_password.html:72
+#: home/templates/home/index.html:78
 msgid "Login"
 msgstr "Login"
 
-#: home/templates/home/index.html:111
+#: home/templates/home/index.html:114
 msgid "ChooseLocation"
 msgstr "Wähle den Ort"
 
-#: home/templates/home/index.html:124
+#: home/templates/home/index.html:127
 msgid "ChooseGenre"
 msgstr "Wähle das Genre"
 
-#: home/templates/home/index.html:137
+#: home/templates/home/index.html:140
 msgid "PlayerCount"
 msgstr "Spieleranzahl"
 
-#: home/templates/home/index.html:145
+#: home/templates/home/index.html:148
 msgid "MatchCharacter"
 msgstr "Versus?"
 
-#: home/templates/home/index.html:158 home/templates/home/index.html:205
-#: home/templates/home/index.html:211
+#: home/templates/home/index.html:161 home/templates/home/index.html:208
+#: home/templates/home/index.html:214
 msgid "GameLength"
 msgstr "Dauer"
 
-#: home/templates/home/index.html:172
+#: home/templates/home/index.html:175
 msgid "FellowPlayers"
 msgstr "Mitspieler"
 
-#: home/templates/home/index.html:189
+#: home/templates/home/index.html:192
 msgid "Search"
 msgstr "Suche"
 
-#: home/templates/home/index.html:195
+#: home/templates/home/index.html:198
 msgid "GameSearch"
 msgstr "Spielsuche"
 
-#: home/templates/home/index.html:199
+#: home/templates/home/index.html:202
 msgid "GameName"
 msgstr "Spielname"
 
-#: home/templates/home/index.html:202
+#: home/templates/home/index.html:205
 msgid "GenreOfGame"
 msgstr "Genre"
 
-#: home/templates/home/index.html:208
+#: home/templates/home/index.html:211
 msgid "GameCharacter"
 msgstr "Versus?"
 
-#: home/templates/home/index.html:214
+#: home/templates/home/index.html:217
 msgid "GameDislikes"
 msgstr "Dislikes"
 

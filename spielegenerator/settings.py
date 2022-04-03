@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'login',
     'editor',
     'locale',
+    'importer',
 ]
 
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
