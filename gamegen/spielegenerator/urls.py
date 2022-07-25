@@ -21,5 +21,6 @@ urlpatterns = [
     path('', include('home.urls')),
     path('login/', include('login.urls')),
     path('editor/', include('editor.urls')),
-    path('importer/', include('importer.urls'))
+    path('importer/', include('importer.urls')),
+    path("i18n/", include('django.conf.urls.i18n')),
 ]

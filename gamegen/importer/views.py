@@ -77,33 +77,32 @@ def index(request, context={}):
     }
     return HttpResponse(template.render(context, request))
 def saveGame(request, context={}):
-    data = request.POST.get("jsonField", "")
-    data = json.loads(data)
-    print(type(data))
-    print(data)
-    ort = data["ort"]
-    ortModel = Ort.objects.get(orte_name=ort)
-    overwrite = data['overwrite']
-    basegames = data['basegames']
-    expansions = data['expansion']
-    for game in basegames:
-        spiel = Spiel.objects.filter(ort=ortModel, name=game['name'])
-        if spiel:
-            if overwrite:
-                einzelnesSpiel = spiel[0]
-                updateGame(game, einzelnesSpiel)
-        else:
-            addGame(game, ortModel)
-    for expansion in expansions:
-        grundspiel = Spiel.objects.get(ort=ortModel, name=expansion['basegame'])
-        # erweiterung = Erweiterungen.objects.filter(grundspiel=grundspiel, name=expansion['name'])
-        erweiterung = Erweiterungen.objects.filter(grundspiel__ort=ortModel, name=expansion['name'])
-        if erweiterung:
-            if overwrite:
-                einzelneErweiterung = erweiterung[0]
-                updateErweiterung(expansion, einzelneErweiterung,grundspiel)
-        else:
-            addErweiterung(expansion, grundspiel)
+    if request.method == 'POST':
+        data = request.POST.get("jsonField", "")
+        data = json.loads(data)
+        ort = data["ort"]
+        ortModel = Ort.objects.get(orte_name=ort)
+        overwrite = data['overwrite']
+        basegames = data['basegames']
+        expansions = data['expansion']
+        for game in basegames:
+            spiel = Spiel.objects.filter(ort=ortModel, name=game['name'])
+            if spiel:
+                if overwrite:
+                    einzelnesSpiel = spiel[0]
+                    updateGame(game, einzelnesSpiel)
+            else:
+                addGame(game, ortModel)
+        for expansion in expansions:
+            grundspiel = Spiel.objects.get(ort=ortModel, name=expansion['basegame'])
+            # erweiterung = Erweiterungen.objects.filter(grundspiel=grundspiel, name=expansion['name'])
+            erweiterung = Erweiterungen.objects.filter(grundspiel__ort=ortModel, name=expansion['name'])
+            if erweiterung:
+                if overwrite:
+                    einzelneErweiterung = erweiterung[0]
+                    updateErweiterung(expansion, einzelneErweiterung,grundspiel)
+            else:
+                addErweiterung(expansion, grundspiel)
 
 
     return HttpResponseRedirect('/')
