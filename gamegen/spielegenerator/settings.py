@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 import ldap
 import environ
@@ -21,7 +21,7 @@ environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -34,6 +34,11 @@ DEBUG = env('DEBUG')
 REGISTRATION_MAIL_TEXT = env('REGISTRATION_MAIL_TEXT')
 
 NAME = env('NAME')
+
+LANGUAGES = (
+    ('de', "Deutsch"),
+    ('en', "English")
+)
 
 LANGUAGE_CODE = env('LANGUAGE_CODE')
 
@@ -56,6 +61,7 @@ INSTALLED_APPS = [
     'editor',
     'locale',
     'importer',
+    'templates',
 ]
 
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
@@ -68,6 +74,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 ROOT_URLCONF = 'spielegenerator.urls'
@@ -75,7 +82,7 @@ ROOT_URLCONF = 'spielegenerator.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
