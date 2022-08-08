@@ -14,11 +14,9 @@ def ortauswertung(ort):
 def erweiterungen(orte):
     erweiterungsList = []
     erweiterungsDictList = []
-    print("Erweiterungsscript")
     for ort in orte:
         erweiterungen = list(Erweiterungen.objects.filter(grundspiel__ort = ort))
         erweiterungsList.extend(erweiterungen)
-    print(erweiterungsList)
     return erweiterungsList
     pass
 
@@ -104,8 +102,6 @@ def spieleauswertung(suche):
             if spiel_dict["maxSpielerErw"]<erweiterung.maxSpieler:
                 spiel_dict["maxSpielerErw"] = erweiterung.maxSpieler
         spiel_dict['erweiterungen'] = ',\n'.join(erweiterungsStringList)
-        print("Erweiterungen: ")
-        print(spiel_dict['erweiterungen'])
         spiel_dict['namenid'] = "hidden_" + str(spiel_dict['id'])
         dislikes = list(spieles.dislikes.all())
         disliker = []
@@ -121,8 +117,6 @@ def spieleauswertung(suche):
 
         spiel = spiel_dict
         spiel["erwAktiv"] = False
-        print("Spiel ist: ")
-        print(spiel)
         drinnen = True
         for x in bedingungen.keys():
             if(x == "Spielerzahl" and bedingungen[x] != None):

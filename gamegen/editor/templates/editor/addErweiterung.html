@@ -51,7 +51,7 @@
           <select name="erweiterungGrundspiel" id="select-state" placeholder="{% trans 'ChooseBaseGame' %}" required>
             <option value="" disabled selected>{% trans 'ChooseBaseGame' %}</option>
             {% for spiel in grundspiele %}
-            <option value={{spiel.id}}>{{spiel.name}}</option> 
+            <option value={{spiel.id}}>{{spiel}}</option> 
             {% endfor %}
             
           </select>
@@ -59,7 +59,7 @@
           <select name="erweiterungGrundspiel" id="select-state" placeholder="{% trans 'ChooseBaseGame' %}" required>
             <option value="" disabled selected>{% trans 'ChooseBaseGame' %}</option>
             {% for spiel in grundspiele %}
-            <option value={{spiel.id}}>{{spiel.name}}</option> 
+            <option value={{spiel.id}}>{{spiel}}</option> 
             {% endfor %}
             
           </select>
