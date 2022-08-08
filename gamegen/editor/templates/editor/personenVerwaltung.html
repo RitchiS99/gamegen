@@ -26,11 +26,9 @@
   }
   </script>
 <body {% block body_attributes %}{% endblock body_attributes %} style="overflow-x: hidden;">
-<form action="" method="post">
-  {% csrf_token %}
-  <input type="hidden" name="methode" value="newUser">
-  <input type="submit" value="{% trans 'AddUser' %}">
-</form>
+  <button onclick="location.href='user/add'">{% trans 'AddUser' %}</button>
+<br>
+<br>
 
 <input type="text" id="myInput" onkeyup="searchTable('persontable')" placeholder={% trans 'PersonSearch' %}>
 
@@ -55,14 +53,7 @@
       <td>{{person.rolle}}</td>
       <td>{{person.ort}}</td>
       <td>
-        <form action="" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="methode" value="deletePerson">
-          <input type="hidden" name="personName" value={{person.person}}>
-          <input type="hidden" name="personRolle" value={{person.rolle}}>
-          <input type="hidden" name="personOrt" value={{person.ort}}>
-          <input type="submit" value={% trans 'Delete' %}>
-        </form>
+        <button onclick="location.href='user/delete?l={{person.ort}}&p={{person.person}}&r={{person.rolle}}'">{% trans 'Delete' %}</button>
 
       </td>
     </tr>

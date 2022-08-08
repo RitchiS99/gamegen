@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+
+{% block content %}
+<script>
+  $(document).ready(function () {
+//change selectboxes to selectize mode to be searchable
+    $("select").select2();
+});
+</script>
+<body {% block body_attributes %}{% endblock body_attributes %} style="overflow-x: hidden;">
+  
+
+  <form action="" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="methode" value="editErweiterung">
+    <input type="hidden" name="extensionID" value={{extension.id}}>
+    <table border=1 style="width:100vw">
+      <tr>
+        <td>{% trans 'Name' %}</td>
+        <td>
+          <input type="text" name="erweiterungName" required value="{{extension.name}}">
+        </td> 
+      </tr>
+      <tr>
+        <td>{% trans 'Number' %}</td>
+        <td>
+          <input type="text" name="erweiterungNummer" required value="{{extension.nummer}}">
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'Basegame' %}</td>
+        <td>
+          
+          <select name="erweiterungGrundspiel" id="select-state" required>
+            <option value="" disabled>{% trans 'ChooseBaseGame' %}</option>
+            {% for spiel in grundspiele %}
+              {% if spiel.name == basegame.name and spiel.ort.orte_name == basegame_ort %}
+                <option selected value={{spiel.id}}>{{spiel}}</option> 
+              {% else %}
+                <option value={{spiel.id}}>{{spiel}}</option> 
+              {% endif %} 
+            {% endfor %}
+            
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'minPlayer' %}</td>
+        <td>
+          <input type="text" name="erweiterungMin" required value="{{extension.minSpieler}}">
+        </td>
+      </tr>
+      <tr>
+        <td>{% trans 'maxPlayer' %}</td>
+        <td>
+          <input type="text" name="erweiterungMax" required value="{{extension.maxSpieler}}">
+        </td>
+      </tr>
+      <tr>
+        <td> {% trans 'Save' %} </td>
+        <td> <input type="submit" value="{% trans 'Save' %}"></td>
+      </tr>
+    </table>
+  </form>
+
+  
+
+
+</body>
+
+</html>
+{% endblock %}

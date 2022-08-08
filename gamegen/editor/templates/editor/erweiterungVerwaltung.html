@@ -36,11 +36,9 @@
   </script>
 
 <body {% block body_attributes %}{% endblock body_attributes %} style="overflow-x: hidden;">
-<form action="" method="post">
-  {% csrf_token %}
-  <input type="hidden" name="methode" value="addErweiterung">
-  <input type="submit" value="{% trans 'AddExtension' %}">
-</form>
+  <button onclick="location.href='extension/add'">{% trans 'AddExtension' %}</button>
+<br>
+<br>
 
 <input type="text" id="myInput" onkeyup="searchTable('erweiterungstable')" placeholder={% trans 'ExtensionSearch' %}>
 
@@ -69,13 +67,8 @@
       <td>{{erweiterung.grundspiel}}</td>
       <td>{{erweiterung.minSpieler}} - {{erweiterung.maxSpieler}}</td>
       <td>
-        <form action="" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="methode" value="deleteErweiterung">
-          <input type="hidden" name="erweiterungid" value={{erweiterung.id}}>
-          <input type="submit" value={% trans 'Delete' %}>
-        </form>
-
+        <button onclick="location.href='extension/edit?e={{erweiterung.id}}'">{% trans 'Edit' %}</button>
+        <button onclick="location.href='extension/delete?e={{erweiterung.id}}'">{% trans 'Delete' %}</button>
       </td>
     </tr>
     {% endfor %}

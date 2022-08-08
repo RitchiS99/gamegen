@@ -27,11 +27,9 @@
   </script>
 
 <body {% block body_attributes %}{% endblock body_attributes %} style="overflow-x: hidden;">
-<form action="" method="post">
-  {% csrf_token %}
-  <input type="hidden" name="methode" value="newOrt">
-  <input type="submit" value="{% trans 'AddLocation' %}">
-</form>
+  <button onclick="location.href='location/add'">{% trans 'AddLocation' %}</button>
+<br>
+<br>
 
 <input type="text" id="myInput" onkeyup="searchTable('orttable')" placeholder={% trans 'LocationSearch' %}>
 
@@ -52,19 +50,8 @@
       <td>{{ort.name}}</td>
       <td>{{ort.personen}}</td>
       <td>
-        <form action="" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="methode" value="editOrt">
-          <input type="hidden" name="ortname" value={{ort.name}}>
-          <input type="hidden" name="ortpersonen" value={{ort.personen}}>
-          <input type="submit" value={% trans 'Edit' %}>
-        </form>
-        <form action="" method="post">
-          {% csrf_token %}
-          <input type="hidden" name="methode" value="deleteOrt">
-          <input type="hidden" name="ortname" value={{ort.name}}>
-          <input type="submit" value={% trans 'Delete' %}>
-        </form>
+        <button onclick="location.href='location/edit?l={{ort.name}}'">{% trans 'Edit' %}</button>
+        <button onclick="location.href='location/delete?l={{ort.name}}'">{% trans 'Delete' %}</button>
 
       </td>
     </tr>

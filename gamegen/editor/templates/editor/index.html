@@ -31,59 +31,59 @@
 <script> 
 // HTML-Tabelle sortieren 
 
-const table = document.getElementById("spieltable"); 
-const headers = table.querySelectorAll("th"); 
-const tableBody = table.querySelector("tbody"); 
-const rows = tableBody.querySelectorAll("tr"); 
-const directions = Array.from(headers).map(function(header) { 
- return ""; 
-}); 
+// const table = document.getElementById("spieltable"); 
+// const headers = table.querySelectorAll("th"); 
+// const tableBody = table.querySelector("tbody"); 
+// const rows = tableBody.querySelectorAll("tr"); 
+// const directions = Array.from(headers).map(function(header) { 
+//  return ""; 
+// }); 
 
-const transform = function(index, content) { 
- const type = headers[index].getAttribute("data-type"); 
- switch (type) { 
-     case "number": 
-  return parseFloat(content); 
-     case "string": 
-     default: 
-  return content; 
- } 
-}; 
+// const transform = function(index, content) { 
+//  const type = headers[index].getAttribute("data-type"); 
+//  switch (type) { 
+//      case "number": 
+//   return parseFloat(content); 
+//      case "string": 
+//      default: 
+//   return content; 
+//  } 
+// }; 
 
-const sortColumn = function(index) { 
- const direction = directions[index] || "asc"; 
-  const multiplier = (direction === "asc") ? 1 : -1; 
-  const newRows = Array.from(rows); 
+// const sortColumn = function(index) { 
+//  const direction = directions[index] || "asc"; 
+//   const multiplier = (direction === "asc") ? 1 : -1; 
+//   const newRows = Array.from(rows); 
 
-  newRows.sort(function(rowA, rowB) { 
-     const cellA = rowA.querySelectorAll("td")[index].textContent; 
-     const cellB = rowB.querySelectorAll("td")[index].textContent; 
+//   newRows.sort(function(rowA, rowB) { 
+//      const cellA = rowA.querySelectorAll("td")[index].textContent; 
+//      const cellB = rowB.querySelectorAll("td")[index].textContent; 
 
-     const a = transform(index, cellA); 
-     const b = transform(index, cellB); 
+//      const a = transform(index, cellA); 
+//      const b = transform(index, cellB); 
 
-     switch (true) { 
-      case a > b: return 1 * multiplier; 
-      case a < b: return -1 * multiplier; 
-      case a === b: return 0; 
-       } 
-   }); 
+//      switch (true) { 
+//       case a > b: return 1 * multiplier; 
+//       case a < b: return -1 * multiplier; 
+//       case a === b: return 0; 
+//        } 
+//    }); 
 
-   [].forEach.call(rows, function(row) { 
-       tableBody.removeChild(row); 
-   }); 
+//    [].forEach.call(rows, function(row) { 
+//        tableBody.removeChild(row); 
+//    }); 
 
-   directions[index] = direction === "asc" ? "desc" : "asc"; 
-   newRows.forEach(function(newRow) { 
-       tableBody.appendChild(newRow); 
-   }); 
- }; 
+//    directions[index] = direction === "asc" ? "desc" : "asc"; 
+//    newRows.forEach(function(newRow) { 
+//        tableBody.appendChild(newRow); 
+//    }); 
+//  }; 
 
-[].forEach.call(headers, function(header, index) { 
-   header.addEventListener("click", function() { 
-       sortColumn(index); 
-   }); 
-}); 
+// [].forEach.call(headers, function(header, index) { 
+//    header.addEventListener("click", function() { 
+//        sortColumn(index); 
+//    }); 
+// }); 
 </script>
 
 
@@ -91,32 +91,16 @@ const sortColumn = function(index) {
   
 <div class="row">
   <div class="col">
-    <form action="" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="methode" value="ortVerwaltung">
-      <input type="submit" id="id_ortnaming" value="{% trans 'ManageLocations' %}">
-    </form>
+    <button onclick="location.href='location'">{% trans 'ManageLocations' %}</button>
   </div>
   <div class="col">
-    <form action="" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="methode" value="personenVerwaltung">
-      <input type="submit" value="{% trans 'ManageUsers' %}">
-    </form> 
+    <button onclick="location.href='user'">{% trans 'ManageUsers' %}</button>
   </div>
   <div class="col">
-    <form action="" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="methode" value="erweiterungVerwaltung">
-      <input type="submit" value="{% trans 'ManageExtensions' %}">
-    </form>
+    <button onclick="location.href='extension'">{% trans 'ManageExtensions' %}</button>
   </div>
   <div class="col">
-    <form action="" method="post">
-      {% csrf_token %}
-      <input type="hidden" name="methode" value="addGame">
-      <input type="submit" value="{% trans 'AddGame' %}">
-    </form>
+    <button onclick="location.href='game/add'">{% trans 'AddGame' %}</button>
   </div>
 </div>
   
@@ -145,19 +129,8 @@ const sortColumn = function(index) {
         <td>{{spiel.name}}</td>
         <td>{{spiel.ort}}</td>
         <td>
-          <form action='' method="post">
-            {% csrf_token %}
-            <input type="hidden" name="methode" value="EditGame">
-            <input type="hidden" name="gameID" value={{spiel.id}}>
-            <input type="submit" value={% trans 'Edit' %}>
-          </form>
-
-          <form action='' method="post">
-            {% csrf_token %}
-            <input type="hidden" name="methode" value="deleteGame">
-            <input type="hidden" name="gameID" value={{spiel.id}}>
-            <input type="submit" value={% trans 'Delete' %}>
-          </form>
+          <button onclick="location.href='game/edit?g={{spiel.id}}'">{% trans 'Edit' %}</button>
+          <button onclick="location.href='game/delete?g={{spiel.id}}'">{% trans 'Delete' %}</button>
         </td>
       </tr>
       {% endfor %}
