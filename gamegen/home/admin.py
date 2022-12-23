@@ -1,10 +1,24 @@
 from django.contrib import admin
 from .models import Ort, Genre, Personen, Zeit, VS, Spiel, Erweiterungen, Rechte
+from modeltranslation.admin import TranslationAdmin
+
+class GenreAdmin(TranslationAdmin):
+    pass
+class VersusAdmin(TranslationAdmin):
+    pass
+class ZeitAdmin(TranslationAdmin):
+    pass
+
+admin.site.register(Genre, GenreAdmin)
+admin.site.register(VS, VersusAdmin)
+admin.site.register(Zeit, ZeitAdmin)
+
+
 # Register your models here.
 admin.site.register(Ort)
-admin.site.register(Genre)
-admin.site.register(Zeit)
-admin.site.register(VS)
+# admin.site.register(Genre)
+# admin.site.register(Zeit)
+# admin.site.register(VS)
 
 class SpielAdmin(admin.ModelAdmin):
     list_display = ('name', 'genre','vs','ort','zeit',)
