@@ -1,5 +1,6 @@
 from django.db.models.manager import Manager
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
@@ -7,6 +8,8 @@ import scripts.generator
 from home.models import Spiel, Genre, Ort, VS
 import itertools
 import pickle
+import random
+import json
 from django.contrib import auth
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
@@ -69,6 +72,8 @@ def index(request, context={}):
         auswahl['versus']=versus
         auswahl['spielerzahl']=spielerzahl
         auswahl['personen'] = dislike
+        print("Auswahl")
+        print(auswahl)
         gefundenes = scripts.generator.spieleauswertung(auswahl)
         print("Gefundenes ist ")
         extensionString = _('extensionString')
@@ -91,6 +96,47 @@ def index(request, context={}):
         'WebsiteName': settings.NAME
     }
     return HttpResponse(template.render(context, request))
+
+def alexa(request):
+    if request.method == "GET":
+        print(request.GET)
+        location=""
+        genre="None"
+        time="None"
+        versus="None"
+        count="None"
+        if "location" in request.GET:
+            location = request.GET["location"]
+        if "genre" in request.GET:
+            genre = request.GET["genre"]
+        if "time" in request.GET:
+            time = request.GET["time"]
+        if "versus" in request.GET:
+            versus = request.GET["versus"]
+        if "count" in request.GET:
+            count = request.GET["count"]
+        selection = {"ort": location, "genres": genre, "zeiten": time, "versus": versus, "spielerzahl": count, "personen": []}
+        print(selection)
+        foundedGames = scripts.generator.spieleauswertung(selection)
+        print(foundedGames)
+        game_count = len(foundedGames)
+        
+        if game_count >=3:
+            random_int = 3
+        else:
+            random_int = game_count
+        random_games = random.sample(foundedGames, random_int)
+        name_list = []
+        print("Name List")
+        for i in random_games:
+            name_list.append(i["name"])
+            print(name_list)
+        data = json.dumps(name_list, separators=(',', ':'))
+        response = JsonResponse(data, safe=False)
+        response = HttpResponse(data)
+        return response
+
+
 
 def logout(request):
     auth.logout(request)

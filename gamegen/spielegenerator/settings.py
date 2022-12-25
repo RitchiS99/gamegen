@@ -35,10 +35,16 @@ REGISTRATION_MAIL_TEXT = env('REGISTRATION_MAIL_TEXT')
 
 NAME = env('NAME')
 
+gettext = lambda s: s
 LANGUAGES = (
-    ('de', "Deutsch"),
-    ('en', "English")
+    ('de', gettext('Deutsch')),
+    ('en', gettext('English')),
 )
+
+# LANGUAGES = (
+#     ('de', "Deutsch"),
+#     ('en', "English")
+# )
 
 LANGUAGE_CODE = env('LANGUAGE_CODE')
 
@@ -49,6 +55,7 @@ CSRF_TRUSTED_ORIGINS = [env('TRUSTED_ORIGINS')]
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
