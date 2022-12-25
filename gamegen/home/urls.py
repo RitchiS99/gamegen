@@ -22,5 +22,6 @@ import itertools
 urlpatterns = [
     path('', views.index, name='index'),
     path('logout', views.logout, name='logout'),
-    path('password', views.change_password, name="change_password")
+    path('password', views.change_password, name="change_password"),
+    path('alexa/get', views.alexa, name="alexa_game_gen")
 ]
