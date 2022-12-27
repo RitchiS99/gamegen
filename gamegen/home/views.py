@@ -98,43 +98,44 @@ def index(request, context={}):
     return HttpResponse(template.render(context, request))
 
 def alexa(request):
-    if request.method == "GET":
-        print(request.GET)
-        location=""
-        genre="None"
-        time="None"
-        versus="None"
-        count="None"
-        if "location" in request.GET:
-            location = request.GET["location"]
-        if "genre" in request.GET:
-            genre = request.GET["genre"]
-        if "time" in request.GET:
-            time = request.GET["time"]
-        if "versus" in request.GET:
-            versus = request.GET["versus"]
-        if "count" in request.GET:
-            count = request.GET["count"]
-        selection = {"ort": location, "genres": genre, "zeiten": time, "versus": versus, "spielerzahl": count, "personen": []}
-        print(selection)
-        foundedGames = scripts.generator.spieleauswertung(selection)
-        print(foundedGames)
-        game_count = len(foundedGames)
-        
-        if game_count >=3:
-            random_int = 3
-        else:
-            random_int = game_count
-        random_games = random.sample(foundedGames, random_int)
-        name_list = []
-        print("Name List")
-        for i in random_games:
-            name_list.append(i["name"])
-            print(name_list)
-        data = json.dumps(name_list, separators=(',', ':'))
-        response = JsonResponse(data, safe=False)
-        response = HttpResponse(data)
-        return response
+    if request.user.is_authenticated:
+        if request.method == "GET":
+            print(request.GET)
+            location=""
+            genre="None"
+            time="None"
+            versus="None"
+            count="None"
+            if "location" in request.GET:
+                location = request.GET["location"]
+            if "genre" in request.GET:
+                genre = request.GET["genre"]
+            if "time" in request.GET:
+                time = request.GET["time"]
+            if "versus" in request.GET:
+                versus = request.GET["versus"]
+            if "count" in request.GET:
+                count = request.GET["count"]
+            selection = {"ort": location, "genres": genre, "zeiten": time, "versus": versus, "spielerzahl": count, "personen": []}
+            print(selection)
+            foundedGames = scripts.generator.spieleauswertung(selection)
+            print(foundedGames)
+            game_count = len(foundedGames)
+            
+            if game_count >=3:
+                random_int = 3
+            else:
+                random_int = game_count
+            random_games = random.sample(foundedGames, random_int)
+            name_list = []
+            print("Name List")
+            for i in random_games:
+                name_list.append(i["name"])
+                print(name_list)
+            data = json.dumps(name_list, separators=(',', ':'))
+            response = JsonResponse(data, safe=False)
+            response = HttpResponse(data)
+            return response
 
 
 
