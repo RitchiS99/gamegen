@@ -23,4 +23,5 @@ urlpatterns = [
     path('editor/', include('editor.urls')),
     path('importer/', include('importer.urls')),
     path("i18n/", include('django.conf.urls.i18n')),
+    path("o/", include('oauth2_provider.urls', namespace='oauth2_provider')),
 ]

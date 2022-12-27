@@ -52,6 +52,8 @@ ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
 
 CSRF_TRUSTED_ORIGINS = [env('TRUSTED_ORIGINS')]
 
+CORS_ORIGIN_ALLOW_ALL = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -69,6 +71,8 @@ INSTALLED_APPS = [
     'locale',
     'importer',
     'templates',
+    'oauth2_provider',
+    'corsheaders',
 ]
 
 AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
@@ -82,6 +86,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'spielegenerator.urls'
