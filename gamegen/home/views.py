@@ -100,7 +100,12 @@ def index(request, context={}):
 def alexa(request):
     if request.user.is_authenticated:
         if request.method == "GET":
-            print(request.GET)
+            user = request.user.rechte
+            viewer = list(user.viewer.all())
+            editer = list(user.editer.all())
+            creater = list(user.creater.all())
+            ort = editer + creater +viewer
+            orte = scripts.generator.ortauswertung(ort)
             location=""
             genre="None"
             time="None"
@@ -118,25 +123,24 @@ def alexa(request):
                 if "count" == 0:
                     count = request.GET["count"]
             selection = {"ort": location, "genres": genre, "zeiten": time, "versus": versus, "spielerzahl": count, "personen": []}
-            print(selection)
-            foundedGames = scripts.generator.spieleauswertung(selection)
-            print(foundedGames)
-            game_count = len(foundedGames)
+            if location in orte:
+                foundedGames = scripts.generator.spieleauswertung(selection)
             
-            if game_count >=3:
-                random_int = 3
-            else:
-                random_int = game_count
-            random_games = random.sample(foundedGames, random_int)
-            name_list = []
-            print("Name List")
-            for i in random_games:
-                name_list.append(i["name"])
-                print(name_list)
-            data = json.dumps(name_list, separators=(',', ':'))
-            response = JsonResponse(data, safe=False)
-            response = HttpResponse(data)
-            return response
+                game_count = len(foundedGames)
+            
+                if game_count >=3:
+                    random_int = 3
+                else:
+                    random_int = game_count
+                random_games = random.sample(foundedGames, random_int)
+                name_list = []
+                for i in random_games:
+                    name_list.append(i["name"])
+                    print(name_list)
+                data = json.dumps(name_list, separators=(',', ':'))
+                response = JsonResponse(data, safe=False)
+                response = HttpResponse(data)
+                return response
 
 
 
