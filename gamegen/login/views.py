@@ -20,6 +20,9 @@ from django.shortcuts import render
 def index(request, context={}):
     # latest_question_list = Question.objects.order_by('-pub_date')[:5]
     template = loader.get_template('login/index.html')
+    if request.method == 'GET':
+        next = request.GET.get('next')
+        context["next"] = next
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -39,16 +42,22 @@ def index(request, context={}):
                     demoOrt = demoOrt[0]
                     user.rechte.viewer.add(demoOrt)
             auth.login(request, user)
+            next = request.POST.get('next')
+            print("next")
+            print(next)
+            if next:
+                print("Next is next")
+                return HttpResponseRedirect(next)
             return HttpResponseRedirect('/')
 
         else:
             # messages.error(request, 'Error wrong username/password')
             messages.error(request, 'Error wrong username/password')
             print("Existiert nicht")
-    context = {
+    context[messages] = {
         'messages'
     }
-    return render(request, 'login/index.html')
+    return render(request,'login/index.html', context=context)
     return HttpResponse(template.render(context, request))
 
 def logout(request):
