@@ -117,6 +117,10 @@ def alexa(request):
             if "count" in request.GET:
                 if "count" == 0:
                     count = request.GET["count"]
+                    try:
+                        count = int(count)
+                    except:
+                        count = "None"
             selection = {"ort": location, "genres": genre, "zeiten": time, "versus": versus, "spielerzahl": count, "personen": []}
             print(selection)
             foundedGames = scripts.generator.spieleauswertung(selection)
