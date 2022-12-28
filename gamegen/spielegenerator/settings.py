@@ -40,6 +40,7 @@ LANGUAGES = (
     ('de', gettext('Deutsch')),
     ('en', gettext('English')),
 )
+LOGIN_URL='/login/'
 
 # LANGUAGES = (
 #     ('de', "Deutsch"),
@@ -75,7 +76,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend",'oauth2_provider.backends.OAuth2Backend',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -87,6 +88,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
 ]
 
 ROOT_URLCONF = 'spielegenerator.urls'
