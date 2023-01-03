@@ -301,8 +301,6 @@
 
     tableExpansion.id = "expansionTable"
     dvCSV.appendChild(tableExpansion)
-    // alert("Verbleibende Erweiterungen")
-    // alert(erweiterungsList)
   }
 
   function addGamesToOrt(){
@@ -338,7 +336,6 @@
           basegame["maxPlayer"] = col.innerHTML
         }else if (j==3){
           basegame["time"] = col.title
-          alert(basegame["time"])
         }else if (j==4){
           genreid = 'genre'+(i-1)
           genreselect = document.getElementById(genreid)
