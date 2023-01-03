@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-04-03 11:39+0200\n"
+"POT-Creation-Date: 2023-01-03 20:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,213 +18,252 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: home/models.py:8 home/models.py:15 home/models.py:22 home/models.py:29
-#: home/models.py:38 home/models.py:46 home/models.py:61
+#: models.py:9
+msgid "Team"
+msgstr "Team"
+
+#: models.py:10
+msgid "Cooperative"
+msgstr "Kooperativ"
+
+#: models.py:11
+msgid "Competitive"
+msgstr "Kompetitiv"
+
+#: models.py:14
+msgid "Word"
+msgstr "Wortspiel"
+
+#: models.py:15
+msgid "Adventure"
+msgstr "Abenteuerspiel"
+
+#: models.py:16
+msgid "Reaction"
+msgstr "Reaktionsspiel"
+
+#: models.py:17
+msgid "Dice"
+msgstr "Würfelspiel"
+
+#: models.py:18
+msgid "Roleplay"
+msgstr "Rollenspiel"
+
+#: models.py:19
+msgid "Think"
+msgstr "Denkspiel"
+
+#: models.py:20
+msgid "Strategy"
+msgstr "Strategiespiel"
+
+#: models.py:21
+msgid "Card"
+msgstr "Kartenspiel"
+
+#: models.py:25
+msgid "Short"
+msgstr "Kurz"
+
+#: models.py:26
+msgid "Middle"
+msgstr "Mittel"
+
+#: models.py:27
+msgid "Long"
+msgstr "Lang"
+
+#: models.py:32 models.py:39 models.py:46 models.py:53 models.py:62
+#: models.py:70 models.py:85
 msgid "modelName"
 msgstr "Name"
 
-#: home/models.py:12 home/models.py:39 home/models.py:49
+#: models.py:36 models.py:63 models.py:73
 msgid "locationModel"
 msgstr "Ort"
 
-#: home/models.py:13
+#: models.py:37
 msgid "locationModelPlural"
 msgstr "Orte"
 
-#: home/models.py:19 home/models.py:47
+#: models.py:43 models.py:72
 msgid "genreModel"
 msgstr "Genre"
 
-#: home/models.py:20
+#: models.py:44
 msgid "genreModelPlural"
 msgstr "Genres"
 
-#: home/models.py:26 home/models.py:48
+#: models.py:50 models.py:71
 msgid "versusModel"
 msgstr "Versus"
 
-#: home/models.py:27
+#: models.py:51
 msgid "versusModelPlural"
 msgstr "Versus"
 
-#: home/models.py:30
+#: models.py:54
 msgid "modelMinTime"
 msgstr "Minmale Zeit"
 
-#: home/models.py:31
+#: models.py:55
 msgid "modelMaxTime"
 msgstr "Maximale Zeit"
 
-#: home/models.py:35 home/models.py:50
+#: models.py:59 models.py:74
 msgid "timeModel"
 msgstr "Zeit"
 
-#: home/models.py:36
+#: models.py:60
 msgid "timeModelPlural"
 msgstr "Zeiten"
 
-#: home/models.py:43 home/models.py:72
+#: models.py:67 models.py:96
 msgid "personModel"
 msgstr "Person"
 
-#: home/models.py:44
+#: models.py:68
 msgid "personModelPlural"
 msgstr "Personen"
 
-#: home/models.py:51 home/models.py:63
+#: models.py:75 models.py:87
 msgid "modelMinPlayer"
 msgstr "Minimale Spieler"
 
-#: home/models.py:52 home/models.py:64
+#: models.py:76 models.py:88
 msgid "modelMaxPlayer"
 msgstr "Maximale Spieler"
 
-#: home/models.py:53
+#: models.py:77
 msgid "modelDislikes"
 msgstr "Dislikes"
 
-#: home/models.py:54
+#: models.py:78
 msgid "modelRules"
 msgstr "Regeln"
 
-#: home/models.py:58
+#: models.py:82
 msgid "gameModel"
 msgstr "Spiel"
 
-#: home/models.py:59
+#: models.py:83
 msgid "gameModelPlural"
 msgstr "Spiele"
 
-#: home/models.py:62
+#: models.py:86
 msgid "modelBaseGame"
 msgstr "Grundspiel"
 
-#: home/models.py:65
+#: models.py:89
 msgid "modelNumber"
 msgstr "Nummer"
 
-#: home/models.py:69
+#: models.py:93
 msgid "extensionModel"
 msgstr "Erweiterung"
 
-#: home/models.py:70
+#: models.py:94
 msgid "extensionModelPlural"
 msgstr "Erweiterungen"
 
-#: home/models.py:73
+#: models.py:97
 msgid "modelViewer"
 msgstr "Viewer"
 
-#: home/models.py:74
+#: models.py:98
 msgid "modelEditer"
 msgstr "Editer"
 
-#: home/models.py:75
+#: models.py:99
 msgid "modelCreater"
 msgstr "Creater"
 
-#: home/models.py:79
+#: models.py:103
 msgid "permissionModel"
 msgstr "Recht"
 
-#: home/models.py:80
+#: models.py:104
 msgid "permissionModelPlural"
 msgstr "Rechte"
 
-#: home/templates/home/change_password.html:38
-#: home/templates/home/index.html:41
-msgid "Generate"
-msgstr "Generieren"
-
-#: home/templates/home/change_password.html:43
-#: home/templates/home/index.html:46
-msgid "Admin"
-msgstr "Admin"
-
-#: home/templates/home/change_password.html:47
-#: home/templates/home/index.html:50
-msgid "Editor"
-msgstr "Editor"
-
-#: home/templates/home/change_password.html:50
-#: home/templates/home/index.html:53
-msgid "ImporterBGG"
-msgstr "BGG Import"
-
-#: home/templates/home/change_password.html:53
-#: home/templates/home/index.html:56
-msgid "Logout"
-msgstr "Logout"
-
-#: home/templates/home/change_password.html:56
-#: home/templates/home/change_password.html:73
-#: home/templates/home/index.html:59
-msgid "PasswordChange"
-msgstr "Passwort ändern"
-
-#: home/templates/home/change_password.html:71
-#: home/templates/home/index.html:75
-msgid "Demo"
-msgstr "Demo"
-
-#: home/templates/home/change_password.html:72
-#: home/templates/home/index.html:78
-msgid "Login"
-msgstr "Login"
-
-#: home/templates/home/index.html:114
+#: templates/home/index.html:38
 msgid "ChooseLocation"
 msgstr "Wähle den Ort"
 
-#: home/templates/home/index.html:127
+#: templates/home/index.html:51
 msgid "ChooseGenre"
 msgstr "Wähle das Genre"
 
-#: home/templates/home/index.html:140
+#: templates/home/index.html:64
 msgid "PlayerCount"
 msgstr "Spieleranzahl"
 
-#: home/templates/home/index.html:148
+#: templates/home/index.html:72
 msgid "MatchCharacter"
 msgstr "Versus?"
 
-#: home/templates/home/index.html:161 home/templates/home/index.html:208
-#: home/templates/home/index.html:214
+#: templates/home/index.html:85 templates/home/index.html:132
+#: templates/home/index.html:138
 msgid "GameLength"
 msgstr "Dauer"
 
-#: home/templates/home/index.html:175
+#: templates/home/index.html:99
 msgid "FellowPlayers"
 msgstr "Mitspieler"
 
-#: home/templates/home/index.html:192
+#: templates/home/index.html:116
 msgid "Search"
 msgstr "Suche"
 
-#: home/templates/home/index.html:198
+#: templates/home/index.html:122
 msgid "GameSearch"
 msgstr "Spielsuche"
 
-#: home/templates/home/index.html:202
+#: templates/home/index.html:126
 msgid "GameName"
 msgstr "Spielname"
 
-#: home/templates/home/index.html:205
+#: templates/home/index.html:129
 msgid "GenreOfGame"
 msgstr "Genre"
 
-#: home/templates/home/index.html:211
+#: templates/home/index.html:135
 msgid "GameCharacter"
 msgstr "Versus?"
 
-#: home/templates/home/index.html:217
+#: templates/home/index.html:141
 msgid "GameDislikes"
 msgstr "Dislikes"
 
-#: home/views.py:74
+#: views.py:82
 msgid "extensionString"
 msgstr ". Erweiterung"
 
-#: home/views.py:75
+#: views.py:83
 msgid "playerString"
 msgstr " Spieler)"
+
+#~ msgid "Generate"
+#~ msgstr "Generieren"
+
+#~ msgid "Admin"
+#~ msgstr "Admin"
+
+#~ msgid "Editor"
+#~ msgstr "Editor"
+
+#~ msgid "ImporterBGG"
+#~ msgstr "BGG Import"
+
+#~ msgid "Logout"
+#~ msgstr "Logout"
+
+#~ msgid "PasswordChange"
+#~ msgstr "Passwort ändern"
+
+#~ msgid "Demo"
+#~ msgstr "Demo"
+
+#~ msgid "Login"
+#~ msgstr "Login"
