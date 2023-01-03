@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 import scripts.generator
-from home.models import Spiel, Genre, Ort, VS
+from home.models import Spiel, Genre, Ort, VS, GENRE, TEAMING, TIME
 import itertools
 import pickle
 import random
@@ -28,13 +28,13 @@ def index(request, context={}):
     ort = list(Ort.objects.all())
     orte = scripts.generator.ortauswertung(ort)
     personen = scripts.generator.ortspersonen(orte)
-    genres = scripts.generator.genre()
-    vs = scripts.generator.vs()
-    zeiten = scripts.generator.zeiten()
+    genres = GENRE
+    vs = TEAMING
+    zeiten = TIME
     auswahl = {"ort":"", "genres": "", "personen": [], "zeiten": "", "versus": "", "spielerzahl":""}
     erstesBeispiel = {}
     gefundenes = []
-    genre = Genre.objects.all()
+    genre = ''
     if request.user.is_authenticated:
         if request.user.is_superuser:
             pass
@@ -43,9 +43,6 @@ def index(request, context={}):
             viewer = list(user.viewer.all())
             editer = list(user.editer.all())
             creater = list(user.creater.all())
-            print(viewer)
-            print(editer)
-            print(creater)
             ort = editer + creater +viewer
             orte = scripts.generator.ortauswertung(ort)
             personen = scripts.generator.ortspersonen(orte)
@@ -62,26 +59,30 @@ def index(request, context={}):
         versus = request.POST.get('versus')
         zeit = request.POST.get('zeit')
         dislike = request.POST.getlist(ort)
+        auswahl['genres'] = "None"
+        auswahl['zeiten'] = "None"
+        auswahl['versus'] = "None"
 
         if (spielerzahl==""):
             spielerzahl=None
 
         auswahl['ort']=ort
-        auswahl['genres']=genre
-        auswahl['zeiten']=zeit
-        auswahl['versus']=versus
+        for i in GENRE:
+            if i.name == genre:
+                auswahl['genres'] = i
+        for i in TIME:
+            if i.name == zeit:
+                auswahl['zeiten'] = i
+        for i in TEAMING:
+            if i.name == versus:
+                auswahl['versus'] = i
         auswahl['spielerzahl']=spielerzahl
         auswahl['personen'] = dislike
-        print("Auswahl")
-        print(auswahl)
         gefundenes = scripts.generator.spieleauswertung(auswahl)
-        print("Gefundenes ist ")
         extensionString = _('extensionString')
         playerString = _('playerString')
         for i in gefundenes:
             if i['erweiterungen']:
-                print("i von erweiterungen")
-                print(i['erweiterungen'])
                 i['erweiterungen'] = i['erweiterungen'].replace(". Erweiterung", extensionString)
                 i['erweiterungen'] = i['erweiterungen'].replace(" Spieler)", playerString)
 
@@ -114,11 +115,17 @@ def alexa(request):
             if "location" in request.GET:
                 location = request.GET["location"]
             if "genre" in request.GET:
-                genre = request.GET["genre"]
+                for i in GENRE:
+                    if i.value == request.GET["genre"]:
+                        genre = i
             if "time" in request.GET:
-                time = request.GET["time"]
+                for i in TIME:
+                    if i.value == request.GET["time"]:
+                        time = i
             if "versus" in request.GET:
-                versus = request.GET["versus"]
+                for i in TEAMING:
+                    if i.value == request.GET["versus"]:
+                        versus = i
             if "count" in request.GET:
                 if "count" == 0:
                     count = request.GET["count"]
@@ -129,7 +136,6 @@ def alexa(request):
             selection = {"ort": location, "genres": genre, "zeiten": time, "versus": versus, "spielerzahl": count, "personen": []}
             if location in orte:
                 foundedGames = scripts.generator.spieleauswertung(selection)
-            
                 game_count = len(foundedGames)
             
                 if game_count >=3:

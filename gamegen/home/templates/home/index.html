@@ -52,10 +52,10 @@
             <td><select id="id_genre" name="genre">
               <option>None</option>
               {% for genre in genres%}
-              {% if genre == auswahl.genres%}
-              <option selected>{{genre}}</option>
+              {% if genre.name == auswahl.genres.name%}
+              <option value="{{genre.name}}" selected>{{genre.label}}</option>
               {% else %}
-              <option>{{genre}}</option>
+              <option value="{{genre.name}}">{{genre.label}}</option>
               {% endif %}
               {% endfor %}
             </select></td>
@@ -73,10 +73,10 @@
         <td><select id="id_versus" name="versus">
           <option>None</option>
           {% for versus in vs%}
-          {% if versus == auswahl.versus%}
-          <option selected>{{versus}}</option>
+          {% if versus.name == auswahl.versus.name%}
+          <option value="{{versus.name}}" selected>{{versus.label}}</option>
           {% else %}
-          <option>{{versus}}</option>
+          <option value="{{versus.name}}">{{versus.label}}</option>
           {% endif %}
           {% endfor %}
         </select></td>
@@ -86,10 +86,10 @@
       <td><select id="id_zeit" name="zeit">
         <option>None</option>
         {% for zeit in zeiten%}
-        {% if zeit == auswahl.zeiten%}
-        <option selected>{{zeit}}</option>
+        {% if zeit.name == auswahl.zeiten.name%}
+        <option value="{{zeit.name}}" selected>{{zeit.label}}</option>
         {% else %}
-        <option>{{zeit}}</option>
+        <option value="{{zeit.name}}">{{zeit.label}}</option>
         {% endif %}
         {% endfor %}
       </select></td>
@@ -149,9 +149,9 @@
   <tr onclick="showHideRow({{nummer.namenid}})">
     {% endif %}
     <td> {{nummer.name}}</td>
-    <td> {{nummer.genre}}</td>
-    <td> {{nummer.zeit}}</td>
-    <td> {{nummer.versus}}</td>
+    <td> {{nummer.genre.label}}</td>
+    <td> {{nummer.zeit.label}}</td>
+    <td> {{nummer.versus.label}}</td>
     <td> {{nummer.minSpieler}}  - {{nummer.maxSpieler}}</td>
     <td> {{nummer.personen_string}}</td>
     <td style="width:1rem"> <img src="https://cdn-icons-png.flaticon.com/512/63/63830.png" style="width:1rem" onclick="showOverlay({{nummer.namenid}}, '{{nummer.rules}}')"></td>

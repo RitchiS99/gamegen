@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 import scripts.generator
-from home.models import Erweiterungen, Spiel, Genre, Ort, VS, Zeit
+from home.models import Erweiterungen, Spiel, Genre, Ort, VS, Zeit, GENRE, TIME, TEAMING
 import itertools
 import pickle
 from django.contrib import auth
@@ -41,17 +41,11 @@ def index(request, context={}):
             viewer = list(user.viewer.all())
             editer = list(user.editer.all())
             creater = list(user.creater.all())
-            print(viewer)
-            print(editer)
-            print(creater)
             ort = editer + creater
             orte = scripts.generator.ortauswertung(ort)
-            print("orte")
-            print(orte)
             auswahl = {"ort":"", "genres": None, "personen": [], "zeiten": None, "versus": None, "spielerzahl":None}
             for ortx in orte:
                 auswahl["ort"] = ortx
-                print(auswahl)
                 gefundenes = scripts.generator.spieleauswertung(auswahl)
                 spiele.extend(gefundenes)
 
@@ -61,16 +55,24 @@ def index(request, context={}):
     # Now the new Stuff
 
 
-    genres = scripts.generator.genre()
-    versus = scripts.generator.vs()
-    zeiten = list(Zeit.objects.all())
-    print("Zeiten sind ")
-    print(zeiten[0].__dir__())
+    genres = GENRE
+    versus = TEAMING
+    zeiten = TIME
+    zeiten = list(reversed(zeiten))
+    zeitenlist = []
+    for zeit in zeiten:
+        zeit_dict = {"label": zeit.label, "name": zeit.name, "value": zeit.value}
+        zeitenlist.append(zeit_dict)
+    print("Zeiten")
+    print(zeitenlist)
+    # zeitenlist = json.dumps(zeiten)
+    # zeitenlist = zeitenlist.replace('/&#x27;/gm', '"')
+    # zeitenlist = json.parse(zeitenlist)
     context = {
         'empty': None,
         'genres': genres,
         'versus': versus,
-        'zeiten': zeiten,
+        'zeiten': zeitenlist,
         'orte': orte,
         'spiele': spiele,
         'WebsiteName': settings.NAME
@@ -116,21 +118,37 @@ def saveGame(request, context={}):
 def addGame(spiel, ort):
     name = spiel['name']
     ort=ort
-    genre=Genre.objects.get(genre_name=spiel['genre'])
-    versus=VS.objects.get(versus_name=spiel['versus'])
-    dauer=Zeit.objects.get(zeit_einteilung=spiel['time'])
+    for i in GENRE:
+        if i.name == spiel['genres']:
+            genre = i
+    for i in TIME:
+        if i.name == spiel['time']:
+            dauer = i
+    for i in TEAMING:
+        if i.name == spiel['versus']:
+            versus = i
     minSpieler=spiel['minPlayer']
     maxSpieler=spiel['maxPlayer']
     rules = ""
+    print("Neues Spiel")
+    print(dauer)
+    print(versus)
+    print(genre)
     spiel = Spiel(name=name, ort=ort, genre=genre, vs=versus, zeit=dauer, minSpieler=minSpieler, maxSpieler=maxSpieler, rules=rules)
     spiel.save()
 
 def updateGame(spielNeu, spielAlt):
 
     game = spielAlt
-    game.genre = Genre.objects.get(genre_name=spielNeu['genre'])
-    game.vs = VS.objects.get(versus_name=spielNeu['versus'])
-    game.zeit = Zeit.objects.get(zeit_einteilung=spielNeu['time'])
+    for i in GENRE:
+        if i.name == spielNeu['genres']:
+            genre = i
+    for i in TIME:
+        if i.name == spielNeu['time']:
+            dauer = i
+    for i in TEAMING:
+        if i.name == spielNeu['versus']:
+            versus = i
     game.minSpieler = spielNeu['minPlayer']
     game.maxSpieler = spielNeu['maxPlayer']
     game.save()

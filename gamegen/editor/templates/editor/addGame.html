@@ -44,7 +44,7 @@
         <td>
           <select id="id_genre" name="gameGenre">
             {% for genrei in genres%}
-            <option>{{genrei}}</option>
+            <option value="{{genrei.name}}">{{genrei.label}}</option>
             {% endfor %}
           </select>
         </td>
@@ -66,7 +66,7 @@
         <td>
           <select id="id_versus" name="gameVersus">
             {% for versis in vs%}
-            <option>{{versis}}</option>
+            <option value="{{versis.name}}">{{versis.label}}</option>
             {% endfor %}
           </select>
         </td>
@@ -76,7 +76,7 @@
         <td>
           <select id="id_dauer" name="gameDauer">
             {% for zeit in zeiten%}
-            <option>{{zeit}}</option>
+            <option value="{{zeit.name}}">{{zeit.label}}</option>
             {% endfor %}
           </select>
         </td>

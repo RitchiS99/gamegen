@@ -1,6 +1,6 @@
 import json
 import codecs
-from home.models import Spiel, Genre, Ort, VS, Personen, Zeit, Erweiterungen
+from home.models import Spiel, Genre, Ort, VS, Personen, Zeit, Erweiterungen, GENRE, TIME, TEAMING
 
 
 
@@ -31,38 +31,40 @@ def ortspersonen(orte):
             person.append(persone.name)
         person_ort[ort] = person
     return person_ort
-def genre():
-    genr = list(Genre.objects.all())
-    genre = []
-    for i in genr:
-        genre.append(i.genre_name)
-    return genre
+# def genre():
+#     genr = list(Genre.objects.all())
+#     genre = []
+#     for i in genr:
+#         genre.append(i.genre_name)
+#     return genre
 
-def zeiten():
-    zeit = list(Zeit.objects.all())
-    zeiten = []
-    for i in zeit:
-        zeiten.append(i.zeit_einteilung)
-    return zeiten
+# def zeiten():
+#     zeit = list(Zeit.objects.all())
+#     zeiten = []
+#     for i in zeit:
+#         zeiten.append(i.zeit_einteilung)
+#     return zeiten
 
-def vs():
-    versus = list(VS.objects.all())
-    vs = []
-    for i in versus:
-        vs.append(i.versus_name)
-    return vs
+# def vs():
+#     versus = list(VS.objects.all())
+#     vs = []
+#     for i in versus:
+#         vs.append(i.versus_name)
+#     return vs
 
 def spieleauswertung(suche):
     orte_nam = Ort.objects.filter(orte_name= suche['ort'])[:1]
-    stade_list = list(Spiel.objects.filter(ort=orte_nam))
+    stade_list = Spiel.objects.filter(ort=orte_nam)
     name = None
     if(suche['genres'] != "None"):
         art = suche['genres']
+        stade_list = stade_list.filter(group=suche['genres'])
     else:
         art = None
     
     if(suche['versus'] != "None"):
         vs = suche['versus']
+        stade_list = stade_list.filter(teaming=suche['versus'])
     else:
         vs = None
     min = None
@@ -73,20 +75,32 @@ def spieleauswertung(suche):
         spielerzahl = None
     if(suche['zeiten'] != "None"):
         zeit = suche['zeiten']
+        stade_list = stade_list.filter(time=suche['zeiten'])
     else:
         zeit = None
     personen = suche['personen']
+    stade_list = list(stade_list)
 
-
-    bedingungen = {"spiel": name, "genre": art, "versus": vs, "zeit": zeit, "Spielerzahl": spielerzahl, "Personen": personen}
+    bedingungen = {"spiel": name, "Spielerzahl": spielerzahl, "Personen": personen}
+    print("Bedingungen")
+    print(bedingungen)
+    print(stade_list)
     spieleauswahl = []
 
     for spieles in stade_list:
         spiel_dict = spieles.__dict__
-        spiel_dict['genre'] = spieles.genre.genre_name
-        vs_of_game = (VS.objects.get(pk=spiel_dict['vs_id'])).__dict__['versus_name']
-        spiel_dict['versus'] = spieles.vs.versus_name
-        spiel_dict['zeit'] = spieles.zeit.zeit_einteilung
+        spiel_dict['genre'] = spieles.group
+        spiel_dict['versus'] = spieles.teaming
+        spiel_dict['zeit'] = spieles.time
+        for i in GENRE:
+            if i.value == spieles.group:
+                spiel_dict['genre'] = i
+        for i in TEAMING:
+            if i.value == spieles.teaming:
+                spiel_dict['versus'] = i
+        for i in TIME:
+            if i.value == spieles.time:
+                spiel_dict['zeit'] = i
         spiel_dict['ort'] = spieles.ort.orte_name
         spiel_dict['id'] = spieles.id
         erweiterungsList = list(spieles.erweiterungen_set.all())

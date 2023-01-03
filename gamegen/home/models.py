@@ -68,12 +68,9 @@ class Personen(models.Model):
 		verbose_name_plural = _('personModelPlural')
 class Spiel(models.Model):
 	name = models.CharField(max_length=200, verbose_name=_('modelName'))
-	genre = models.ForeignKey(Genre, on_delete=CASCADE, verbose_name=_('genreModel'))
-	vs = models.ForeignKey(VS, on_delete=CASCADE, verbose_name=_('versusModel'))
 	teaming = models.CharField(max_length=1, choices=TEAMING.choices, verbose_name=_('versusModel'), default=TEAMING.TEAM)
 	group = models.IntegerField(choices=GENRE.choices, default=GENRE.WORD, verbose_name=_("genreModel"))
 	ort = models.ForeignKey(Ort, on_delete=CASCADE, verbose_name=_('locationModel'))
-	zeit = models.ForeignKey(Zeit, on_delete=CASCADE, verbose_name=_('timeModel'))
 	time = models.IntegerField(choices=TIME.choices, default=TIME.SHORT, verbose_name=_("timeModel"))
 	minSpieler = models.IntegerField(default=0, verbose_name=_('modelMinPlayer'))
 	maxSpieler = models.IntegerField(default=0, verbose_name=_('modelMaxPlayer'))
