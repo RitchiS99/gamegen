@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
 import scripts.generator
-from home.models import Spiel, Genre, Ort, VS, Personen, Zeit, Rechte, Erweiterungen
+from home.models import Spiel, Genre, Ort, VS, Personen, Zeit, Rechte, Erweiterungen, GENRE, TIME, TEAMING
 import itertools
 import pickle
 from django.contrib import auth
@@ -31,7 +31,7 @@ def index(request, context={}):
             ort = list(Ort.objects.all())
             orte = scripts.generator.ortauswertung(ort)
             creater = ort
-            auswahl = {"ort":"", "genres": None, "personen": [], "zeiten": None, "versus": None, "spielerzahl":None}
+            auswahl = {"ort":"", "genres": "None", "personen": [], "zeiten": "None", "versus": "None", "spielerzahl":None}
             for ortx in orte:
                 auswahl["ort"] = ortx
                 gefundenes = scripts.generator.spieleauswertung(auswahl)
@@ -44,7 +44,7 @@ def index(request, context={}):
             creater = list(user.creater.all())
             ort = editer + creater
             orte = scripts.generator.ortauswertung(ort)
-            auswahl = {"ort":"", "genres": None, "personen": [], "zeiten": None, "versus": None, "spielerzahl":None}
+            auswahl = {"ort":"", "genres": "None", "personen": [], "zeiten": "None", "versus": "None", "spielerzahl":None}
             for ortx in orte:
                 auswahl["ort"] = ortx
                 gefundenes = scripts.generator.spieleauswertung(auswahl)
@@ -73,10 +73,15 @@ def logout(request):
 def editGame(request, id, orte):
     game = Spiel.objects.get(id = id)
     spiel_dict = game.__dict__
-    spiel_dict['genre'] = game.genre.genre_name
-    vs_of_game = (VS.objects.get(pk=spiel_dict['vs_id'])).__dict__['versus_name']
-    spiel_dict['versus'] = game.vs.versus_name
-    spiel_dict['zeit'] = game.zeit.zeit_einteilung
+    for i in GENRE:
+        if i.value == game.group:
+            spiel_dict['genre'] = i
+    for i in TEAMING:
+        if i.value == game.teaming:
+            spiel_dict['versus'] = i
+    for i in TIME:
+        if i.value == game.time:
+            spiel_dict['zeit'] = i
     spiel_dict['ort'] = game.ort.orte_name
     spiel_dict['id'] = game.id
     spiel_dict['rules'] = game.rules
@@ -89,9 +94,9 @@ def editGame(request, id, orte):
 
 
     personen = scripts.generator.ortspersonen(orte)
-    genres = scripts.generator.genre()
-    vs = scripts.generator.vs()
-    zeiten = scripts.generator.zeiten()
+    genres = GENRE
+    vs = TEAMING
+    zeiten = TIME
     context = {
         'orte': orte,
         'game': spiel_dict,
@@ -126,10 +131,16 @@ def editExtension(request, id, orte):
 def saveGame(inhalte):
     game = Spiel.objects.get(id=inhalte.get('gameID'))
     game.name = inhalte.get('gameName')
-    game.genre = Genre.objects.get(genre_name=inhalte.get('gameGenre'))
-    game.vs = VS.objects.get(versus_name=inhalte.get('gameVersus'))
+    for i in GENRE:
+        if i.name == inhalte.get('gameGenre'):
+            game.group = i
+    for i in TEAMING:
+        if i.name == inhalte.get('gameVersus'):
+            game.teaming = i
+    for i in TIME:
+        if i.name == inhalte.get('gameDauer'):
+            game.time = i
     game.ort = Ort.objects.get(orte_name=inhalte.get('gameOrt'))
-    game.zeit = Zeit.objects.get(zeit_einteilung=inhalte.get('gameDauer'))
     game.minSpieler = inhalte.get('gameMinSpieler')
     game.maxSpieler = inhalte.get('gameMaxSpieler')
     game.rules = inhalte.get('rules')
@@ -203,20 +214,23 @@ def addUser(username, mail, rolle, ortname, request):
 
 
 def addGame(werte, disliker):
+    for i in GENRE:
+        if i.name == werte['gameGenre']:
+            genre = i
+    for i in TIME:
+        if i.name == werte['gameDauer']:
+            dauer = i
+    for i in TEAMING:
+        if i.name == werte['gameVersus']:
+            versus = i
     name = werte['gameName']
     ortName=werte['gameOrt']
     ort=Ort.objects.get(orte_name=ortName)
-    genreName=werte['gameGenre']
-    genre=Genre.objects.get(genre_name=genreName)
-    versusName=werte['gameVersus']
-    versus=VS.objects.get(versus_name=versusName)
-    dauerName=werte['gameDauer']
-    dauer=Zeit.objects.get(zeit_einteilung=dauerName)
     minSpieler=werte['gameMinSpieler']
     maxSpieler=werte['gameMaxSpieler']
     rules = werte['rules']
     
-    spiel = Spiel(name=name, ort=ort, genre=genre, vs=versus, zeit=dauer, minSpieler=minSpieler, maxSpieler=maxSpieler, rules=rules)
+    spiel = Spiel(name=name, ort=ort, group=genre, teaming=versus, time=dauer, minSpieler=minSpieler, maxSpieler=maxSpieler, rules=rules)
     spiel.save()
     dislikeList = disliker
     if dislikeList:
@@ -881,9 +895,9 @@ def add_game(request):
         pass
     else:
         context['personen'] = scripts.generator.ortspersonen(orte)
-        context['genres'] = scripts.generator.genre()
-        context['vs'] = scripts.generator.vs()
-        context['zeiten'] = scripts.generator.zeiten()
+        context['genres'] = GENRE
+        context['vs'] = TEAMING
+        context['zeiten'] = TIME
         template = loader.get_template('editor/addGame.html')
         return HttpResponse(template.render(context, request))
     return HttpResponseRedirect('/editor')

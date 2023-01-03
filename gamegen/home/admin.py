@@ -21,9 +21,9 @@ admin.site.register(Zeit)
 admin.site.register(VS)
 
 class SpielAdmin(admin.ModelAdmin):
-    list_display = ('name', 'genre','vs','ort','zeit',)
+    list_display = ('name', 'group','teaming','ort','time',)
     search_fields = ('name',)
-    list_filter = ('genre', 'vs', 'ort', 'zeit',)
+    list_filter = ('group', 'teaming', 'ort', 'time',)
     pass
 class ErweiterungAdmin(admin.ModelAdmin):
     search_fields = ('grundspiel__name', 'name',)

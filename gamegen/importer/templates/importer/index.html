@@ -41,14 +41,14 @@
   <select id="genreSelect" style="display:none" form="uploadForm">
     <option selected disabled value="">{% trans 'choose' %}</option>
     {% for genre in genres %}
-    <option>{{genre}}</option>
+    <option value="{{genre.name}}">{{genre.label}}</option>
     {% endfor %}
   </select>
 
   <select id="versusSelect" style="display:none" form="uploadForm">
     <option selected disabled value="">{% trans 'choose' %}</option>
     {% for vs in versus %}
-    <option>{{vs}}</option>
+    <option value="{{vs.name}}">{{vs.label}}</option>
     {% endfor %}
   </select>
 
@@ -188,12 +188,13 @@
               gesuchteZeit = parseInt(e[i][spalten[j]])
               let timecounter = 0
               {% for time in zeiten %}
-              minZeit = {{time.minZeit}}
-              maxZeit = {{time.maxZeit}}
-              einteilungZeit = "{{time.zeit_einteilung}}"
+              timevalue = {{time.value}}
+              timelabel = "{{time.label}}"
+              timename = "{{time.name}}"
               timecounter = timecounter + 1 
-              if ((minZeit>=gesuchteZeit) && (maxZeit<=gesuchteZeit)){
-                cell.innerHTML = einteilungZeit;
+              if ((timevalue>=gesuchteZeit)){
+                cell.innerHTML = timelabel;
+                cell.title = timename
               }
               {% endfor %}
               }else{
@@ -336,7 +337,8 @@
         }else if (j==2){
           basegame["maxPlayer"] = col.innerHTML
         }else if (j==3){
-          basegame["time"] = col.innerHTML
+          basegame["time"] = col.title
+          alert(basegame["time"])
         }else if (j==4){
           genreid = 'genre'+(i-1)
           genreselect = document.getElementById(genreid)
