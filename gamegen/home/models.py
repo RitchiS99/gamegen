@@ -2,6 +2,30 @@ from django.db import models
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import Group, User
 from django.utils.translation import gettext_lazy as _
+from django import forms
+
+
+class TEAMING(models.TextChoices):
+    TEAM = 'T', _("Team")
+    COOP = 'C', _("Cooperative")
+    COMPETITIVE = 'V', _("Competitive")
+
+class GENRE(models.IntegerChoices):
+	WORD = '1', _("Word")
+	ADVENTURE = '2', _("Adventure")
+	REACTION = '3', _("Reaction")
+	DICE = '4', _("Dice")
+	ROLEPLAY = '5', _("Roleplay")
+	THINK = '6', _("Think")
+	STRATEGY = '7', _("Strategy")
+	CARD = '8', _("Card")
+	
+
+class TIME(models.IntegerChoices):
+	SHORT = '60', _("Short")
+	MIDDLE = '120', _("Middle")
+	LONG = '1000000', _("Long")
+
 
 # Create your models here.
 class Ort(models.Model):
@@ -46,8 +70,11 @@ class Spiel(models.Model):
 	name = models.CharField(max_length=200, verbose_name=_('modelName'))
 	genre = models.ForeignKey(Genre, on_delete=CASCADE, verbose_name=_('genreModel'))
 	vs = models.ForeignKey(VS, on_delete=CASCADE, verbose_name=_('versusModel'))
+	teaming = models.CharField(max_length=1, choices=TEAMING.choices, verbose_name=_('versusModel'), default=TEAMING.TEAM)
+	group = models.IntegerField(choices=GENRE.choices, default=GENRE.WORD, verbose_name=_("genreModel"))
 	ort = models.ForeignKey(Ort, on_delete=CASCADE, verbose_name=_('locationModel'))
 	zeit = models.ForeignKey(Zeit, on_delete=CASCADE, verbose_name=_('timeModel'))
+	time = models.IntegerField(choices=TIME.choices, default=TIME.SHORT, verbose_name=_("timeModel"))
 	minSpieler = models.IntegerField(default=0, verbose_name=_('modelMinPlayer'))
 	maxSpieler = models.IntegerField(default=0, verbose_name=_('modelMaxPlayer'))
 	dislikes = models.ManyToManyField(Personen, blank=True, verbose_name=_('modelDislikes'))
