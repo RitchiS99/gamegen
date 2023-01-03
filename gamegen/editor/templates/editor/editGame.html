@@ -28,7 +28,6 @@
         <td>{% trans 'Genre' %}</td>
         <td>
           <select id="id_genre" name="gameGenre">
-            <option>None</option>
             {% for genrei in genres%}
             {% if genrei.name == game.genre.name%}
             <option value="{{genrei.name}}" selected>{{genrei.label}}</option>
@@ -55,7 +54,6 @@
         <td>{% trans 'Versus' %}</td>
         <td>
           <select id="id_versus" name="gameVersus">
-            <option>None</option>
             {% for versis in vs%}
             {% if versis.name == game.versus.name%}
             <option value="{{versis.name}}" selected>{{versis.label}}</option>
@@ -70,7 +68,6 @@
         <td>{% trans 'Length' %}</td>
         <td>
           <select id="id_dauer" name="gameDauer">
-            <option>None</option>
             {% for zeit in zeiten%}
             {% if zeit.name == game.zeit.name%}
             <option value="{{zeit.name}}" selected>{{zeit.label}}</option>
