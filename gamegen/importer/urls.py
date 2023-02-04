@@ -22,4 +22,5 @@ import itertools
 urlpatterns = [
     path('', views.index, name='index'),
     path('save', views.saveGame, name='index'),
+    path('export', views.exportGameList, name="export"),
 ]

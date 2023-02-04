@@ -37,6 +37,14 @@
   <input type="submit" id="saveGames" value="Save" onclick="SaveGames()" />
   </div>
 </form>
+<form id="exportForm">
+  <select id="locSelect">
+    {% for ort in orte%}
+    <option>{{ort}}</option>
+    {% endfor %}
+  </select>
+  <input type="button" id="export" value="Export as CSV" onclick="Export()" />
+</form>
 
   <select id="genreSelect" style="display:none" form="uploadForm">
     <option selected disabled value="">{% trans 'choose' %}</option>
@@ -89,6 +97,12 @@
 </script>
 
 <script>
+  function Export(){
+    ort = document.getElementById("locSelect").value
+    window.location.href = "http://localhost:8005/importer/export?location="+ort;
+  }
+
+
   function generateTable(e){
     var table = document.createElement("table");
     var rows = e.target.result.split("\n");

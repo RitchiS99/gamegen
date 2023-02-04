@@ -1,5 +1,5 @@
 from django.db.models.manager import Manager
-from django.http import HttpResponse
+from django.http import HttpResponse, FileResponse
 from django.http import HttpResponseRedirect
 from django.template import loader
 from django.urls import reverse
@@ -15,6 +15,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from django.utils.translation import gettext as _
 import json
+import csv
 
 # Create your views here.
 def index(request, context={}):
@@ -171,4 +172,28 @@ def updateErweiterung(erweiterung, erweiterungAlt, grundspiel):
     extension.grundspiel = grundspiel
     extension.save()
 
-    
+
+def exportGameList(request):
+    location_name = request.GET.get("location")
+    print("Location is " + location_name)
+    location = Ort.objects.get(orte_name=location_name)
+    location_games = Spiel.objects.filter(ort=location)
+    csv_name = "games" + location.orte_name + ".csv"
+    game_list = []
+    for game in location_games:
+        gameDict = {}
+        gameDict["name"] = game.name
+        gameDict["teaming"] = game.teaming
+        gameDict["group"] = game.group
+        gameDict["time"]= game.time
+        gameDict["minPlayer"] = game.minSpieler
+        gameDict["maxPlayer"] = game.maxSpieler
+        game_list.append(gameDict)
+    keys = ["name", "teaming", "group", "time", "minPlayer", "maxPlayer"]
+    with open(csv_name, 'w', newline='') as output_file:
+        dict_writer = csv.DictWriter(output_file, keys)
+        dict_writer.writeheader()
+        dict_writer.writerows(game_list)
+    response = FileResponse(open(csv_name, 'rb'), as_attachment=True)
+    return response
+    return redirect("/")
