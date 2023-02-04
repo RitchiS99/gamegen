@@ -99,7 +99,8 @@
 <script>
   function Export(){
     ort = document.getElementById("locSelect").value
-    window.location.href = "http://localhost:8005/importer/export?location="+ort;
+    url = "{{ request.get_full_path }}" + "export?location="+ort;
+    window.location.href = url
   }
 
 
