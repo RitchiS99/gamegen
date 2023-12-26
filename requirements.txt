@@ -7,3 +7,4 @@ django-multiselectfield==0.1.12
 django-modeltranslation==0.18.7
 requests
 django-environ
+django-webpack-loader

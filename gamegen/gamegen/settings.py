@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'modelclasses',
     'templates',
     'home',
+    'webpack_loader',
     'multiselectfield',
 ]
 
@@ -82,6 +83,17 @@ TEMPLATES = [
         },
     },
 ]
+
+WEBPACK_LOADER = {
+        'DEFAULT': {
+            'CACHE': False,
+            'BUNDLE_DIR_NAME': 'dev/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+            'POLL_INTERVAL': 0.1,
+            'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+        }
+    }
+
 
 WSGI_APPLICATION = 'gamegen.wsgi.application'
 
@@ -141,6 +153,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static'
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, 'assets'),
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
