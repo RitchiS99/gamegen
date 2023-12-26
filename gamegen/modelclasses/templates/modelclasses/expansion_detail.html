@@ -1,0 +1,24 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'modelclasses_expansion_list' %}">
+    expansion Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>rule_link</td><td>{{ object.rule_link }}</td></tr>
+    <tr><td>release_date</td><td>{{ object.release_date }}</td></tr>
+    <tr><td>number</td><td>{{ object.number }}</td></tr>
+    <tr><td>name</td><td>{{ object.name }}</td></tr>
+    <tr><td>max_player</td><td>{{ object.max_player }}</td></tr>
+    <tr><td>min_player</td><td>{{ object.min_player }}</td></tr>
+    <tr><td>teaming</td><td>{{ object.teaming }}</td></tr>
+    <tr><td>base_game</td><td>{{ object.base_game }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'modelclasses_location_list' %}">
+    location Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>name</td><td>{{ object.name }}</td></tr>
+    <tr><td>wishlist_games</td><td>{{ object.wishlist_games }}</td></tr>
+    <tr><td>creater</td><td>{{ object.creater }}</td></tr>
+    <tr><td>viewer</td><td>{{ object.viewer }}</td></tr>
+    <tr><td>expansions</td><td>{{ object.expansions }}</td></tr>
+    <tr><td>wishlist_expansions</td><td>{{ object.wishlist_expansions }}</td></tr>
+    <tr><td>editer</td><td>{{ object.editer }}</td></tr>
+    <tr><td>game</td><td>{{ object.game }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

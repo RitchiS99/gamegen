@@ -1,0 +1,45 @@
+{% load i18n %}
+
+<div id="game-table">
+    <table border=1 style="width:75vw" id="table_detail">
+        <tr>
+            <th style="width:15vw">
+            {% trans 'GameName' %}
+            </th>
+            <th style="width:15vw">
+            {% trans 'GenreOfGame' %}
+            </th>
+            <th style="width:15vw">
+            {% trans 'GameLength' %}
+            </th>
+            <th style="width:15vw">
+            {% trans 'GameCharacter' %}
+            </th>
+            <th style="width:15vw">
+                {% trans 'PlayerCount' %}
+                </th>
+            <th style="width:15vw">
+            {% trans 'GameDislikes' %}
+            </th>
+            <th></th>
+        </tr>
+        {% for game in games %}
+        {% if nummer.erwAktiv %}
+        <tr onclick="showHideRow({{nummer.namenid}})" style="background-color: yellow;">
+        {% else %}
+        <tr onclick="showHideRow({{nummer.namenid}})">
+            {% endif %}
+            <td> {{game.name}}</td>
+            <td> {% for genre in game.genre.all %}{{genre.name}}{% endfor %}</td>
+            <td> {{game.duration}} min</td>
+            <td> {{game.teaming.all|join:", "}}</td>
+            <td> {{game.min_player}}  - {{game.max_player}}</td>
+            <td> {{game.dislikes.disliker}}</td>
+            <td style="width:1rem"> <img src="https://cdn-icons-png.flaticon.com/512/63/63830.png" style="width:1rem" onclick="showOverlay({{nummer.namenid}}, '{{nummer.rules}}')"></td>
+        </tr>
+        <tr id={{nummer.namenid}} class="hidden_row">
+            <td colspan=6>{{nummer.erweiterungen|linebreaks}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>

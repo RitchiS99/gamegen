@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block extrahead %}
+<script src="https://unpkg.com/htmx.org@1.8.4"></script>
+<script>
+  htmx.config.useTemplateFragments = true;
+</script>
+{% endblock %}
+{% block allcontent %}
+<div id="content" class="container">
+  <h2>Home: <a href="{% url 'index' %}">Project1233</a></h2>
+  <div class="container">
+    <div class="row">
+    
+      <div class="col col-lg-6">
+        <h5>Add A dislikes</h5>
+        <div hx-get="{% url 'modelclasses_dislikes_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>dislikes List</h4>
+        <div hx-get="{% url 'modelclasses_dislikes_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A expansion</h5>
+        <div hx-get="{% url 'modelclasses_expansion_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>expansion List</h4>
+        <div hx-get="{% url 'modelclasses_expansion_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A game</h5>
+        <div hx-get="{% url 'modelclasses_game_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>game List</h4>
+        <div hx-get="{% url 'modelclasses_game_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A genre</h5>
+        <div hx-get="{% url 'modelclasses_genre_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>genre List</h4>
+        <div hx-get="{% url 'modelclasses_genre_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Add A location</h5>
+        <div hx-get="{% url 'modelclasses_location_htmx_create' %}" hx-trigger="load" hx-swap="outerHTML"></div>
+        <h4>location List</h4>
+        <div hx-get="{% url 'modelclasses_location_htmx_list' %}" hx-trigger="load">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

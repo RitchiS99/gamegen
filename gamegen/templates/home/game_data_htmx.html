@@ -1,0 +1,58 @@
+{% load i18n %}
+
+<form>
+    <div class="mb-3">
+        <label for="name" class="form-label">{% translate "Name" %}</label>
+        <input type="text" class="form-control" id="name" value="{{data.name}}">
+    </div>
+    <div class="mb-3">
+        <label for="duration" class="form-label">{% translate "Duration" %}</label>
+        <input type="number" class="form-control" id="duration" value={{data.duration}}>
+    </div>
+    <div class="mb-3">
+        <label for="minPlayer" class="form-label">{% translate "min Player" %}</label>
+        <input type="number" class="form-control" id="minPlayer" value={{data.minPlayer}}>
+    </div>
+    <div class="mb-3">
+        <label for="maxPlayer" class="form-label">{% translate "max Player" %}</label>
+        <input type="number" class="form-control" id="maxPlayer" value={{data.maxPlayer}}>
+    </div>
+    <div class="mb-3">
+        <label for="releaseDate" class="form-label">{% translate "Release Date" %}</label>
+        <input type="date" class="form-control" id="releaseDate">
+    </div>
+    <div class="mb-3">
+        <label for="ruleLink" class="form-label">{% translate "Rule Link" %}</label>
+        <input type="url" class="form-control" id="ruleLink">
+    </div>
+    <div class="mb-3">
+        <label for="ruleFile" class="form-label">{% translate "Rule File" %}</label>
+        <input type="file" class="form-control" id="ruleFile">
+    </div>
+    <div class="mb-3">
+        <label for="genre" class="form-label">{% translate "Genre" %}</label>
+        <select class="select-control select-dropdowns" multiple id="genre" name="genre">
+            {% for genre in genres %}
+            <option value="{{genre.id}}">{{genre.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-3">
+        <label for="teaming" class="form-label">{% translate "Teaming" %}</label>
+        <select class="select-control select-dropdowns" multiple id="teaming" name="teaming" >
+            {% for teaming in teamings %}
+            <option value="{{teaming.id}}">{{teaming.name}}</option>
+            {% endfor %}
+        </select>
+    </div>
+</form>
+
+<script>
+
+    $( '.select-dropdowns' ).select2( {
+        theme: "bootstrap-5",
+        width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
+        placeholder: $( this ).data( 'placeholder' ),
+        tags: true,
+    } );   
+</script>

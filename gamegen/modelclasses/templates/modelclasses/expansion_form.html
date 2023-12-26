@@ -1,0 +1,64 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'modelclasses_expansion_list' %}">
+    expansion Listing
+    </a>
+</p>
+    
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+  {{form.errors}}
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="rule_link">rule_link: </label>
+      <input class="form-control col-sm-10"
+         id="rule_link" type="text"
+         name="rule_link" value="{{ object.rule_link }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="release_date">release_date: </label>
+      <input class="form-control col-sm-10"
+         id="release_date" type="date"
+         name="release_date" value="{{ object.release_date }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="number">number: </label>
+      <input class="form-control col-sm-10"
+         id="number" type="number"
+         name="number" value="{{ object.number }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="name">name: </label>
+      <input class="form-control col-sm-10"
+         id="name" type="text"
+         name="name" value="{{ object.name }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="max_player">max_player: </label>
+      <input class="form-control col-sm-10"
+         id="max_player" type="number"
+         name="max_player" value="{{ object.max_player }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="min_player">min_player: </label>
+      <input class="form-control col-sm-10"
+         id="min_player" type="number"
+         name="min_player" value="{{ object.min_player }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="teaming">teaming: </label>
+      <input class="form-control col-sm-10"
+         id="teaming" type="text"
+         name="teaming" value="{{ object.teaming }}">
+  </div>
+  <div class="form-group row">
+      <label class="col-sm-2 col-form-label" for="base_game">base_game: </label>
+      {{ form.base_game }}
+  </div>
+  <input type="submit" value="Save" class="btn btn-primary">
+</form>
+
+{% endblock %}

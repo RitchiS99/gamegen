@@ -1,0 +1,17 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    
+<p>
+    <a class="btn btn-light" href="{% url 'modelclasses_genre_list' %}">
+    genre Listing
+    </a>
+</p>
+    
+<table class="table">
+    <tr><td>name</td><td>{{ object.name }}</td></tr>
+</table>
+<a class="btn btn-primary" href="{{object.get_update_url}}">Edit</a>
+
+{% endblock %}

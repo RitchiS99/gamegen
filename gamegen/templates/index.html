@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="m-2"><h4>modelclasses</h4></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'modelclasses_dislikes_list' %}">dislikes Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'modelclasses_expansion_list' %}">expansion Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'modelclasses_game_list' %}">game Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'modelclasses_genre_list' %}">genre Listing</a></div>
+<div class="m-2"><a class="btn btn-light" href="{% url 'modelclasses_location_list' %}">location Listing</a></div>
+<div class="m-2"><h4>home</h4></div>
+<div class='container'>
+<div class='card'>
+<div class='card-body'>
+<div><a href="{% url 'htmx' %}">HTMX UI</a></div>
+</div>
+</div>
+</div>
+{% endblock %}

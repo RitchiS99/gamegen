@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<label for="dislikes" class="form-label">{% trans 'Dislikes' %}</label>
+<select id="dislikes" class="select select-dislike select2" multiple style="width:10vw" name="dislike">
+    {% for dislike in dislikes %}
+    <option value="{{dislike}}">{{dislike}}</option>
+    {% endfor %}
+</select>
+
+<script>
+    $(document).ready(function() {
+      $('.select-dislike').select2({tags: true});
+    });
+</script>

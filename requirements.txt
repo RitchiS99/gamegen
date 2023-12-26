@@ -1,6 +1,9 @@
-django==4.0.3
-django-environ==0.8.1
-django-auth-ldap==4.0.0
+Django==5
+django-extensions
+djangorestframework
+django-htmx
+django-multiselectfield==0.1.12
+#django-auth-ldap==4.0.0
 django-modeltranslation==0.18.7
-django-oauth-toolkit==2.2.0
-django-cors-headers==3.13.0
+requests
+django-environ

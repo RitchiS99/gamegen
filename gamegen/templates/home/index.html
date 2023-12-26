@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+
+
+
+<label for="location" class="form-label">{% translate "Location" %}</label>
+<select id="location" class="select-normal select2" style="width:10vw" name="location" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="change" hx-include="[name='genre'], [name='min-player'],[name='teaming'],[name='duration']">
+    <option value="0">{% translate "Unset" %}</option>
+    {% for location in locations %}
+    <option value="{{location.id}}">{{location.name}}</option>
+    {% endfor %}
+</select>
+
+<label for="genre" class="form-label">{% translate "Genre" %}</label>
+<select class="select-normal select2" id="genre" style="width:10vw" name="genre" hx-get="{% url 'GameTable' %}" multiple hx-target="#game-table" hx-trigger="change" hx-include="[name='location'],[name='min-player'],[name='teaming'],[name='duration']">
+    {% for genre in genres %}
+    <option value="{{genre.id}}">{{genre.name}}</option>
+    {% endfor %}
+</select>
+
+<label for="teaming" class="form-label">{% translate "Teaming" %}</label>
+<select class="select-normal select2" id="teaming" style="width:10vw" name="teaming" hx-get="{% url 'GameTable' %}" multiple hx-target="#game-table" hx-trigger="change" hx-include="[name='location'],[name='min-player'],[name='genre'],[name='duration']">
+    {% for teaming in teamings %}
+    <option value="{{teaming.id}}">{{teaming.name}}</option>
+    {% endfor %}
+</select>
+</br>
+<label for="duration" class="form-label">{% translate "Duration" %}</label>
+<input type="number" id="duration" name="duration" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="keyup change" hx-include="[name='location'], [name='genre'], [name='teaming'],[name='min-player']" placeholder="{% trans 'Max min' %}"/>
+<label for="player" class="form-label">{% translate "Player Count" %}</label>
+<input type="number" id="player" name="player" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="keyup change" hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration']" placeholder="{% trans 'PlayerCount' %}"/>
+
+</br>
+</br>
+
+<label for="myInput" class="form-label">{% translate "Search" %}</label>
+<input type="text" id="myInput" onkeyup="searchTable('table_detail')" placeholder={% trans 'GameSearch' %}>
+</br>
+
+
+{% include "home/game_table.html" %}
+
+
+
+<div class="overlay" id="overlay" onclick="removeOverlay()" style="background: rgba(0, 0, 0, 0.8);height: 100%;width: 100%;position: fixed;top: 0;left: 0;display: none;">
+    <p id="rules" style="background-color:white; color:black; position: absolute;width: fit-content;height:fit-content;top: 0; bottom:0;left: 0; right:0; max-width:80%; margin-top: auto; margin-bottom:auto;margin-left: auto;margin-right:auto; opacity:1"></p>  </div>
+</div>
+
+
+
+<script>
+
+    window.addEventListener("DOMContentLoaded", (e) => {
+        $('select').on('select2:select', function (e) {
+            $(this).closest('select').get(0).dispatchEvent(new Event('change'));
+        });
+    });   
+</script>
+
+{% endblock content %}
