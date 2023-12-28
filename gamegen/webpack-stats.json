@@ -1,0 +1,24 @@
+{
+  "status": "done",
+  "assets": {
+    "944.08b5beb8beea5062cb63.bundle.js": {
+      "name": "944.08b5beb8beea5062cb63.bundle.js",
+      "path": "944.08b5beb8beea5062cb63.bundle.js"
+    },
+    "app.99908093f53659e314be.bundle.js": {
+      "name": "app.99908093f53659e314be.bundle.js",
+      "path": "app.99908093f53659e314be.bundle.js"
+    },
+    "appf9ad6acf1d56753aa4b0.css": {
+      "name": "appf9ad6acf1d56753aa4b0.css",
+      "path": "appf9ad6acf1d56753aa4b0.css"
+    }
+  },
+  "chunks": {
+    "app": [
+      "944.08b5beb8beea5062cb63.bundle.js",
+      "appf9ad6acf1d56753aa4b0.css",
+      "app.99908093f53659e314be.bundle.js"
+    ]
+  }
+}

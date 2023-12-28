@@ -27,6 +27,8 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 
+
+
 NAME = env('NAME')
 
 ALLOWED_HOSTS = [env('ALLOWED_HOSTS')]
@@ -85,15 +87,29 @@ TEMPLATES = [
     },
 ]
 
-WEBPACK_LOADER = {
+
+if DEBUG:
+    WEBPACK_LOADER = {
+            'DEFAULT': {
+                'CACHE': False,
+                'BUNDLE_DIR_NAME': 'dev/',
+                'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+                'POLL_INTERVAL': 0.1,
+                'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+            }
+        }
+else:
+
+    WEBPACK_LOADER = {
         'DEFAULT': {
-            'CACHE': False,
-            'BUNDLE_DIR_NAME': 'dev/',
-            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+            'CACHE': True,
+            'BUNDLE_DIR_NAME': 'dist/',
+            'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
             'POLL_INTERVAL': 0.1,
             'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
         }
     }
+
 
 
 WSGI_APPLICATION = 'gamegen.wsgi.application'
