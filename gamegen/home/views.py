@@ -103,7 +103,7 @@ def addDislikes(request):
     disliker = []
     if(request.GET.get('location') and (request.GET.get('location')).isdigit() and int(request.GET.get('location'))!=0):
         location = models.location.objects.get(id=request.GET.get('location'))
-        if location:
+        if location and location.disliker:
             disliker = location.disliker.split(",")
     context = {'dislikes': disliker}
     return render(request, 'home/add_dislike.html', context)
@@ -162,7 +162,7 @@ def saveNewGame(request):
 
 def addGame(request):
     locationID = request.GET.get('location')
-    if isinstance(locationID, int):
+    if locationID.isnumeric():
         location = models.location.objects.get(id=locationID)
     else:
         location = models.location(creater = request.user, name=locationID)
@@ -240,3 +240,19 @@ def login(request, context={}):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect('/')
+
+def addWishlist(request):
+    locationID = request.GET.get('location')
+    if locationID.isnumeric():
+        location = models.location.objects.get(id=locationID)
+    else:
+        location = models.location(creater = request.user, name=locationID)
+        location.save()
+    if request.GET.get('type')=="expansion":
+        expansion = models.expansion.objects.get(id=request.GET.get('game'))
+        location.wishlist_expansions.add(expansion)
+    else:
+        game = models.game.objects.get(id=request.GET.get('game'))
+        location.wishlist_games.add(game)
+    location.save()
+    return HttpResponse(status=200)
