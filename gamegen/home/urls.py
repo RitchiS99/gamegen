@@ -18,4 +18,6 @@ urlpatterns = (
     path('saveNewGame/', views.saveNewGame, name="saveNewGame"),
     path('addGame/', views.addGame, name="addGame"),
     path('createExpansion/', views.CreateExpansionView.as_view(), name="CreateExpansionView"),
+    path('login/', views.login, name="login"),
+    path('logout/', views.logout, name="logout"),
 )

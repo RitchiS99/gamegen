@@ -32,10 +32,12 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'HomeView' %}">{% trans 'Home' %}</a>
           </li>
+          {% if user.is_authenticated %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {% trans 'Create' %}
             </a>
+
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="{% url 'CreateGameView' %}">{% trans 'Create Game' %}</a></li>
               <li><a class="dropdown-item" href="{% url 'CreateExpansionView' %}">{% trans 'Create Expansion' %}</a></li>
@@ -45,8 +47,16 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            <a class="nav-link" href="/admin" tabindex="-1" aria-disabled="true">{% trans 'Admin' %}</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">{% trans 'Login' %}</a>
+          </li>
+          {% endif %}
         </ul>
       </div>
     </div>

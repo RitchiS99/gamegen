@@ -7,28 +7,39 @@ from django.shortcuts import render
 import requests
 from xml.etree import ElementTree
 from django.http import HttpResponse
-
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import auth, messages
+from django.http import HttpResponseRedirect
+# from django.template import loader
 
 
 class HomeView(TemplateView):
     template_name = "home/index.html"
 
     def get_context_data(self, **kwargs):
-        user =self.request.user
-        games = editableGames(user)
-        userLocations = list(user.viewer.all())
-        for location in userLocations:
-            games = list(set(games) | set(location.game.all()))
-        # Call the base implementation first to get a context
         context = super().get_context_data(**kwargs)
+        user =self.request.user
+        if user.is_authenticated:
+            games = editableGames(user)
+            userLocations = list(user.viewer.all())
+            for location in userLocations:
+                games = list(set(games) | set(location.game.all()))
+            context["games"] = games
+            context["locations"] = list(user.creater.all()) + list(user.editer.all()) + list(user.viewer.all())
+        else:
+            context["games"] = []
+            context["locations"] = []
+        # Call the base implementation first to get a context
+
         # Add in a QuerySet of all the books
-        context["games"] = games
-        context["locations"] = list(user.creater.all()) + list(user.editer.all()) + list(user.viewer.all())
+
         context["genres"] = models.genre.objects.all()
         context["teamings"] = models.teaming.objects.all()
         return context
     
-class CreateGameView(TemplateView):
+    
+class CreateGameView(LoginRequiredMixin,TemplateView):
     template_name = "home/add_game.html"
 
     def get_context_data(self, **kwargs):
@@ -41,7 +52,7 @@ class CreateGameView(TemplateView):
         context["teamings"] = models.teaming.objects.all()
         return context
     
-class CreateExpansionView(TemplateView):
+class CreateExpansionView(LoginRequiredMixin, TemplateView):
     template_name = "home/add_game.html"
 
     def get_context_data(self, **kwargs):
@@ -190,3 +201,42 @@ def editableGames(user):
     for location in locations:
         games = list(set(games) | set(location.game.all()))
     return games
+
+
+def login(request, context={}):
+    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    # template = loader.get_template('login.html')
+    if request.method == 'GET':
+        next = request.GET.get('next')
+        context["next"] = next
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        user = auth.authenticate(username=username, password=password)
+        # print("Authenticated")
+        # print(user)
+        # print(user.ldap_user.group_names)
+        # print(user.__dir__())
+        if user is not None:
+            # correct username and password login the user
+            auth.login(request, user)
+            next = request.POST.get('next')
+            print("next")
+            print(next)
+            if next!="None":
+                print("Next is next")
+                return HttpResponseRedirect(next)
+            return HttpResponseRedirect('/')
+
+        else:
+            # messages.error(request, 'Error wrong username/password')
+            messages.error(request, 'Error wrong username/password')
+            print("Existiert nicht")
+    context[messages] = {
+        'messages'
+    }
+    return render(request,'login.html', context=context)
+
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect('/')
