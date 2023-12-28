@@ -40,6 +40,9 @@
 
 <label for="myInput" class="form-label">{% translate "Search" %}</label>
 <input type="text" id="myInput" onkeyup="searchTable('table_detail')" placeholder={% trans 'GameSearch' %}>
+
+<button class="btn btn-primary float-end" onclick="randomGame('table_detail')">{% trans "Get Random Game" %}</button>
+</br>
 </br>
 
 
@@ -60,6 +63,41 @@
             $(this).closest('select').get(0).dispatchEvent(new Event('change'));
         });
     });   
+    function searchTable(tableName) {
+        // Declare variables 
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById(tableName);
+        tr = table.getElementsByTagName("tr");
+      
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+          td = tr[i].getElementsByTagName("td")[0];
+          if (td) {
+            txtValue = td.textContent || td.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+              tr[i].style.display = "";
+            } else {
+              tr[i].style.display = "none";
+            }
+          } 
+        }
+    }
+
+    function randomGame(tableName){
+        table = document.getElementById(tableName);
+        tr = table.getElementsByTagName("tr");
+        //need to get rid of first element
+        maxValue = tr.length
+        randomVal = randomNumber(1, maxValue)
+        game = tr[randomVal].getElementsByTagName("td")[0]
+        gameName = game.textContent || game.innerText
+        alert(gameName)
+    }
+    function randomNumber(min, max){
+        return Math.floor(Math.random() * (max - min) + min);
+    }
 </script>
 
 {% endblock content %}
