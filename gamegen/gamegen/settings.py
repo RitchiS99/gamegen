@@ -88,7 +88,7 @@ TEMPLATES = [
 ]
 
 
-if DEBUG:
+if DEBUG=="True":
     WEBPACK_LOADER = {
             'DEFAULT': {
                 'CACHE': False,
