@@ -1,33 +1,50 @@
 {% load i18n %}
 
-<form>
+<form id="newGameForm" name="newGameForm" hx-post="{% url 'saveNewGame' %}" hx-trigger="submit" hx-encoding="multipart/form-data">
+    {% csrf_token %}
     <div class="mb-3">
         <label for="name" class="form-label">{% translate "Name" %}</label>
-        <input type="text" class="form-control" id="name" value="{{data.name}}">
+        <input type="text" class="form-control" id="name" name="name" value="{{data.name}}" required>
+    </div>
+    {% if type == "expansion" %}
+    <div class="mb-3">
+        <label for="baseGame" class="form-label">{% translate "Basegame" %}</label>
+        <select class="select-control select-dropdowns" id="baseGame" name="baseGame" required>
+            <option value="">{% translate "Unset" %}</option>
+            {% for game in allGames %}
+            <option value="{{game.id}}">{{game.name}}</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="mb-3">
+        <label for="number" class="form-label">{% translate "Number" %}</label>
+        <input type="number" class="form-control" id="number" name="number" value="" required>
+    </div>
+    <input type="hidden" name="type" value="expansion">
+    {% endif %}
+    <div class="mb-3">
         <label for="duration" class="form-label">{% translate "Duration" %}</label>
-        <input type="number" class="form-control" id="duration" value={{data.duration}}>
+        <input type="number" class="form-control" id="duration" name="duration" value={{data.duration}} required>
     </div>
     <div class="mb-3">
         <label for="minPlayer" class="form-label">{% translate "min Player" %}</label>
-        <input type="number" class="form-control" id="minPlayer" value={{data.minPlayer}}>
+        <input type="number" class="form-control" id="minPlayer" name="minPlayer" value={{data.minPlayer}} required>
     </div>
     <div class="mb-3">
         <label for="maxPlayer" class="form-label">{% translate "max Player" %}</label>
-        <input type="number" class="form-control" id="maxPlayer" value={{data.maxPlayer}}>
+        <input type="number" class="form-control" id="maxPlayer" name="maxPlayer" value={{data.maxPlayer}} required>
     </div>
     <div class="mb-3">
         <label for="releaseDate" class="form-label">{% translate "Release Date" %}</label>
-        <input type="date" class="form-control" id="releaseDate">
+        <input type="date" class="form-control" name="releaseDate" id="releaseDate">
     </div>
     <div class="mb-3">
         <label for="ruleLink" class="form-label">{% translate "Rule Link" %}</label>
-        <input type="url" class="form-control" id="ruleLink">
+        <input type="url" class="form-control" name="ruleLink" id="ruleLink">
     </div>
     <div class="mb-3">
         <label for="ruleFile" class="form-label">{% translate "Rule File" %}</label>
-        <input type="file" class="form-control" id="ruleFile">
+        <input type="file" class="form-control" name="ruleFile" id="ruleFile">
     </div>
     <div class="mb-3">
         <label for="genre" class="form-label">{% translate "Genre" %}</label>
@@ -55,4 +72,15 @@
         placeholder: $( this ).data( 'placeholder' ),
         tags: true,
     } );   
+    
+    document.addEventListener('htmx:afterRequest', function(evt) {
+        if (evt.detail.xhr.status == 200){
+            if(evt.detail.target.id=="newGameForm"){
+                location.reload()
+            }
+            if(evt.detail.target.id=="addGameToLocation"){
+                location.reload()
+            }
+        }
+    });
 </script>

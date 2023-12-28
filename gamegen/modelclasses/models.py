@@ -58,7 +58,7 @@ class expansion(models.Model):
         pass
 
     def __str__(self):
-        return str(self.name)
+        return str(self.name+" - "+self.base_game.name)
 
     def get_absolute_url(self):
         return reverse("modelclasses_expansion_detail", args=(self.pk,))
@@ -134,7 +134,7 @@ class genre(models.Model):
 
 class location(models.Model):
     name = models.CharField(max_length=60)
-    creater = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="created")
+    creater = models.ForeignKey("auth.User", on_delete=models.SET_NULL, null=True, related_name="creater")
     editer = models.ManyToManyField("auth.User", related_name="editer", blank=True)
     viewer = models.ManyToManyField("auth.User", related_name="viewer", blank=True)
     # Relationships

@@ -4,29 +4,43 @@
 
 
 {% block content %}
-<label for="game" class="form-label">{% trans 'GameName' %}</label>
-<div class="input-group mb-3">
-    <select id="select-game" class="form-select" style="width:10vw" name="game" data-placeholder="Choose one game">
-        <option value="">{% translate "" %}</option>
-        {% for game in games %}
-        <option value="{{game.id}}">{{game.name}}</option>
-        {% endfor %}
-    </select>
-    <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#gameModal">+</button>
+<form id="addGameToLocation" hx-get="{% url 'addGame' %}" hx-trigger="submit">
+  <label for="select-game" class="form-label">{% if type == "expansion" %}{% trans 'ExpansionName' %}{% else %}{% trans 'GameName' %}{% endif %}</label>
+  <div class="input-group mb-3">
+      <select id="select-game" class="form-select" style="width:10vw" name="game" data-placeholder="Choose one game">
+          <option value="">{% translate "" %}</option>
+          {% for game in games %}
+          <option value="{{game.id}}">{{game}}</option>
+          {% endfor %}
+      </select>
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-bs-toggle="modal" data-bs-target="#gameModal">+</button>
+  </div>
+  </br>
+
+  <label for="location" class="form-label">{% trans 'Location' %}</label>
+  <select id="location" required class="select select-location select2" style="width:10vw" name="location" {% if type != "expansion" %}hx-get="{% url 'AddDislikes' %}" hx-target="#dislikerDiv" hx-trigger="change" {% endif %}>
+      <option value=""></option>
+      {% for location in locations %}
+      <option value="{{location.id}}">{{location.name}}</option>
+      {% endfor %}
+  </select>
+  {% if type == "expansion" %}
+  <input type="hidden" name="type" value="expansion">
+  </br>
+  {% else %}
+  <div id="dislikerDiv">
+
+  </div>
+  {% endif %}
+
+  <button type="submit" class="btn btn-primary">{% if type == "expansion" %}{% trans "Save Expansion" %}{% else %}{% trans "Save Game" %}{% endif %}</button>
+</form>
+
+<div class="overviewTable">
+
 </div>
-</br>
 
-<label for="location" class="form-label">{% trans 'Location' %}</label>
-<select id="location" class="select select-location select2" style="width:10vw" name="location" hx-get="{% url 'AddDislikes' %}" hx-target="#dislikerDiv" hx-trigger="change">
-    <option value=""></option>
-    {% for location in locations %}
-    <option value="{{location.id}}">{{location.name}}</option>
-    {% endfor %}
-</select>
 
-<div id="dislikerDiv">
-
-</div>
 
 
   <!-- Modal -->
@@ -34,15 +48,17 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="gameModalLabel">{% translate "New Game" %}</h1>
+          <h1 class="modal-title fs-5" id="gameModalLabel">{% if type == "expansion" %}{% translate "New Expansion" %}{% else %}{% translate "New Game" %}{% endif %}</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <h3>{% translate "Import from BGG" %}</h3>
-            <div class="input-group mb-3">
-                <input type="text" id="InputBGGId" class="form-control" placeholder="BGG Game ID">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">{% translate "Get Data" %}</button>
+            <form hx-get="{% url 'getBGGData' %}" hx-target="#game_data">
+              <div class="input-group mb-3">
+                  <input type="text" id="InputBGGId" class="form-control" name="id" placeholder="BGG Game ID">
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">{% translate "Get Data" %}</button>
               </div>
+              {% if type == "expansion" %}<input type="hidden" name="type" value="expansion">{% endif %}
             </form>
             <hr>
             <h3>{% translate "Game Data" %}</h3>
@@ -52,7 +68,7 @@
           </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" form="newGameForm" class="btn btn-primary">Save Game</button>
         </div>
       </div>
     </div>

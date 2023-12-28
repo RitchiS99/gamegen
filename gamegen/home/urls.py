@@ -14,6 +14,8 @@ urlpatterns = (
     path('gameTable/', views.gameTable, name="GameTable"),
     path('createGame/', views.CreateGameView.as_view(), name="CreateGameView"),
     path('addDislikes/', views.addDislikes, name="AddDislikes"),
-    path('getBGG', views.loadFromBGG, name="getBGGData"),
-
+    path('getBGG/', views.loadFromBGG, name="getBGGData"),
+    path('saveNewGame/', views.saveNewGame, name="saveNewGame"),
+    path('addGame/', views.addGame, name="addGame"),
+    path('createExpansion/', views.CreateExpansionView.as_view(), name="CreateExpansionView"),
 )
