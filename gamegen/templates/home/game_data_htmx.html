@@ -9,7 +9,7 @@
     {% if type == "expansion" %}
     <div class="mb-3">
         <label for="baseGame" class="form-label">{% translate "Basegame" %}</label>
-        <select class="select-control select-dropdowns" id="baseGame" name="baseGame" required>
+        <select class="select-control select-modal select2" id="baseGame" name="baseGame" required>
             <option value="">{% translate "Unset" %}</option>
             {% for game in allGames %}
             <option value="{{game.id}}">{{game.name}}</option>
@@ -48,7 +48,7 @@
     </div>
     <div class="mb-3">
         <label for="genre" class="form-label">{% translate "Genre" %}</label>
-        <select class="select-control select-dropdowns" multiple id="genre" name="genre">
+        <select class="select-control select-dropdowns select2" multiple id="genre" name="genre" style="width:10vw">
             {% for genre in genres %}
             <option value="{{genre.id}}">{{genre.name}}</option>
             {% endfor %}
@@ -56,7 +56,7 @@
     </div>
     <div class="mb-3">
         <label for="teaming" class="form-label">{% translate "Teaming" %}</label>
-        <select class="select-control select-dropdowns" multiple id="teaming" name="teaming" >
+        <select class="select-control select-dropdowns select2" multiple id="teaming" name="teaming" style="width:10vw">
             {% for teaming in teamings %}
             <option value="{{teaming.id}}">{{teaming.name}}</option>
             {% endfor %}
@@ -68,10 +68,19 @@
 
     $( '.select-dropdowns' ).select2( {
         theme: "bootstrap-5",
+
+        placeholder: $( this ).data( 'placeholder' ),
+
+    } );   
+    $( '.select-modal' ).select2( {
+        theme: "bootstrap-5",
         width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
         placeholder: $( this ).data( 'placeholder' ),
-        tags: true,
+        dropdownParent: $('#gameModal')
+
     } );   
+ 
+ 
     
     document.addEventListener('htmx:afterRequest', function(evt) {
         if (evt.detail.xhr.status == 200){
