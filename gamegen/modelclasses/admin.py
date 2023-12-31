@@ -18,6 +18,8 @@ class dislikesAdmin(admin.ModelAdmin):
         "location",
         "disliker",
     ]
+    search_fields = ('game__name','location__name',)
+    list_filter = ('location',)
 
 
 class expansionAdminForm(forms.ModelForm):
@@ -38,9 +40,9 @@ class expansionAdmin(admin.ModelAdmin):
         "release_date",
         "rule_link",
         "file",
-
     ]
-
+    search_fields = ('name','base_game__name',)
+    list_filter = ('base_game', 'genre', 'teaming',)
 
 
 class gameAdminForm(forms.ModelForm):
@@ -60,8 +62,9 @@ class gameAdmin(admin.ModelAdmin):
         "release_date",
         "rule_link",
         "file",
-        
     ]
+    search_fields = ('name',)
+    list_filter = ('genre', 'teaming',)
 
 
 

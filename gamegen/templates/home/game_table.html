@@ -29,7 +29,7 @@
         {% for game in games %}
             <tr>
                 <td> {{game.name}}</td>
-                <td> {% for genre in game.genre.all %}{{genre.name}}{% endfor %}</td>
+                <td> {{game.genre.all|join:", "}}</td>
                 <td> {{game.duration}} min</td>
                 <td> {{game.teaming.all|join:", "}}</td>
                 <td> {{game.min_player}}  - {{game.max_player}}</td>

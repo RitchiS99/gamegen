@@ -80,9 +80,6 @@ def gameTable(request):
             games = list(set(games) | set(location.game.all()))
     
     if(request.GET.get('genre')):
-        # genre = models.genre.objects.get(id=request.GET.get('genre'))
-        print("Genre")
-        print(request.GET.getlist('genre'))
         games = games.filter(genre__in=request.GET.getlist('genre'))
     
     if(request.GET.get('player')and int(request.GET.get('player'))!=0):
@@ -96,7 +93,7 @@ def gameTable(request):
         games = games.filter(duration__lte=int(request.GET.get('duration')))
 
 
-    context = {'games': games}
+    context = {'games': games.distinct()}
     return render(request, 'home/game_table.html', context)
 
 def addDislikes(request):
