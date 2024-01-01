@@ -169,27 +169,31 @@ def addGame(request):
 
 
     if request.GET.get('type')=="expansion":
-        expansion = models.expansion.objects.get(id=request.GET.get('game'))
-        location.expansions.add(expansion)
-        location.save()
+        id_list = request.GET.getlist('game')
+        for id in id_list:
+            expansion = models.expansion.objects.get(id=id)
+            location.expansions.add(expansion)
+            location.save()
         pass
     else:
-        game = models.game.objects.get(id=request.GET.get('game'))
-        dislikes = request.GET.getlist('dislike')
-        dislikeString = ','.join(dislikes)
-        existingDislike = models.dislikes.objects.filter(location=location, game=game)
-        if existingDislike:
-            return HttpResponse(status=200)
-        dislike = models.dislikes(game=game, location=location, disliker=dislikeString)
-        dislike.save()
-        locationDislikes = str(location.disliker)
-        ### Check if every disliker in location.dislikes
-        for dislikeObject in dislikes:
-            if dislikeObject not in locationDislikes:
-                locationDislikes = locationDislikes + ", "+dislikeObject
+        id_list = request.GET.getlist('game')
+        for id in id_list:
+            game = models.game.objects.get(id=id)
+            dislikes = request.GET.getlist('dislike')
+            dislikeString = ','.join(dislikes)
+            existingDislike = models.dislikes.objects.filter(location=location, game=game)
+            if existingDislike:
+                return HttpResponse(status=200)
+            dislike = models.dislikes(game=game, location=location, disliker=dislikeString)
+            dislike.save()
+            locationDislikes = str(location.disliker)
+            ### Check if every disliker in location.dislikes
+            for dislikeObject in dislikes:
+                if dislikeObject not in locationDislikes:
+                    locationDislikes = locationDislikes + ", "+dislikeObject
 
-        location.disliker = locationDislikes
-        location.save()
+            location.disliker = locationDislikes
+            location.save()
     return HttpResponse(status=200)
 
 def editableGames(user):
@@ -240,16 +244,19 @@ def logout(request):
 
 def addWishlist(request):
     locationID = request.GET.get('location')
+    id_list = request.GET.getlist('game')
     if locationID.isnumeric():
         location = models.location.objects.get(id=locationID)
     else:
         location = models.location(creater = request.user, name=locationID)
         location.save()
     if request.GET.get('type')=="expansion":
-        expansion = models.expansion.objects.get(id=request.GET.get('game'))
-        location.wishlist_expansions.add(expansion)
+        for id in id_list:
+            expansion = models.expansion.objects.get(id=id)
+            location.wishlist_expansions.add(expansion)
     else:
-        game = models.game.objects.get(id=request.GET.get('game'))
-        location.wishlist_games.add(game)
+        for id in id_list:
+            game = models.game.objects.get(id=id)
+            location.wishlist_games.add(game)
     location.save()
     return HttpResponse(status=200)
