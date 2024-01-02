@@ -92,8 +92,7 @@ def gameTable(request):
     if(request.GET.get('duration') and int(request.GET.get('duration'))!=0):
         games = games.filter(duration__lte=int(request.GET.get('duration')))
 
-
-    context = {'games': games.distinct()}
+    context = {'games': games.distinct(), 'location': location}
     return render(request, 'home/game_table.html', context)
 
 def addDislikes(request):
