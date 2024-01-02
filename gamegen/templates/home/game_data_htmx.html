@@ -9,7 +9,7 @@
     {% if type == "expansion" %}
     <div class="mb-3">
         <label for="baseGame" class="form-label">{% translate "Basegame" %}</label>
-        <select class="select-control select-modal select2" id="baseGame" name="baseGame" required>
+        <select class="select-control select-modal select2" id="baseGame" name="baseGame" required style="width:100%">
             <option value="">{% translate "Unset" %}</option>
             {% for game in allGames %}
             <option value="{{game.id}}">{{game.name}}</option>
@@ -48,7 +48,7 @@
     </div>
     <div class="mb-3">
         <label for="genre" class="form-label">{% translate "Genre" %}</label>
-        <select class="select-control select-dropdowns select2" multiple id="genre" name="genre" style="width:10vw">
+        <select class="select-control select-dropdowns select2" multiple id="genre" name="genre" style="width:100%">
             {% for genre in genres %}
             <option value="{{genre.id}}">{{genre.name}}</option>
             {% endfor %}
@@ -56,7 +56,7 @@
     </div>
     <div class="mb-3">
         <label for="teaming" class="form-label">{% translate "Teaming" %}</label>
-        <select class="select-control select-dropdowns select2" multiple id="teaming" name="teaming" style="width:10vw">
+        <select class="select-control select-dropdowns select2" multiple id="teaming" name="teaming" style="width:100%">
             {% for teaming in teamings %}
             <option value="{{teaming.id}}">{{teaming.name}}</option>
             {% endfor %}

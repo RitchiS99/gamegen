@@ -69,17 +69,21 @@
         input = document.getElementById("myInput");
         filter = input.value.toUpperCase();
         table = document.getElementById(tableName);
-        tr = table.getElementsByTagName("tr");
+        tr = document.getElementsByClassName("gameRows");
       
         // Loop through all table rows, and hide those who don't match the search query
         for (i = 0; i < tr.length; i++) {
           td = tr[i].getElementsByTagName("td")[0];
+          gameID = tr[i].dataset.name
           if (td) {
             txtValue = td.textContent || td.innerText;
             if (txtValue.toUpperCase().indexOf(filter) > -1) {
               tr[i].style.display = "";
             } else {
-              tr[i].style.display = "none";
+                tr[i].style.display = "none";
+                if(!$( "#hidden_"+gameID).hasClass( "hidden_row" )){
+                    showHideRow('hidden_'+gameID)
+                }
             }
           } 
         }
@@ -87,10 +91,9 @@
 
     function randomGame(tableName){
         table = document.getElementById(tableName);
-        tr = table.getElementsByTagName("tr");
-        //need to get rid of first element
+        tr = table.getElementsByClassName("gameRows");
         maxValue = tr.length
-        randomVal = randomNumber(1, maxValue)
+        randomVal = randomNumber(0, maxValue)
         game = tr[randomVal].getElementsByTagName("td")[0]
         gameName = game.textContent || game.innerText
         alert(gameName)

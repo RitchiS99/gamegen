@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         {% for game in games %}
-            <tr onclick="showHideRow('hidden_{{game.id}}')">
+            <tr onclick="showHideRow('hidden_{{game.id}}')" class="gameRows" data-name="{{game.id}}">
                 <td> {{game.name}}</td>
                 <td> {{game.genre.all|join:", "}}</td>
                 <td> {{game.duration}} min</td>
