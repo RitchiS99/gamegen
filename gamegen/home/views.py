@@ -72,27 +72,36 @@ def gameTable(request):
     user =request.user
     games = editableGames(user)
     userLocations = list(user.viewer.all())
+    expansions = None
+    expansionGames = None
     if(request.GET.get('location')and int(request.GET.get('location'))!=0):
         location = models.location.objects.get(id=request.GET.get('location'))
         games = location.game.all()
+        expansions = location.expansions.all()
     else:
         for location in userLocations:
             games = list(set(games) | set(location.game.all()))
     
     if(request.GET.get('genre')):
         games = games.filter(genre__in=request.GET.getlist('genre'))
+        expansions = expansions.filter(genre__in=request.GET.getlist('genre'))
     
     if(request.GET.get('player')and int(request.GET.get('player'))!=0):
         player = int(request.GET.get('player'))
         games = games.filter(min_player__lte=player, max_player__gte=player)
+        expansions = expansions.filter(min_player__lte=player, max_player__gte=player)
     
     if(request.GET.get('teaming')):
         games = games.filter(teaming__in=request.GET.getlist('teaming'))
+        expansions = expansions.filter(teaming__in=request.GET.getlist('teaming'))
     
     if(request.GET.get('duration') and int(request.GET.get('duration'))!=0):
         games = games.filter(duration__lte=int(request.GET.get('duration')))
-
-    context = {'games': games.distinct(), 'location': location}
+        expansions = expansions.filter(duration__lte=int(request.GET.get('duration')))
+    expansionGames = location.game.filter(expansion__in=expansions)
+    notGames = expansionGames.exclude(pk__in=games).distinct()
+    games = (games|expansionGames)
+    context = {'games': games.distinct(), 'location': location, 'notGames': notGames, 'expansions': expansions}
     return render(request, 'home/game_table.html', context)
 
 def addDislikes(request):
