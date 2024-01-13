@@ -74,13 +74,15 @@ def gameTable(request):
     userLocations = list(user.viewer.all())
     expansions = None
     expansionGames = None
-    if(request.GET.get('location')and int(request.GET.get('location'))!=0):
+    location = None
+    notGames = None
+    if(request.GET.get('location')and int(request.GET.get('location'))!=0): # check if location in user.locations
         location = models.location.objects.get(id=request.GET.get('location'))
         games = location.game.all()
         expansions = location.expansions.all()
     else:
         for location in userLocations:
-            games = list(set(games) | set(location.game.all()))
+            games = games | location.game.all()
     
     if(request.GET.get('genre')):
         games = games.filter(genre__in=request.GET.getlist('genre'))
@@ -98,9 +100,14 @@ def gameTable(request):
     if(request.GET.get('duration') and int(request.GET.get('duration'))!=0):
         games = games.filter(duration__lte=int(request.GET.get('duration')))
         expansions = expansions.filter(duration__lte=int(request.GET.get('duration')))
-    expansionGames = location.game.filter(expansion__in=expansions)
-    notGames = expansionGames.exclude(pk__in=games).distinct()
-    games = (games|expansionGames)
+
+
+    if location:
+        expansionGames = location.game.filter(expansion__in=expansions)
+    if expansionGames:
+        notGames = expansionGames.exclude(pk__in=games).distinct()
+        games = (games|expansionGames)
+
     context = {'games': games.distinct(), 'location': location, 'notGames': notGames, 'expansions': expansions}
     return render(request, 'home/game_table.html', context)
 
@@ -205,10 +212,10 @@ def addGame(request):
     return HttpResponse(status=200)
 
 def editableGames(user):
-    games = []
+    games = models.game.objects.none()
     locations = list(user.creater.all()) + list(user.editer.all())
     for location in locations:
-        games = list(set(games) | set(location.game.all()))
+        games = games | location.game.all()
     return games
 
 

@@ -5,16 +5,16 @@
         <thead>
             <tr>
                 <th style="width:25vw">
-                {% trans 'GameName' %}
+                {% trans 'Name' %}
                 </th>
                 <th style="width:15vw">
-                {% trans 'GenreOfGame' %}
+                {% trans 'Genre' %}
                 </th>
                 <th style="width:15vw">
-                {% trans 'GameLength' %}
+                    {% trans 'Teaming' %}
                 </th>
                 <th style="width:15vw">
-                {% trans 'GameCharacter' %}
+                {% trans 'Duration' %}
                 </th>
                 <th style="width:15vw">
                     {% trans 'PlayerCount' %}
@@ -30,8 +30,8 @@
             <tr onclick="showHideRow('hidden_{{game.id}}')" class="gameRows" data-name="{{game.id}}" {% if game in notGames %}style="background-color:red"{% endif %}>
                 <td> {{game.name}}</td>
                 <td> {{game.genre.all|join:", "}}</td>
-                <td> {{game.duration}} min</td>
                 <td> {{game.teaming.all|join:", "}}</td>
+                <td> {{game.duration}} min</td>
                 <td> {{game.min_player}}  - {{game.max_player}}</td>
                 <td> {{game.dislikes.disliker}}</td>
                 <td style="width:1rem"> <img src="https://cdn-icons-png.flaticon.com/512/63/63830.png" style="width:1rem" onclick="showOverlay({{nummer.namenid}}, '{{nummer.rules}}')"></td>
@@ -41,16 +41,20 @@
                     <p>
                         <table class="table" style="font-size:small">
                             <tr class="table-info text-center">
-                                <th>Name</th>
-                                <th>Number</th>
-                                <th>Duration</th>
-                                <th>PlayerCount</th>
+                                <th>{% trans 'Number' %}</th>
+                                <th>{% trans 'Name' %}</th>
+                                <th>{% trans 'Genre' %}</th>
+                                <th>{% trans 'Teaming' %}</th>
+                                <th>{% trans 'Duration' %}</th>
+                                <th>{% trans 'PlayerCount' %}</th>
                             </tr>
                             {% for expansion in game.expansion_set.all %}
                                 {% if expansion in location.expansions.all %}
                                 <tr class="table-info text-center">
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.name}}</td>
                                     <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.number}}</td>
+                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.name}}</td>
+                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.genre.all|join:", "}}</td>
+                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.teaming.all|join:", "}}</td>
                                     <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.duration}}min</td>
                                     <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.min_player}}-{{expansion.max_player}}</td>
                                 </tr>
