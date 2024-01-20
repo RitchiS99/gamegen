@@ -61,7 +61,7 @@
       </div>
     </div>
   </nav>
-  <body hx-headers="{'X-CSRFToken': '{{ csrf_token }}'}">
+  <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
     {% block allcontent %}
     <div id="content" class="container">
       {% block content %}{% endblock %}

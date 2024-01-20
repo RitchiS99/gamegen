@@ -34,7 +34,7 @@
                 <td> {{game.duration}} min</td>
                 <td> {{game.min_player}}  - {{game.max_player}}</td>
                 <td> {{game.dislikes.disliker}}</td>
-                <td style="width:1rem"> <img src="https://cdn-icons-png.flaticon.com/512/63/63830.png" style="width:1rem" onclick="showOverlay({{nummer.namenid}}, '{{nummer.rules}}')"></td>
+                <td style="width:1rem"> {% if location in user.editer.all or location in user.creater.all %}<a hx-get="{% url 'changeDislikes' %}" multiple hx-target="#modalDislikeBody" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}}' data-bs-toggle="modal" data-bs-target="#changeDislikes"><i class="material-icons me-1">edit</i></a>{% endif %}</td>
             </tr>
             <tr id="hidden_{{game.id}}"  class="hidden_row">
                 <td colspan="7">

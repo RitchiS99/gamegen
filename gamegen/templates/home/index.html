@@ -49,6 +49,27 @@
 {% include "home/game_table.html" %}
 
 
+<div class="modal fade" id="changeDislikes" tabindex="-1" aria-labelledby="changeDislikesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changeDislikesLabel">Dislikes</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modalDislikeBody">
+                {% include "home/change_dislike.html" %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="dislikeForm" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
 
 <div class="overlay" id="overlay" onclick="removeOverlay()" style="background: rgba(0, 0, 0, 0.8);height: 100%;width: 100%;position: fixed;top: 0;left: 0;display: none;">
     <p id="rules" style="background-color:white; color:black; position: absolute;width: fit-content;height:fit-content;top: 0; bottom:0;left: 0; right:0; max-width:80%; margin-top: auto; margin-bottom:auto;margin-left: auto;margin-right:auto; opacity:1"></p>  </div>

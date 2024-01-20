@@ -7,3 +7,4 @@ testenv/
 node_modules/
 dev/
 uploaded_files/
+dist/

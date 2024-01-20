@@ -1,0 +1,59 @@
+{
+  "status": "done",
+  "assets": {
+    "0c35d18bf06992036b69.woff2": {
+      "name": "0c35d18bf06992036b69.woff2",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/0c35d18bf06992036b69.woff2"
+    },
+    "219aa9140e099e6c72ed.woff2": {
+      "name": "219aa9140e099e6c72ed.woff2",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/219aa9140e099e6c72ed.woff2"
+    },
+    "3a4004a46a653d4b2166.woff": {
+      "name": "3a4004a46a653d4b2166.woff",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/3a4004a46a653d4b2166.woff"
+    },
+    "3baa5b8f3469222b822d.woff": {
+      "name": "3baa5b8f3469222b822d.woff",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/3baa5b8f3469222b822d.woff"
+    },
+    "4d73cb90e394b34b7670.woff": {
+      "name": "4d73cb90e394b34b7670.woff",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/4d73cb90e394b34b7670.woff"
+    },
+    "4ef4218c522f1eb6b5b1.woff2": {
+      "name": "4ef4218c522f1eb6b5b1.woff2",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/4ef4218c522f1eb6b5b1.woff2"
+    },
+    "5d681e2edae8c60630db.woff": {
+      "name": "5d681e2edae8c60630db.woff",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/5d681e2edae8c60630db.woff"
+    },
+    "6f420cf17cc0d7676fad.woff2": {
+      "name": "6f420cf17cc0d7676fad.woff2",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/6f420cf17cc0d7676fad.woff2"
+    },
+    "app.bundle.css": {
+      "name": "app.bundle.css",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/app.bundle.css"
+    },
+    "app.bundle.js": {
+      "name": "app.bundle.js",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/app.bundle.js"
+    },
+    "c380809fd3677d7d6903.woff2": {
+      "name": "c380809fd3677d7d6903.woff2",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/c380809fd3677d7d6903.woff2"
+    },
+    "f882956fd323fd322f31.woff": {
+      "name": "f882956fd323fd322f31.woff",
+      "path": "/Users/richard/Documents/Eigene_Projekte/Eigenes_Git/gamegen/gamegen/assets/dev/f882956fd323fd322f31.woff"
+    }
+  },
+  "chunks": {
+    "app": [
+      "app.bundle.css",
+      "app.bundle.js"
+    ]
+  }
+}

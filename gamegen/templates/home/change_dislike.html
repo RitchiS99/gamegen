@@ -1,0 +1,18 @@
+{% load i18n %}
+<form id="dislikeForm" hx-get="{% url 'changeDislikesSave' %}">
+  <h3>{{game.name}}</h3>
+  <input id="game" type="hidden" name="game" value="{{game.id}}">
+  <input id="location" type="hidden" name="location" value="{{location.id}}">
+  <label for="dislikes" class="form-label">{% trans 'Dislikes' %}</label>
+  <select id="dislikes" class="select select-dislike select2" multiple style="width:10vw" name="dislike">
+      {% for dislike in dislikes %}
+      <option value="{{dislike}}" {% if dislike in dislikeList %}selected{% endif %}>{{dislike}}</option>
+      {% endfor %}
+  </select>
+</form>
+
+<script>
+    $(document).ready(function() {
+      $('.select-dislike').select2({tags: true, dropdownParent: $('#changeDislikes')});
+    });
+</script>

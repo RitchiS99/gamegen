@@ -1,24 +1,64 @@
 {
   "status": "done",
   "assets": {
-    "944.08b5beb8beea5062cb63.bundle.js": {
-      "name": "944.08b5beb8beea5062cb63.bundle.js",
-      "path": "944.08b5beb8beea5062cb63.bundle.js"
+    "0c35d18bf06992036b69.woff2": {
+      "name": "0c35d18bf06992036b69.woff2",
+      "path": "0c35d18bf06992036b69.woff2"
     },
-    "app.99908093f53659e314be.bundle.js": {
-      "name": "app.99908093f53659e314be.bundle.js",
-      "path": "app.99908093f53659e314be.bundle.js"
+    "219aa9140e099e6c72ed.woff2": {
+      "name": "219aa9140e099e6c72ed.woff2",
+      "path": "219aa9140e099e6c72ed.woff2"
     },
-    "appf9ad6acf1d56753aa4b0.css": {
-      "name": "appf9ad6acf1d56753aa4b0.css",
-      "path": "appf9ad6acf1d56753aa4b0.css"
+    "3a4004a46a653d4b2166.woff": {
+      "name": "3a4004a46a653d4b2166.woff",
+      "path": "3a4004a46a653d4b2166.woff"
+    },
+    "3baa5b8f3469222b822d.woff": {
+      "name": "3baa5b8f3469222b822d.woff",
+      "path": "3baa5b8f3469222b822d.woff"
+    },
+    "4d73cb90e394b34b7670.woff": {
+      "name": "4d73cb90e394b34b7670.woff",
+      "path": "4d73cb90e394b34b7670.woff"
+    },
+    "4ef4218c522f1eb6b5b1.woff2": {
+      "name": "4ef4218c522f1eb6b5b1.woff2",
+      "path": "4ef4218c522f1eb6b5b1.woff2"
+    },
+    "5d681e2edae8c60630db.woff": {
+      "name": "5d681e2edae8c60630db.woff",
+      "path": "5d681e2edae8c60630db.woff"
+    },
+    "6f420cf17cc0d7676fad.woff2": {
+      "name": "6f420cf17cc0d7676fad.woff2",
+      "path": "6f420cf17cc0d7676fad.woff2"
+    },
+    "99161fb213df482680e4e70.css": {
+      "name": "99161fb213df482680e4e70.css",
+      "path": "99161fb213df482680e4e70.css"
+    },
+    "app.59cd774f65b57baf1669.bundle.js": {
+      "name": "app.59cd774f65b57baf1669.bundle.js",
+      "path": "app.59cd774f65b57baf1669.bundle.js"
+    },
+    "app76ae6dc9ce83d44e891e.css": {
+      "name": "app76ae6dc9ce83d44e891e.css",
+      "path": "app76ae6dc9ce83d44e891e.css"
+    },
+    "c380809fd3677d7d6903.woff2": {
+      "name": "c380809fd3677d7d6903.woff2",
+      "path": "c380809fd3677d7d6903.woff2"
+    },
+    "f882956fd323fd322f31.woff": {
+      "name": "f882956fd323fd322f31.woff",
+      "path": "f882956fd323fd322f31.woff"
     }
   },
   "chunks": {
     "app": [
-      "944.08b5beb8beea5062cb63.bundle.js",
-      "appf9ad6acf1d56753aa4b0.css",
-      "app.99908093f53659e314be.bundle.js"
+      "99161fb213df482680e4e70.css",
+      "app76ae6dc9ce83d44e891e.css",
+      "app.59cd774f65b57baf1669.bundle.js"
     ]
   }
 }

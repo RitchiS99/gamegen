@@ -205,7 +205,7 @@ def addGame(request):
             ### Check if every disliker in location.dislikes
             for dislikeObject in dislikes:
                 if dislikeObject not in locationDislikes:
-                    locationDislikes = locationDislikes + ", "+dislikeObject
+                    locationDislikes = locationDislikes + ","+dislikeObject
 
             location.disliker = locationDislikes
             location.save()
@@ -275,3 +275,31 @@ def addWishlist(request):
             location.wishlist_games.add(game)
     location.save()
     return HttpResponse(status=200)
+
+
+def changeDislikes(request):
+    game = models.game.objects.get(id=request.GET.get('game'))
+    location = models.location.objects.get(id=request.GET.get('location'))
+    dislikeList = list(models.dislikes.objects.get(game=game,location=location).disliker.split(","))
+    dislikes = list(location.disliker.split(","))
+    context = {'game': game, 'dislikeList': dislikeList, "dislikes":dislikes, "location":location}
+    return render(request, 'home/change_dislike.html', context=context)
+
+def changeDislikesSave(request):
+    game = models.game.objects.get(id=int(request.GET.get('game')))
+    location = models.location.objects.get(id=int(request.GET.get('location')))
+    dislikes = request.GET.getlist('dislike')
+    gameDislike = models.dislikes.objects.get(game=game, location=location)
+    gameDislike.disliker = ','.join(dislikes)
+    gameDislike.save()
+    locationDislikes = str(location.disliker)
+    print("locationDislikes")
+            ### Check if every disliker in location.dislikes
+    for dislikeObject in dislikes:
+        if dislikeObject not in locationDislikes:
+            locationDislikes = locationDislikes + ","+dislikeObject
+    location.disliker = locationDislikes
+    location.save()
+    return HttpResponse(status=200)
+
+

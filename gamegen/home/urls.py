@@ -21,4 +21,6 @@ urlpatterns = (
     path('addWishlist/', views.addWishlist, name="addWishlist"),
     path('login/', views.login, name="login"),
     path('logout/', views.logout, name="logout"),
+    path('changeDislikes', views.changeDislikes, name="changeDislikes"),
+    path('changeDislikesSave', views.changeDislikesSave, name="changeDislikesSave"),
 )
