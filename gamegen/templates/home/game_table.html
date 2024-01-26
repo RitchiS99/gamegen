@@ -60,7 +60,7 @@
                                 <th>{% trans 'Duration' %}</th>
                                 <th>{% trans 'PlayerCount' %}</th>
                             </tr>
-                            {% for expansion in game.expansion_set.all %}
+                            {% for expansion in game.expansion_set.all or expansion in game.game.expasion_set.all %}
                                 {% if expansion in location.expansions.all %}
                                 <tr class="table-info text-center">
                                     <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.number}}</td>
