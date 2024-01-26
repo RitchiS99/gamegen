@@ -37,13 +37,13 @@
                 <td style="width:1rem"> 
                     {% if type == "wishlist" %}
                         {% if location in user.editer.all or location in user.creater.all %}
-                            {% if game in location.wishlist_games.all %}<a hx-get="{% url 'addToStorage' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}, "elementType": "game" }' hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">add_shopping_cart</i></a>{% endif %}
-                            {% if game in location.wishlist_games.all %}<a hx-get="{% url 'deleteElement' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}, "type": "{{type}}","elementType": "game"}' hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">delete</i></a>{% endif %}
+                            {% if game in location.wishlist_games.all %}<a hx-get="{% url 'addToStorage' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}, "elementType": "game" }' hx-include="[name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">add_shopping_cart</i></a>{% endif %}
+                            {% if game in location.wishlist_games.all %}<a hx-get="{% url 'deleteElement' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}, "type": "{{type}}","elementType": "game"}' hx-include="[name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">delete</i></a>{% endif %}
                         {% endif %}
                     {% else %}
                         {% if location in user.editer.all or location in user.creater.all %}
                             <a hx-get="{% url 'changeDislikes' %}" hx-target="#modalDislikeBody" hx-trigger="click" hx-vals='{"game": {{game.game.id}}, "location": {{location.id}}}' data-bs-toggle="modal" data-bs-target="#changeDislikes"><i class="material-icons me-1">edit</i></a>
-                            <a hx-get="{% url 'deleteElement' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.game.id}}, "location": {{location.id}}, "type": "{{type}}","elementType": "game"}' hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">delete</i></a>
+                            <a hx-get="{% url 'deleteElement' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.game.id}}, "location": {{location.id}}, "type": "{{type}}","elementType": "game"}' hx-include="[name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">delete</i></a>
                         {% endif %}
                     {% endif %}
                 </td>
