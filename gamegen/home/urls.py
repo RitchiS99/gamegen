@@ -23,4 +23,6 @@ urlpatterns = (
     path('logout/', views.logout, name="logout"),
     path('changeDislikes', views.changeDislikes, name="changeDislikes"),
     path('changeDislikesSave', views.changeDislikesSave, name="changeDislikesSave"),
+    path('addToStorage', views.addToStorage, name="addToStorage"),
+    path('deleteElement', views.deleteItem, name="deleteElement"),
 )

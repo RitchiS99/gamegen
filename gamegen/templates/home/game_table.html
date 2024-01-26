@@ -28,13 +28,25 @@
         <tbody>
         {% for game in games %}
             <tr onclick="showHideRow('hidden_{{game.id}}')" class="gameRows" data-name="{{game.id}}" {% if game in notGames %}style="background-color:red"{% endif %}>
-                <td> {{game.name}}</td>
-                <td> {{game.genre.all|join:", "}}</td>
-                <td> {{game.teaming.all|join:", "}}</td>
-                <td> {{game.duration}} min</td>
-                <td> {{game.min_player}}  - {{game.max_player}}</td>
-                <td> {{game.dislikes.disliker}}</td>
-                <td style="width:1rem"> {% if location in user.editer.all or location in user.creater.all %}<a hx-get="{% url 'changeDislikes' %}" multiple hx-target="#modalDislikeBody" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}}' data-bs-toggle="modal" data-bs-target="#changeDislikes"><i class="material-icons me-1">edit</i></a>{% endif %}</td>
+                <td> {% if type == "collection" %}{{game.game.name}}{% else %}{{game.name}} {% endif %}</td>
+                <td> {% if type == "collection" %}{{game.game.genre.all|join:", "}}{% else %}{{game.genre.all|join:", "}} {% endif %}</td>
+                <td> {% if type == "collection" %}{{game.game.teaming.all|join:", "}}{% else %}{{game.teaming.all|join:", "}} {% endif %}</td>
+                <td> {% if type == "collection" %}{{game.game.duration}}{% else %}{{game.duration}} {% endif %} min</td>
+                <td> {% if type == "collection" %}{{game.game.min_player}}{% else %} {{game.min_player}}{% endif %}  - {% if type == "collection" %}{{game.game.max_player}}{% else %} {{game.max_player}}{% endif %}</td>
+                <td> {{game.disliker}}</td>
+                <td style="width:1rem"> 
+                    {% if type == "wishlist" %}
+                        {% if location in user.editer.all or location in user.creater.all %}
+                            {% if game in location.wishlist_games.all %}<a hx-get="{% url 'addToStorage' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}, "elementType": "game" }' hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">add_shopping_cart</i></a>{% endif %}
+                            {% if game in location.wishlist_games.all %}<a hx-get="{% url 'deleteElement' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.id}}, "location": {{location.id}}, "type": "{{type}}","elementType": "game"}' hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">delete</i></a>{% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if location in user.editer.all or location in user.creater.all %}
+                            <a hx-get="{% url 'changeDislikes' %}" hx-target="#modalDislikeBody" hx-trigger="click" hx-vals='{"game": {{game.game.id}}, "location": {{location.id}}}' data-bs-toggle="modal" data-bs-target="#changeDislikes"><i class="material-icons me-1">edit</i></a>
+                            <a hx-get="{% url 'deleteElement' %}" hx-target="#game-table" hx-trigger="click" hx-vals='{"game": {{game.game.id}}, "location": {{location.id}}, "type": "{{type}}","elementType": "game"}' hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']"><i class="material-icons me-1">delete</i></a>
+                        {% endif %}
+                    {% endif %}
+                </td>
             </tr>
             <tr id="hidden_{{game.id}}"  class="hidden_row">
                 <td colspan="7">

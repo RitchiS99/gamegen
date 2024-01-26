@@ -21,12 +21,18 @@ class HomeView(TemplateView):
         context = super().get_context_data(**kwargs)
         user =self.request.user
         if user.is_authenticated:
-            games = editableGames(user)
+            locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
+            location = locations.first()
+            games = location.game.all()
             userLocations = list(user.viewer.all())
             for location in userLocations:
                 games = list(set(games) | set(location.game.all()))
-            context["games"] = games
-            context["locations"] = list(user.creater.all()) + list(user.editer.all()) + list(user.viewer.all())
+            dislikes = models.dislikes.objects.filter(game__in=games, location=location)
+            context["games"] = dislikes
+            context["locations"] = locations
+            context["selectedLocation"] = location
+            context["location"] = location
+            context["type"]="collection"
         else:
             context["games"] = []
             context["locations"] = []
@@ -69,20 +75,31 @@ class CreateExpansionView(LoginRequiredMixin, TemplateView):
 
 
 def gameTable(request):
+    typeValue = request.GET.get('type')
     user =request.user
     games = editableGames(user)
     userLocations = list(user.viewer.all())
+    locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
     expansions = None
     expansionGames = None
     location = None
     notGames = None
     if(request.GET.get('location')and int(request.GET.get('location'))!=0): # check if location in user.locations
         location = models.location.objects.get(id=request.GET.get('location'))
-        games = location.game.all()
-        expansions = location.expansions.all()
+        if typeValue=="wishlist":
+            games = location.wishlist_games.all()
+            expansions = location.wishlist_expansions.all()
+        else:
+            games = location.game.all()
+            expansions = location.expansions.all()
     else:
-        for location in userLocations:
-            games = games | location.game.all()
+        location = locations.first()
+        if typeValue=="wishlist":
+            games = location.wishlist_games.all()
+            expansions = location.wishlist_expansions.all()
+        else:
+            games = location.game.all()
+            expansions = location.expansions.all()
     
     if(request.GET.get('genre')):
         games = games.filter(genre__in=request.GET.getlist('genre'))
@@ -100,15 +117,17 @@ def gameTable(request):
     if(request.GET.get('duration') and int(request.GET.get('duration'))!=0):
         games = games.filter(duration__lte=int(request.GET.get('duration')))
         expansions = expansions.filter(duration__lte=int(request.GET.get('duration')))
-
-
     if location:
         expansionGames = location.game.filter(expansion__in=expansions)
     if expansionGames:
         notGames = expansionGames.exclude(pk__in=games).distinct()
         games = (games|expansionGames)
+    if typeValue=="collection":
+        games = models.dislikes.objects.filter(game__in=games, location=location)
+    else:
+        game = games.distinct()
 
-    context = {'games': games.distinct(), 'location': location, 'notGames': notGames, 'expansions': expansions}
+    context = {'games': games.distinct(), 'location': location, 'notGames': notGames, 'expansions': expansions, 'type':typeValue}
     return render(request, 'home/game_table.html', context)
 
 def addDislikes(request):
@@ -229,25 +248,17 @@ def login(request, context={}):
         username = request.POST.get('username')
         password = request.POST.get('password')
         user = auth.authenticate(username=username, password=password)
-        # print("Authenticated")
-        # print(user)
-        # print(user.ldap_user.group_names)
-        # print(user.__dir__())
         if user is not None:
             # correct username and password login the user
             auth.login(request, user)
             next = request.POST.get('next')
-            print("next")
-            print(next)
             if next!="None":
                 print("Next is next")
                 return HttpResponseRedirect(next)
             return HttpResponseRedirect('/')
-
         else:
             # messages.error(request, 'Error wrong username/password')
             messages.error(request, 'Error wrong username/password')
-            print("Existiert nicht")
     context[messages] = {
         'messages'
     }
@@ -293,13 +304,60 @@ def changeDislikesSave(request):
     gameDislike.disliker = ','.join(dislikes)
     gameDislike.save()
     locationDislikes = str(location.disliker)
-    print("locationDislikes")
-            ### Check if every disliker in location.dislikes
+    ### Check if every disliker in location.dislikes
     for dislikeObject in dislikes:
         if dislikeObject not in locationDislikes:
             locationDislikes = locationDislikes + ","+dislikeObject
     location.disliker = locationDislikes
     location.save()
-    return HttpResponse(status=200)
+    return gameTable(request)
+
+def addToStorage(request):
+    typeValue = request.GET.get('elementType')
+    location = models.location.objects.get(id=int(request.GET.get('location')))
+    if typeValue=="game":
+        game = models.game.objects.get(id=int(request.GET.get('game')))
+        if not models.dislikes.objects.filter(game=game, location=location).exists():
+            dislike = models.dislikes(game=game, location=location, disliker="")
+            dislike.save()
+        location.wishlist_games.remove(game)
+        location.save()
+    elif typeValue=="expansion":
+        expansion = models.expansion.objects.get(id=int(request.GET.get('game')))
+        location.expansions.add(expansion)
+        location.wishlist_expansions.remove(expansion)
+        location.save()
+    return gameTable(request)
 
 
+
+def deleteItem(request):
+    typeFrom = request.GET.get('type')
+    elementType = request.GET.get('elementType')
+    location = models.location.objects.get(id=int(request.GET.get('location')))
+    if typeFrom == "wishlist":
+        if elementType=="game":
+            game = models.game.objects.get(id=int(request.GET.get('game')))
+            location.wishlist_games.remove(game)
+        elif elementType=="expansion":
+            expansion = models.expansion.objects.get(id=int(request.GET.get('game')))
+            location.wishlist_expansion.remove(expansion)
+    elif typeFrom == "collection":
+        if elementType=="game":
+            game = models.game.objects.get(id=int(request.GET.get('game')))
+            dislike = models.dislikes.objects.get(location=location, game=game)
+            dislike.delete()
+        elif elementType=="expansion":
+            expansion = models.expansion.objects.get(id=int(request.GET.get('game')))
+            location.expansions.remove(expansion)
+    location.save()
+
+    # context = {
+    #     "location": request.GET.get("location"),
+    #     "type": request.GET.get("type"),
+    #     "genre": request.GET.get("genre"),
+    #     "teaming": request.GET.get("teaming"),
+    #     "duration": request.GET.get("duration"),
+    #     "minPlayer": request.GET.get("min-player")
+    # }
+    return gameTable(request)

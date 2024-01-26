@@ -1,5 +1,5 @@
 {% load i18n %}
-<form id="dislikeForm" hx-get="{% url 'changeDislikesSave' %}">
+<form id="dislikeForm" hx-get="{% url 'changeDislikesSave' %}" hx-include="[name='location'], [name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']" hx-target="#game-table">
   <h3>{{game.name}}</h3>
   <input id="game" type="hidden" name="game" value="{{game.id}}">
   <input id="location" type="hidden" name="location" value="{{location.id}}">
