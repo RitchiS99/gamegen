@@ -61,7 +61,7 @@
                                 <th>{% trans 'PlayerCount' %}</th>
                             </tr>
                             {% for expansion in game.expansion_set.all %}
-                                {% if expansion in location.expansions.all %}
+                                {% if expansion in location.wishlist_expansion.all %}
                                 <tr class="table-info text-center">
                                     <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.number}}</td>
                                     <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.name}}</td>
@@ -75,12 +75,12 @@
                             {% for expansion in game.game.expansion_set.all %}
                                 {% if expansion in location.expansions.all %}
                                 <tr class="table-info text-center">
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.number}}</td>
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.name}}</td>
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.genre.all|join:", "}}</td>
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.teaming.all|join:", "}}</td>
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.duration}}min</td>
-                                    <td {% if game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.min_player}}-{{expansion.max_player}}</td>
+                                    <td {% if game.game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.number}}</td>
+                                    <td {% if game.game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.name}}</td>
+                                    <td {% if game.game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.genre.all|join:", "}}</td>
+                                    <td {% if game.game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.teaming.all|join:", "}}</td>
+                                    <td {% if game.game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.duration}}min</td>
+                                    <td {% if game.game in notGames and expansion in expansions %}style="background-color:lightgreen"{% endif %}>{{expansion.min_player}}-{{expansion.max_player}}</td>
                                 </tr>
                                 {% endif %}
                         {% endfor %}
