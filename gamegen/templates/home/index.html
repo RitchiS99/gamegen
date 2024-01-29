@@ -9,34 +9,34 @@
 
 
 <label for="location" class="form-label">{% translate "Location" %}</label>
-<select id="location" class="select-normal select2" style="width:10vw" name="location" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="change" hx-include="[name='genre'], [name='min-player'],[name='teaming'],[name='duration'],[name='type']">
+<select id="location" class="select-normal select2" style="width:10vw" name="location" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="change" hx-include="[name='genre'], [name='player'],[name='teaming'],[name='duration'],[name='type']">
     {% for location in locations %}
     <option value="{{location.id}}" {% if location == selectedLocation %}selected{% endif %}>{{location.name}}</option>
     {% endfor %}
 </select>
 
 <label for="genre" class="form-label">{% translate "Genre" %}</label>
-<select class="select-normal select2" id="genre" style="width:10vw" name="genre" hx-get="{% url 'GameTable' %}" multiple hx-target="#game-table" hx-vals='js:{location: $("#location").select2().val()}' hx-trigger="change" hx-include="[name='min-player'],[name='teaming'],[name='duration'],[name='type']">
+<select class="select-normal select2" id="genre" style="width:10vw" name="genre" hx-get="{% url 'GameTable' %}" multiple hx-target="#game-table" hx-vals='js:{location: $("#location").select2().val()}' hx-trigger="change" hx-include="[name='player'],[name='teaming'],[name='duration'],[name='type']">
     {% for genre in genres %}
     <option value="{{genre.id}}">{{genre.name}}</option>
     {% endfor %}
 </select>
 
 <label for="teaming" class="form-label">{% translate "Teaming" %}</label>
-<select class="select-normal select2" id="teaming" style="width:10vw" name="teaming" hx-get="{% url 'GameTable' %}" multiple hx-vals='js:{location: $("#location").select2().val()}' hx-target="#game-table" hx-trigger="change" hx-include="[name='min-player'],[name='genre'],[name='duration'],[name='type']">
+<select class="select-normal select2" id="teaming" style="width:10vw" name="teaming" hx-get="{% url 'GameTable' %}" multiple hx-vals='js:{location: $("#location").select2().val()}' hx-target="#game-table" hx-trigger="change" hx-include="[name='player'],[name='genre'],[name='duration'],[name='type']">
     {% for teaming in teamings %}
     <option value="{{teaming.id}}">{{teaming.name}}</option>
     {% endfor %}
 </select>
 </br>
 <label for="duration" class="form-label">{% translate "Duration" %}</label>
-<input type="number" id="duration" name="duration" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="keyup change" hx-vals='js:{location: $("#location").select2().val()}' hx-include="[name='genre'], [name='teaming'],[name='min-player'],[name='type']" placeholder="{% trans 'Max min' %}"/>
+<input type="number" id="duration" name="duration" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="keyup change" hx-vals='js:{location: $("#location").select2().val()}' hx-include="[name='genre'], [name='teaming'],[name='player'],[name='type']" placeholder="{% trans 'Max min' %}"/>
 <label for="player" class="form-label">{% translate "Player Count" %}</label>
 <input type="number" id="player" name="player" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="keyup change" hx-vals='js:{location: $("#location").select2().val()}' hx-include="[name='genre'], [name='teaming'],[name='duration'],[name='type']" placeholder="{% trans 'PlayerCount' %}"/>
 
 </br>
 
-<div class="btn-group" role="group" aria-label="Basic radio toggle button group" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="change" hx-vals='js:{location: $("#location").select2().val()}'hx-include="[name='genre'], [name='teaming'],[name='duration'],[name='min-player'],[name='type']">
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="change" hx-vals='js:{location: $("#location").select2().val()}'hx-include="[name='genre'], [name='teaming'],[name='duration'],[name='player'],[name='type']">
     <input type="radio" class="btn-check" name="type" value="collection" id="btnradio1" autocomplete="off" checked>
     <label class="btn btn-outline-primary" for="btnradio1">{% translate "Collection" %}</label>
   
