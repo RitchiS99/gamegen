@@ -78,56 +78,24 @@ def gameTable(request):
     typeValue = request.GET.get('type')
     user =request.user
     games = editableGames(user)
-    userLocations = list(user.viewer.all())
     locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
-    expansions = None
-    expansionGames = None
     location = None
-    notGames = None
     if(request.GET.get('location')and int(request.GET.get('location'))!=0): # check if location in user.locations
         location = models.location.objects.get(id=request.GET.get('location'))
-        if typeValue=="wishlist":
-            games = location.wishlist_games.all()
-            expansions = location.wishlist_expansions.all()
-        else:
-            games = location.game.all()
-            expansions = location.expansions.all()
     else:
         location = locations.first()
-        if typeValue=="wishlist":
-            games = location.wishlist_games.all()
-            expansions = location.wishlist_expansions.all()
-        else:
-            games = location.game.all()
-            expansions = location.expansions.all()
     
-    if(request.GET.get('genre')):
-        games = games.filter(genre__in=request.GET.getlist('genre'))
-        expansions = expansions.filter(genre__in=request.GET.getlist('genre'))
-    
-    if(request.GET.get('player')and int(request.GET.get('player'))!=0):
-        player = int(request.GET.get('player'))
-        games = games.filter(min_player__lte=player, max_player__gte=player)
-        expansions = expansions.filter(min_player__lte=player, max_player__gte=player)
-    
-    if(request.GET.get('teaming')):
-        games = games.filter(teaming__in=request.GET.getlist('teaming'))
-        expansions = expansions.filter(teaming__in=request.GET.getlist('teaming'))
-    
-    if(request.GET.get('duration') and int(request.GET.get('duration'))!=0):
-        games = games.filter(duration__lte=int(request.GET.get('duration')))
-        expansions = expansions.filter(duration__lte=int(request.GET.get('duration')))
-    if location:
-        expansionGames = location.game.filter(expansion__in=expansions)
-    if expansionGames:
-        notGames = expansionGames.exclude(pk__in=games).distinct()
-        games = (games|expansionGames)
-    if typeValue=="collection":
-        games = models.dislikes.objects.filter(game__in=games, location=location)
-    else:
-        game = games.distinct()
 
-    context = {'games': games.distinct(), 'location': location, 'notGames': notGames, 'expansions': expansions, 'type':typeValue}
+    
+
+
+    gameData = filterGames(request)
+    print("Expansions")
+    print(games)
+    print(gameData["games"])
+    
+
+    context = {'games': gameData["games"], 'location': location, 'notGames': gameData["notGames"], 'expansions': gameData["expansions"], 'type':typeValue}
     return render(request, 'home/game_table.html', context)
 
 def addDislikes(request):
@@ -351,13 +319,67 @@ def deleteItem(request):
             expansion = models.expansion.objects.get(id=int(request.GET.get('game')))
             location.expansions.remove(expansion)
     location.save()
-
-    # context = {
-    #     "location": request.GET.get("location"),
-    #     "type": request.GET.get("type"),
-    #     "genre": request.GET.get("genre"),
-    #     "teaming": request.GET.get("teaming"),
-    #     "duration": request.GET.get("duration"),
-    #     "minPlayer": request.GET.get("min-player")
-    # }
     return gameTable(request)
+
+
+def filterGames(request):
+    typeValue = request.GET.get('type') or 'collection'
+    user =request.user
+    games = editableGames(user)
+    locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
+    expansions = None
+    expansionGames = None
+    location = None
+    notGames = None
+    if(request.GET.get('location')and int(request.GET.get('location'))!=0): # check if location in user.locations
+        location = models.location.objects.get(id=request.GET.get('location'))
+        if typeValue=="wishlist":
+            games = location.wishlist_games.all()
+            expansions = location.wishlist_expansions.all()
+        else:
+            games = location.game.all()
+            expansions = location.expansions.all()
+    else:
+        location = locations.first()
+        if typeValue=="wishlist":
+            games = location.wishlist_games.all()
+            expansions = location.wishlist_expansions.all()
+        else:
+            games = location.game.all()
+            expansions = location.expansions.all()
+    
+    if(request.GET.get('genre')):
+        games = games.filter(genre__in=request.GET.getlist('genre'))
+        print("Genre is")
+        print(request.GET.get('genre'))
+        expansions = expansions.filter(genre__in=request.GET.getlist('genre'))
+    
+    if(request.GET.get('player')and int(request.GET.get('player'))!=0):
+        player = int(request.GET.get('player'))
+        games = games.filter(min_player__lte=player, max_player__gte=player)
+        expansions = expansions.filter(min_player__lte=player, max_player__gte=player)
+    
+    if(request.GET.get('teaming')):
+        games = games.filter(teaming__in=request.GET.getlist('teaming'))
+        expansions = expansions.filter(teaming__in=request.GET.getlist('teaming'))
+    
+    if(request.GET.get('duration') and int(request.GET.get('duration'))!=0):
+        games = games.filter(duration__lte=int(request.GET.get('duration')))
+        expansions = expansions.filter(duration__lte=int(request.GET.get('duration')))
+    if location:
+        expansionGames = location.game.filter(expansion__in=expansions)
+    if expansionGames:
+        notGames = expansionGames.exclude(pk__in=games).distinct()
+        games = (games|expansionGames)
+    if typeValue=="collection":
+        games = models.dislikes.objects.filter(game__in=games, location=location)
+    else:
+        games = games.distinct()
+    
+    gameData = {}
+    gameData["games"] = games
+    gameData["notGames"] = notGames
+    gameData["expansions"] = expansions
+
+    return gameData
+
