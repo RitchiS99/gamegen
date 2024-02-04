@@ -350,8 +350,6 @@ def filterGames(request):
     
     if(request.GET.get('genre')):
         games = games.filter(genre__in=request.GET.getlist('genre'))
-        print("Genre is")
-        print(request.GET.get('genre'))
         expansions = expansions.filter(genre__in=request.GET.getlist('genre'))
     
     if(request.GET.get('player')and int(request.GET.get('player'))!=0):

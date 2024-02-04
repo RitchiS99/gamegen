@@ -50,6 +50,9 @@
             <a class="nav-link" href="/admin" tabindex="-1" aria-disabled="true">{% trans 'Admin' %}</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="/static/dsgvo.txt" target="_blank" tabindex="-1" aria-disabled="true">{% trans 'DSGVO' %}</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout' %}</a>
           </li>
           {% else %}
