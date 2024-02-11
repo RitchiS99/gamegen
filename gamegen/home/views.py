@@ -381,36 +381,3 @@ def filterGames(request):
 
     return gameData
 
-
-
-def alexaLogin(request, context={}):
-    # latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    # template = loader.get_template('login.html')
-    if request.method == 'GET':
-        next = request.GET.get('next')
-        client_id = request.GET.get('client_id')
-        context["client_id"] = client_id
-        context["next"] = request.GET.get('redirect_uri')
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = auth.authenticate(username=username, password=password)
-        if user is not None:
-            # correct username and password login the user
-            auth.login(request, user)
-            data = {'grant_type':'password', # your defined grant type
-                'client_id':request.POST.get("client_id"), # your clinet id
-                'username':username, # your username that you get from user
-                'password':password #your password that you get from user
-            }
-            r = requests.post('http://localhost:8005/o/token/', #your token address
-                      data = data
-            )
-            return HttpResponseRedirect(request.POST.get('next')) 
-            #return HttpResponse(r.json())
-        else:
-            messages.error(request, 'Error wrong username/password')
-    context[messages] = {
-        'messages'
-    }
-    return render(request,'login.html', context=context)
