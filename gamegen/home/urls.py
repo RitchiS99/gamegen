@@ -25,4 +25,5 @@ urlpatterns = (
     path('changeDislikesSave', views.changeDislikesSave, name="changeDislikesSave"),
     path('addToStorage', views.addToStorage, name="addToStorage"),
     path('deleteElement', views.deleteItem, name="deleteElement"),
+    path('alexa/login', views.alexaLogin, name="alexaLogin")
 )
