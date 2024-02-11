@@ -390,7 +390,7 @@ def alexaLogin(request, context={}):
         next = request.GET.get('next')
         client_id = request.GET.get('client_id')
         context["client_id"] = client_id
-        context["next"] = next
+        context["next"] = request.GET.get('redirect_uri')
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
@@ -405,8 +405,9 @@ def alexaLogin(request, context={}):
             }
             r = requests.post('http://localhost:8005/o/token/', #your token address
                       data = data
-            ) 
-            return HttpResponse(r.json())
+            )
+            return HttpResponseRedirect(request.POST.get('next')) 
+            #return HttpResponse(r.json())
         else:
             messages.error(request, 'Error wrong username/password')
     context[messages] = {
