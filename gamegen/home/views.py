@@ -22,7 +22,7 @@ class HomeView(TemplateView):
         user =self.request.user
         if user.is_authenticated:
             locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
-            setting = models.UserSettings.objects.get(user=user)
+            setting = models.UserSettings.objects.filter(user=user).first
             if setting:
                 location = setting.home
             else:
@@ -87,7 +87,7 @@ def gameTable(request):
     if(request.GET.get('location')and int(request.GET.get('location'))!=0): # check if location in user.locations
         location = models.location.objects.get(id=request.GET.get('location'))
     else:
-        setting = models.UserSettings.objects.get(user=user)
+        setting = models.UserSettings.objects.filter(user=user).first()
         if setting:
             location = setting.home
         else:
@@ -348,7 +348,7 @@ def filterGames(request):
             games = location.game.all()
             expansions = location.expansions.all()
     else:
-        setting = models.UserSettings.objects.get(user=user)
+        setting = models.UserSettings.objects.filter(user=user).first()
         if setting:
             location = setting.home
         else:
@@ -399,9 +399,9 @@ class UserSettings(TemplateView):
         user =request.user
         context = {}
         setting = None
-        userSetting = models.UserSettings.objects.filter(user=user)
+        userSetting = models.UserSettings.objects.filter(user=user).first
         if userSetting:
-            setting = userSetting.first()
+            setting = userSetting
         else:
             setting = models.UserSettings(user=user)
             setting.save()
@@ -413,9 +413,9 @@ class UserSettings(TemplateView):
         user =request.user
         context = {}
         setting = None
-        userSetting = models.UserSettings.objects.filter(user=user)
+        userSetting = models.UserSettings.objects.filter(user=user).first
         if userSetting:
-            setting = userSetting.first()
+            setting = userSetting
         else:
             setting = models.UserSettings(user=user)
             setting.save()
