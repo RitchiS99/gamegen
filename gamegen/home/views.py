@@ -22,7 +22,11 @@ class HomeView(TemplateView):
         user =self.request.user
         if user.is_authenticated:
             locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
-            location = locations.first()
+            setting = models.UserSettings.objects.get(user=user)
+            if setting:
+                location = setting.home
+            else:
+                location = locations.first()
             games = location.game.all()
             userLocations = list(user.viewer.all())
             for location in userLocations:
@@ -83,7 +87,11 @@ def gameTable(request):
     if(request.GET.get('location')and int(request.GET.get('location'))!=0): # check if location in user.locations
         location = models.location.objects.get(id=request.GET.get('location'))
     else:
-        location = locations.first()
+        setting = models.UserSettings.objects.get(user=user)
+        if setting:
+            location = setting.home
+        else:
+            location = locations.first()
     
 
     
@@ -340,7 +348,11 @@ def filterGames(request):
             games = location.game.all()
             expansions = location.expansions.all()
     else:
-        location = locations.first()
+        setting = models.UserSettings.objects.get(user=user)
+        if setting:
+            location = setting.home
+        else:
+            location = locations.first()
         if typeValue=="wishlist":
             games = location.wishlist_games.all()
             expansions = location.wishlist_expansions.all()
@@ -381,3 +393,36 @@ def filterGames(request):
 
     return gameData
 
+class UserSettings(TemplateView):
+    template_name = "home/settings.html"
+    def get(self, request, **kwargs):
+        user =request.user
+        context = {}
+        setting = None
+        userSetting = models.UserSettings.objects.filter(user=user)
+        if userSetting:
+            setting = userSetting.first()
+        else:
+            setting = models.UserSettings(user=user)
+            setting.save()
+        locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
+        context["locations"] = locations
+        context["setting"] = setting
+        return render(request, "home/settings.html", context)
+    def post(self, request, **kwargs):
+        user =request.user
+        context = {}
+        setting = None
+        userSetting = models.UserSettings.objects.filter(user=user)
+        if userSetting:
+            setting = userSetting.first()
+        else:
+            setting = models.UserSettings(user=user)
+            setting.save()
+        locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
+        context["locations"] = locations
+        context["setting"] = setting
+        location = models.location.objects.get(id=request.POST.get('location'))
+        setting.home = location
+        setting.save()
+        return render(request, "home/settings.html", context)

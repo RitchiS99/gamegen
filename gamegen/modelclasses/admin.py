@@ -95,6 +95,13 @@ class locationAdmin(admin.ModelAdmin):
         "name",
     ]
 
+class userSettingsAdmin(admin.ModelAdmin):
+    model = models.UserSettings
+    list_display = [
+        "user",
+        "home"
+    ]
+
 
 
 admin.site.register(models.dislikes, dislikesAdmin)
@@ -102,4 +109,5 @@ admin.site.register(models.expansion, expansionAdmin)
 admin.site.register(models.game, gameAdmin)
 admin.site.register(models.genre, genreAdmin)
 admin.site.register(models.location, locationAdmin)
+admin.site.register(models.UserSettings, userSettingsAdmin)
 admin.site.register(models.teaming)

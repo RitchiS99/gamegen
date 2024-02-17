@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+
+
+{% block content %}
+
+
+<form method="POST">
+    <label for="location" class="form-label">{% translate "User Settings" %}</label>
+    <select id="location" class="select-normal select2" style="width:10vw" name="location" hx-get="{% url 'GameTable' %}" hx-target="#game-table" hx-trigger="change" hx-include="[name='genre'], [name='player'],[name='teaming'],[name='duration'],[name='type']">
+        {% for location in locations %}
+        <option value="{{location.id}}" {% if location == setting.home %}selected{% endif %}>{{location.name}}</option>
+        {% endfor %}
+    </select>
+    {% csrf_token %}
+
+    <input type="submit" value='{% translate "Save" %}' />
+</form>
+
+</br>
+
+
+
+<script>
+
+    window.addEventListener("DOMContentLoaded", (e) => {
+        $('select').on('select2:select', function (e) {
+            $(this).closest('select').get(0).dispatchEvent(new Event('change'));
+        });
+    });   
+    
+</script>
+
+{% endblock content %}

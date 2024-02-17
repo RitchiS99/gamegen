@@ -168,3 +168,11 @@ class location(models.Model):
 
     def get_htmx_delete_url(self):
         return reverse("modelclasses_location_htmx_delete", args=(self.pk,))
+
+class UserSettings(models.Model):
+    user = models.OneToOneField("auth.User", on_delete=models.CASCADE)
+    home = models.ForeignKey("modelclasses.location", on_delete=models.SET_NULL, null=True)
+    
+    def __str__(self):
+        return str(self.user.username + " - " + self.home.name)
+    
