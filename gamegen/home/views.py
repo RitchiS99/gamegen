@@ -22,7 +22,7 @@ class HomeView(TemplateView):
         user =self.request.user
         if user.is_authenticated:
             locations = (user.creater.all() | user.editer.all() | user.viewer.all()).distinct()
-            setting = models.UserSettings.objects.filter(user=user).first
+            setting = models.UserSettings.objects.filter(user=user).first()
             if setting:
                 location = setting.home
             else:
@@ -399,7 +399,7 @@ class UserSettings(TemplateView):
         user =request.user
         context = {}
         setting = None
-        userSetting = models.UserSettings.objects.filter(user=user).first
+        userSetting = models.UserSettings.objects.filter(user=user).first()
         if userSetting:
             setting = userSetting
         else:
@@ -413,7 +413,7 @@ class UserSettings(TemplateView):
         user =request.user
         context = {}
         setting = None
-        userSetting = models.UserSettings.objects.filter(user=user).first
+        userSetting = models.UserSettings.objects.filter(user=user).first()
         if userSetting:
             setting = userSetting
         else:
