@@ -193,7 +193,7 @@ def addGame(request):
             dislikeString = ','.join(dislikes)
             existingDislike = models.dislikes.objects.filter(location=location, game=game)
             if existingDislike:
-                return HttpResponse(status=200)
+                continue
             dislike = models.dislikes(game=game, location=location, disliker=dislikeString)
             dislike.save()
             locationDislikes = str(location.disliker)

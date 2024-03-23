@@ -8,4 +8,5 @@ django-modeltranslation==0.18.7
 requests
 django-environ
 django-webpack-loader
-django-oauth-toolkit==2.3.0
+# django-oauth-toolkit==2.3.0
+django-oauth-toolkit @ git+https://github.com/RitchiS99/django-oauth-toolkit.git
