@@ -98,9 +98,6 @@ def gameTable(request):
 
 
     gameData = filterGames(request)
-    print("Expansions")
-    print(games)
-    print(gameData["games"])
     
 
     context = {'games': gameData["games"], 'location': location, 'notGames': gameData["notGames"], 'expansions': gameData["expansions"], 'type':typeValue}
@@ -229,7 +226,6 @@ def login(request, context={}):
             auth.login(request, user)
             next = request.POST.get('next')
             if next!="None":
-                print("Next is next")
                 return HttpResponseRedirect(next)
             return HttpResponseRedirect('/')
         else:
