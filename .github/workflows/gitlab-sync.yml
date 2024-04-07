@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - rework-v2
 
 jobs: 
   sync: 
