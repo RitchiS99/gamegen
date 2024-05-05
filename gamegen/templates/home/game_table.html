@@ -1,6 +1,8 @@
 {% load i18n %}
 
 <div id="game-table" class="table table-striped">
+    <p class="text-end">{% trans "Game Count" %}: {{games.count}}</p>
+
     <table border=1 style="width:75vw" id="table_detail">
         <thead>
             <tr>

@@ -50,10 +50,13 @@
 <label for="myInput" class="form-label">{% translate "Search" %}</label>
 <input type="text" id="myInput" onkeyup="searchTable('table_detail')" placeholder={% trans 'GameSearch' %}>
 
-<button class="btn btn-primary float-end" onclick="randomGame('table_detail')">{% trans "Get Random Game" %}</button>
-</br>
-</br>
+<div class="float-end">
+    <input class="" type="number" id="randomNumber" value="1" min="0">
+    <button class="btn btn-primary float-end" onclick="randomGame('table_detail')">{% trans "Get Random Game" %}</button>
+</div>
 
+</br>
+</br>
 
 {% include "home/game_table.html" %}
 
@@ -123,13 +126,43 @@
         table = document.getElementById(tableName);
         tr = table.getElementsByClassName("gameRows");
         maxValue = tr.length
-        randomVal = randomNumber(0, maxValue)
-        game = tr[randomVal].getElementsByTagName("td")[0]
-        gameName = game.textContent || game.innerText
-        alert(gameName)
+        gameAmount = $("#randomNumber").val()
+        if (gameAmount>maxValue){
+            gameAmount = maxValue
+        }
+        randomVals = getRandomNumberList(maxValue, gameAmount)
+        gameText = ""
+        for (i in randomVals){
+            if(gameText){
+                gameText += "\n"
+            }
+            game = tr[i].getElementsByTagName("td")[0]
+            gameText += (game.textContent || game.innerText) 
+        }
+        alert(gameText)
     }
-    function randomNumber(min, max){
-        return Math.floor(Math.random() * (max - min) + min);
+    function getRandomNumberList(max, gameAmount){
+        allInts = Array.from(Array(max).keys())
+        shuffle(allInts)
+        console.log(allInts)
+        randomNumbers = allInts.slice(0, 0+gameAmount)
+        return randomNumbers
+
+    }
+    function shuffle(array) {
+        let currentIndex = array.length;
+      
+        // While there remain elements to shuffle...
+        while (currentIndex != 0) {
+      
+          // Pick a remaining element...
+          let randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
+      
+          // And swap it with the current element.
+          [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+        }
     }
 </script>
 
