@@ -132,19 +132,18 @@
         }
         randomVals = getRandomNumberList(maxValue, gameAmount)
         gameText = ""
-        for (i in randomVals){
+        randomVals.forEach(i => {
             if(gameText){
                 gameText += "\n"
             }
             game = tr[i].getElementsByTagName("td")[0]
             gameText += (game.textContent || game.innerText) 
-        }
+        })
         alert(gameText)
     }
     function getRandomNumberList(max, gameAmount){
         allInts = Array.from(Array(max).keys())
         shuffle(allInts)
-        console.log(allInts)
         randomNumbers = allInts.slice(0, 0+gameAmount)
         return randomNumbers
 
